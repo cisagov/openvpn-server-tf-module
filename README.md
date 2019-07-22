@@ -1,6 +1,6 @@
-# skeleton-tf-module #
+# openvpn-server-tf-module #
 
-[![Build Status](https://travis-ci.com/cisagov/skeleton-tf-module.svg?branch=develop)](https://travis-ci.com/cisagov/skeleton-tf-module)
+[![Build Status](https://travis-ci.com/cisagov/openvpn-server-tf-module.svg?branch=develop)](https://travis-ci.com/cisagov/openvpn-server-tf-module)
 
 This is a generic skeleton project that can be used to quickly get a
 new [cisagov](https://github.com/cisagov) [Terraform
@@ -18,7 +18,7 @@ details on Terraform modules and the standard module structure.
 
 ```hcl
 module "example" {
-  source = "github.com/cisagov/skeleton-tf-module"
+  source = "github.com/cisagov/openvpn-server-tf-module"
 
   aws_region            = "us-west-1"
   aws_availability_zone = "b"
@@ -33,7 +33,7 @@ module "example" {
 
 ## Examples ##
 
-* [Deploying into the default VPC](https://github.com/cisagov/skeleton-tf-module/tree/develop/examples/default_vpc)
+* [Deploying into the default VPC](https://github.com/cisagov/openvpn-server-tf-module/tree/develop/examples/default_vpc)
 
 ## Inputs ##
 
