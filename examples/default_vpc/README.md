@@ -1,4 +1,4 @@
-# Launch the Example EC2 Instance into the Default VPC #
+# Launch the OpenVPN EC2 Instance into the Default VPC #
 
 ## Usage ##
 
