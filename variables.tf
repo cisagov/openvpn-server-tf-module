@@ -33,6 +33,16 @@ variable "trusted_cidr_blocks" {
   description = "A list of the CIDR blocks that are allowed to access the OpenVPN servers (e.g. [\"10.10.0.0/16\", \"10.11.0.0/16\"])"
 }
 
+variable "private_networks" {
+  type        = list(string)
+  description = "A list of network netmasks that exist behind the VPN server.  These will be pushed to the client.  (e.g. [\"10.224.0.0 255.240.0.0\", \"192.168.100.0 255.255.255.0\"])"
+}
+
+variable "client_network" {
+  type        = string
+  description = "A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. \"10.240.0.0 255.255.255.0\")"
+}
+
 # ------------------------------------------------------------------------------
 # Optional parameters
 #
