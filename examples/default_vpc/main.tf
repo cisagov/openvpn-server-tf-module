@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-west-1"
+  region = "us-east-2"
 }
 
 #-------------------------------------------------------------------------------
@@ -19,7 +19,13 @@ data "aws_subnet_ids" "default" {
 module "example" {
   source = "../../"
 
-  aws_region            = "us-west-1"
-  aws_availability_zone = "b"
-  subnet_id             = tolist(data.aws_subnet_ids.default.ids)[0]
+  client_network          = "10.240.0.0 255.255.255.0"
+  domain                  = "felddy.cyber.dhs.gov"
+  hostname                = "vpn.felddy.cyber.dhs.gov"
+  private_networks        = ["10.224.0.0 255.240.0.0"]
+  private_reverse_zone_id = ""
+  private_zone_id         = ""
+  public_zone_id          = ""
+  subnet_id               = tolist(data.aws_subnet_ids.default.ids)[0]
+  trusted_cidr_blocks     = ["0.0.0.0/0"]
 }
