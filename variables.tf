@@ -52,7 +52,7 @@ variable "client_network" {
 variable "associate_public_ip_address" {
   type        = bool
   description = "Whether or not to associate a public IP address with the OpenVPN server"
-  default     = false
+  default     = true
 }
 
 variable "aws_instance_type" {
