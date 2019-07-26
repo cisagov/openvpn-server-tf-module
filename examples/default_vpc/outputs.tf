@@ -18,6 +18,11 @@ output "private_ip" {
   description = "The private IP of the EC2 instance"
 }
 
+output "public_ip" {
+  value       = module.example.public_ip
+  description = "The public IP of the EC2 instance"
+}
+
 output "subnet_id" {
   value       = module.example.subnet_id
   description = "The ID of the subnet where the EC2 instance is deployed"
