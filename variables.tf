@@ -52,6 +52,12 @@ variable "aws_instance_type" {
   default     = "t3.small"
 }
 
+variable "create_AAAA" {
+  type        = bool
+  description = "Whether or not to create AAAA records for the OpenVPN server"
+  default     = false
+}
+
 variable "tags" {
   type        = map(string)
   description = "Tags to apply to all AWS resources created"
@@ -60,5 +66,5 @@ variable "tags" {
 
 variable "ttl" {
   description = "The TTL value to use for Route53 DNS records (e.g. 86400).  A smaller value may be useful when the DNS records are changing often, for example when testing."
-  default     = 86400
+  default     = 60
 }
