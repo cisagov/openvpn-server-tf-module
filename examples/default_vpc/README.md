@@ -8,6 +8,15 @@ followed by the `terraform apply` command.
 Note that this example may create resources which cost money. Run
 `terraform destroy` when you no longer need these resources.
 
+## Inputs ##
+
+| Name | Description |
+|------|-------------|
+| dns_role_arn | ARN of a role with route53 access |
+| cert_role_arn | ARN of a role with certificate manager access |
+| cert_manager_region | Certificate manager region (default: us-east-1) |
+| region | Region for instances (default: us-east-2) |
+
 ## Outputs ##
 
 | Name | Description |
