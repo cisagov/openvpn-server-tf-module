@@ -5,23 +5,15 @@
 # ------------------------------------------------------------------------------
 
 variable "domain" {
-  description = "The domain for the OpenVPN server (e.g. example.com)"
+  description = "The domain for the OpenVPN server (e.g. cyber.dhs.gov)"
+}
+
+variable "subdomain" {
+  description = "The subdomain for the OpenVPN server.  If empty, no subdomain will be used. (e.g. cool)"
 }
 
 variable "hostname" {
-  description = "The hostname of the OpenVPN server (e.g. vpn.example.com)"
-}
-
-variable "private_zone_id" {
-  description = "The zone ID corresponding to the private Route53 zone where the kerberos-related DNS records should be created (e.g. ZKX36JXQ8W82L)"
-}
-
-variable "private_reverse_zone_id" {
-  description = "The zone ID corresponding to the private Route53 reverse zone where the PTR records for the kerberos-related A records should be created (e.g. ZKX36JXQ8W82L)"
-}
-
-variable "public_zone_id" {
-  description = "The zone ID corresponding to the public Route53 zone where the kerberos-related DNS records should be created (e.g. ZKX36JXQ8W82L)"
+  description = "The hostname of the OpenVPN server (e.g. vpn1)"
 }
 
 variable "subnet_id" {
