@@ -4,6 +4,7 @@ write_files:
     permissions: '0755'
     owner: root:root
     content: |
+      #!/usr/bin/env python3
       """Install certificates from AWS Certificate Manager.
 
       This file is a template.  It should be processed by terraform.
@@ -13,7 +14,7 @@ write_files:
 
 
       # Create ACM client
-      acm = boto3.client("acm")
+      acm = boto3.client("acm", region_name="${cert_manager_region}")
 
       try:
           # Describe the specified certificate.

@@ -20,6 +20,7 @@ data "template_cloudinit_config" "cloud_init_tasks" {
     content = templatefile(
       "${path.module}/cloudinit/install-certificates.tpl.yml", {
         server_certificate_arn = aws_acm_certificate.server_cert.arn
+        cert_manager_region    = aws.certs.region
     })
   }
 }
