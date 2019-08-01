@@ -49,4 +49,5 @@ module "example" {
   private_networks    = ["10.224.0.0 255.240.0.0"]
   subnet_id           = tolist(data.aws_subnet_ids.default.ids)[0]
   trusted_cidr_blocks = ["0.0.0.0/0"]
+  tags                = { "Name" : "OpenVPN Test" }
 }
