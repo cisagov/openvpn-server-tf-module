@@ -4,16 +4,6 @@ data "aws_route53_zone" "public_dns_zone" {
   name     = var.domain
 }
 
-resource "aws_acm_certificate" "server_cert" {
-  provider          = aws.certs
-  domain_name       = local.server_fqdn
-  validation_method = "DNS"
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
 # This DNS record gives Amazon Certificate Manager permission to
 # generate certificates for the server_fqdn
 resource "aws_route53_record" "cert_validation_record" {
@@ -23,12 +13,6 @@ resource "aws_route53_record" "cert_validation_record" {
   type     = aws_acm_certificate.server_cert.domain_validation_options.0.resource_record_type
   ttl      = 60
   records  = ["${aws_acm_certificate.server_cert.domain_validation_options.0.resource_record_value}"]
-}
-
-resource "aws_acm_certificate_validation" "cert_validation" {
-  provider                = aws.certs
-  certificate_arn         = aws_acm_certificate.server_cert.arn
-  validation_record_fqdns = ["${aws_route53_record.cert_validation_record.fqdn}"]
 }
 
 resource "aws_route53_record" "server_A" {
