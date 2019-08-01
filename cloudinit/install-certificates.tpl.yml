@@ -1,0 +1,42 @@
+---
+write_files:
+  - path: /root/install-certificates.py
+    permissions: '0755'
+    owner: root:root
+    content: |
+      """Install certificates from AWS Certificate Manager.
+
+      This file is a template.  It should be processed by terraform.
+      """
+
+      import boto3
+
+
+      # Create ACM client
+      acm = boto3.client("acm")
+
+      try:
+          # Describe the specified certificate.
+          response = \
+              acm.get_certificate(CertificateArn="${server_certificate_arn}")
+
+          print("\n\rCertificate:\n\r")
+          print(response["Certificate"])
+          print("CertificateChain:\n\r")
+          print(response["CertificateChain"])
+
+      except acm.exceptions.ResourceNotFoundException as e:
+          print(e.response["Error"]["Code"] + ": " +
+              e.response["Error"]["Message"])
+          exit(1)
+
+      except acm.exceptions.RequestInProgressException as e:
+          print(e.response["Error"]["Code"] + ": " +
+              e.response["Error"]["Message"])
+          exit(1)
+
+      except Exception:
+          print("There was an error.")
+          exit(1)
+runcmd:
+  - /root/install-certificates.py
