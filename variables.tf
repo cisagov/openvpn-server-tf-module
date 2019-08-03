@@ -35,6 +35,11 @@ variable "client_network" {
   description = "A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. \"10.240.0.0 255.255.255.0\")"
 }
 
+variable "cert_read_role_arn" {
+  type        = string
+  description = "A string containing the ARN of a role that can read the instance certificate. (e.g. arn:aws:iam::123456789abc:role/ReadCerts)"
+}
+
 # ------------------------------------------------------------------------------
 # Optional parameters
 #
