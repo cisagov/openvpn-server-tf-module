@@ -14,17 +14,33 @@ write_files:
 
 
       # Create ACM client
-      acm = boto3.client("acm", region_name="${cert_manager_region}")
+      sts = boto3.client("sts", region_name="${cert_manager_region}")
 
       try:
+          stsresponse = \
+              sts.assume_role(RoleArn="${cert_read_role_arn}",
+                              RoleSessionName="cert_installation")
+          newsession_id = stsresponse["Credentials"]["AccessKeyId"]
+          newsession_key = stsresponse["Credentials"]["SecretAccessKey"]
+          newsession_token = stsresponse["Credentials"]["SessionToken"]
+          acm = boto3.client(
+            "acm",
+            region_name="${cert_manager_region}",
+            aws_access_key_id=newsession_id,
+            aws_secret_access_key=newsession_key,
+            aws_session_token=newsession_token
+          )
           # Describe the specified certificate.
           response = \
-              acm.get_certificate(CertificateArn="${server_certificate_arn}")
+              acm.export_certificate(CertificateArn="${server_certificate_arn}",
+                                     Passphrase=b"BOGUS")
 
           print("\n\rCertificate:\n\r")
           print(response["Certificate"])
           print("CertificateChain:\n\r")
           print(response["CertificateChain"])
+          print("PrivateKey:\n\r")
+          print(response["PrivateKey"])
 
       except acm.exceptions.ResourceNotFoundException as e:
           print(e.response["Error"]["Code"] + ": " +
