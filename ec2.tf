@@ -12,8 +12,9 @@ resource "aws_instance" "openvpn" {
 
   user_data_base64 = data.template_cloudinit_config.cloud_init_tasks.rendered
 
-  tags        = var.tags
-  volume_tags = var.tags
+  tags                 = var.tags
+  volume_tags          = var.tags
+  iam_instance_profile = aws_iam_instance_profile.instance_profile.name
 }
 
 # This is the Terraform configuration for the EBS volume that will
