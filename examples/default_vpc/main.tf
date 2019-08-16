@@ -11,15 +11,6 @@ provider "aws" {
   }
 }
 
-provider "aws" {
-  alias  = "certs"
-  region = var.cert_manager_region # cert-manager is region-specific
-  assume_role {
-    role_arn     = var.cert_create_role_arn
-    session_name = "terraform-openvpn-certificates"
-  }
-}
-
 #-------------------------------------------------------------------------------
 # Data sources to get default VPC and its subnets.
 #-------------------------------------------------------------------------------
@@ -37,17 +28,17 @@ data "aws_subnet_ids" "default" {
 module "example" {
   source = "../../"
   providers = {
-    aws       = "aws"
-    aws.dns   = "aws.dns"
-    aws.certs = "aws.certs"
+    aws     = "aws"
+    aws.dns = "aws.dns"
   }
 
   cert_read_role_arn  = var.cert_read_role_arn
-  client_network      = "10.240.0.0 255.255.255.0"
-  domain              = "cyber.dhs.gov"
+  cert_bucket_name    = var.cert_bucket_name
   hostname            = "vpn"
+  subdomain           = "cool"
+  domain              = "cyber.dhs.gov"
+  client_network      = "10.240.0.0 255.255.255.0"
   private_networks    = ["10.224.0.0 255.240.0.0"]
-  subdomain           = "felddy"
   subnet_id           = tolist(data.aws_subnet_ids.default.ids)[0]
   tags                = { "Name" : "OpenVPN Test" }
   trusted_cidr_blocks = ["0.0.0.0/0"]

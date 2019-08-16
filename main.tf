@@ -7,7 +7,3 @@ provider "aws" {
 provider "aws" {
   alias = "dns"
 }
-
-provider "aws" {
-  alias = "certs"
-}

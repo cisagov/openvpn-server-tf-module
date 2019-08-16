@@ -39,8 +39,8 @@ data "aws_iam_policy_document" "assume_role_policy_doc" {
 data "aws_iam_policy_document" "read_cert_policy_doc" {
   statement {
     sid       = "2"
-    actions   = ["acm:GetCertificate"]
-    resources = ["${aws_acm_certificate.server_cert.arn}"]
+    actions   = ["s3:GetObject"]
+    resources = ["${local.cert_bucket_path_arn}"]
     effect    = "Allow"
   }
 }
