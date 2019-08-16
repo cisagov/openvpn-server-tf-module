@@ -11,6 +11,15 @@ provider "aws" {
   }
 }
 
+provider "aws" {
+  alias  = "ami"
+  region = "us-east-2"
+  assume_role {
+    role_arn     = var.ami_role_arn
+    session_name = "terraform-openvpn-ami"
+  }
+}
+
 #-------------------------------------------------------------------------------
 # Data sources to get default VPC and its subnets.
 #-------------------------------------------------------------------------------
@@ -30,6 +39,7 @@ module "example" {
   providers = {
     aws     = "aws"
     aws.dns = "aws.dns"
+    aws.ami = "aws.ami"
   }
 
   cert_read_role_arn  = var.cert_read_role_arn

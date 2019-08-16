@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 # The AWS account ID being used
-data "aws_caller_identity" "current" {}
+# data "aws_caller_identity" "current" {}
 
 # ------------------------------------------------------------------------------
 # Automatically look up the latest AMI from
@@ -15,6 +15,8 @@ data "aws_caller_identity" "current" {}
 
 # The AMI from cisagov/openvpn-packer
 data "aws_ami" "openvpn" {
+  provider = aws.ami
+
   filter {
     name = "name"
     values = [
@@ -32,6 +34,6 @@ data "aws_ami" "openvpn" {
     values = ["ebs"]
   }
 
-  owners      = [data.aws_caller_identity.current.account_id] # This is us
+  owners      = ["self"]
   most_recent = true
 }
