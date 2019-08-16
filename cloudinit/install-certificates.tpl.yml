@@ -4,56 +4,51 @@ write_files:
     permissions: '0755'
     owner: root:root
     content: |
-      #!/usr/bin/env python3
-      """Install certificates from AWS Certificate Manager.
+      """Install certificates from AWS S3.
 
       This file is a template.  It should be processed by terraform.
       """
 
       import boto3
 
+      # Inputs from terraform
+      CERT_BUCKET_NAME = "${cert_bucket_name}"
+      CERT_READ_ROLE_ARN = "${cert_read_role_arn}"
+      SERVER_FQDN = "${server_fqdn}"
 
-      # Create ACM client
-      sts = boto3.client("sts", region_name="${cert_manager_region}")
+      # These files will be copied from the bucket
+      # and installed in the specified location.
+      INSTALLATION_MAP = {
+          "fullchain.pem": "/etc/openvpn/server/server.crt",
+          "privkey.pem": "/etc/openvpn/server/server.key",
+      }
 
-      try:
-          stsresponse = \
-              sts.assume_role(RoleArn="${cert_read_role_arn}",
-                              RoleSessionName="cert_installation")
-          newsession_id = stsresponse["Credentials"]["AccessKeyId"]
-          newsession_key = stsresponse["Credentials"]["SecretAccessKey"]
-          newsession_token = stsresponse["Credentials"]["SessionToken"]
-          acm = boto3.client(
-            "acm",
-            region_name="${cert_manager_region}",
-            aws_access_key_id=newsession_id,
-            aws_secret_access_key=newsession_key,
-            aws_session_token=newsession_token
-          )
-          # Describe the specified certificate.
-          response = \
-              acm.export_certificate(CertificateArn="${server_certificate_arn}",
-                                     Passphrase=b"BOGUS")
+      # Create STS client
+      sts = boto3.client("sts")
 
-          print("\n\rCertificate:\n\r")
-          print(response["Certificate"])
-          print("CertificateChain:\n\r")
-          print(response["CertificateChain"])
-          print("PrivateKey:\n\r")
-          print(response["PrivateKey"])
+      # Assume the role that can read the certificate
+      stsresponse = sts.assume_role(
+          RoleArn=CERT_READ_ROLE_ARN, RoleSessionName="cert_installation"
+      )
+      newsession_id = stsresponse["Credentials"]["AccessKeyId"]
+      newsession_key = stsresponse["Credentials"]["SecretAccessKey"]
+      newsession_token = stsresponse["Credentials"]["SessionToken"]
 
-      except acm.exceptions.ResourceNotFoundException as e:
-          print(e.response["Error"]["Code"] + ": " +
-              e.response["Error"]["Message"])
-          exit(1)
+      # Create a new client to access S3 using the temporary credentials
+      s3 = boto3.client(
+          "s3",
+          aws_access_key_id=newsession_id,
+          aws_secret_access_key=newsession_key,
+          aws_session_token=newsession_token,
+      )
 
-      except acm.exceptions.RequestInProgressException as e:
-          print(e.response["Error"]["Code"] + ": " +
-              e.response["Error"]["Message"])
-          exit(1)
+      # Copy each file from the bucket to the local file system
+      for src, dst in INSTALLATION_MAP.items():
+          obj = s3.get_object(
+            Bucket=CERT_BUCKET_NAME,
+            Key=f"live/{SERVER_FQDN}/{src}")
+          with open(dst, "wb") as f:
+              f.write(obj["Body"].read())
 
-      except Exception:
-          print("There was an error.")
-          exit(1)
 runcmd:
   - /root/install-certificates.py
