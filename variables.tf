@@ -40,6 +40,11 @@ variable "cert_read_role_arn" {
   description = "A string containing the ARN of a role that can read the instance certificate. (e.g. arn:aws:iam::123456789abc:role/ReadCerts)"
 }
 
+variable "cert_bucket_name" {
+  type        = string
+  description = "The name of a bucket that stores certificates. (e.g. my-certs)"
+}
+
 # ------------------------------------------------------------------------------
 # Optional parameters
 #
