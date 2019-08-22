@@ -9,5 +9,5 @@ provider "aws" {
 }
 
 provider "aws" {
-  alias = "ami"
+  alias = "ec2"
 }

@@ -13,9 +13,9 @@ variable "dns_role_arn" {
   description = "The ARN of the role that can modify route53 DNS. (e.g. arn:aws:iam::123456789abc:role/ModifyPublicDNS)"
 }
 
-variable "ami_role_arn" {
+variable "ec2_role_arn" {
   type        = string
-  description = "The ARN of the role that can read AMIs?. (e.g. arn:aws:iam::123456789abc:role/ModifyPublicDNS)"
+  description = "The ARN of the role that can terraform EC2 resources. (e.g. arn:aws:iam::123456789abc:role/TerraformEC2)"
 }
 
 variable "region" {

@@ -12,11 +12,11 @@ provider "aws" {
 }
 
 provider "aws" {
-  alias  = "ami"
+  alias  = "ec2"
   region = "us-east-2"
   assume_role {
-    role_arn     = var.ami_role_arn
-    session_name = "terraform-openvpn-ami"
+    role_arn     = var.ec2_role_arn
+    session_name = "terraform-openvpn-ec2"
   }
 }
 
@@ -24,11 +24,13 @@ provider "aws" {
 # Data sources to get default VPC and its subnets.
 #-------------------------------------------------------------------------------
 data "aws_vpc" "default" {
-  default = true
+  provider = aws.ec2
+  default  = true
 }
 
 data "aws_subnet_ids" "default" {
-  vpc_id = data.aws_vpc.default.id
+  provider = aws.ec2
+  vpc_id   = data.aws_vpc.default.id
 }
 
 #-------------------------------------------------------------------------------
@@ -39,7 +41,7 @@ module "example" {
   providers = {
     aws     = "aws"
     aws.dns = "aws.dns"
-    aws.ami = "aws.ami"
+    aws.ec2 = "aws.ec2"
   }
 
   cert_read_role_arn  = var.cert_read_role_arn
