@@ -46,6 +46,7 @@ module "example" {
 
   cert_read_role_arn  = var.cert_read_role_arn
   cert_bucket_name    = var.cert_bucket_name
+  local_ec2_profile   = var.local_ec2_profile
   hostname            = "vpn"
   subdomain           = "cool"
   domain              = "cyber.dhs.gov"

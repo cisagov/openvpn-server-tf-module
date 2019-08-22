@@ -59,14 +59,14 @@ resource "aws_volume_attachment" "openvpn_data_attachment" {
   # successfully destroy the volume attachments.
   provisioner "local-exec" {
     when       = destroy
-    command    = "aws --region=${data.aws_availability_zone.the_az.region} ec2 terminate-instances --instance-ids ${aws_instance.openvpn.id}"
+    command    = "aws --profile=${var.local_ec2_profile} --region=${data.aws_availability_zone.the_az.region} ec2 terminate-instances --instance-ids ${aws_instance.openvpn.id}"
     on_failure = continue
   }
 
   # Wait until the instance is terminated before continuing on
   provisioner "local-exec" {
     when    = destroy
-    command = "aws --region=${data.aws_availability_zone.the_az.region} ec2 wait instance-terminated --instance-ids ${aws_instance.openvpn.id}"
+    command = "aws --profile=${var.local_ec2_profile} --region=${data.aws_availability_zone.the_az.region} ec2 wait instance-terminated --instance-ids ${aws_instance.openvpn.id}"
   }
 
   skip_destroy = true

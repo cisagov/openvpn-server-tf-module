@@ -45,6 +45,11 @@ variable "cert_bucket_name" {
   description = "The name of a bucket that stores certificates. (e.g. my-certs)"
 }
 
+variable "local_ec2_profile" {
+  type        = string
+  description = "The name of a local AWS profile (e.g. in your ~/.aws/credentials) that has permission to terminate and check the status of EC2 instances. (e.g. terraform-ec2-role)"
+}
+
 # ------------------------------------------------------------------------------
 # Optional parameters
 #
