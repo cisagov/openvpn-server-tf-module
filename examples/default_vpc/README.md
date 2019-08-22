@@ -13,8 +13,9 @@ Note that this example may create resources which cost money. Run
 | Name | Description |
 |------|-------------|
 | dns_role_arn | ARN of a role with route53 access |
+| cert_bucket_name | Name of the bucket that stores the certificates |
 | cert_role_arn | ARN of a role with certificate manager access |
-| cert_manager_region | Certificate manager region (default: us-east-1) |
+| ec2_role_arn | ARN of a role with EC2 access |
 | region | Region for instances (default: us-east-2) |
 
 ## Outputs ##
@@ -25,4 +26,5 @@ Note that this example may create resources which cost money. Run
 | arn | The EC2 instance ARN |
 | availability_zone | The AZ where the EC2 instance is deployed |
 | private_ip | The private IP of the EC2 instance |
+| public_ip | The public IP of the EC2 instance |
 | subnet_id | The ID of the subnet where the EC2 instance is deployed |
