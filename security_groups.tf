@@ -32,3 +32,17 @@ resource "aws_security_group_rule" "openvpn_udp_ingress" {
   from_port         = local.openvpn_udp_ports[count.index]
   to_port           = local.openvpn_udp_ports[count.index]
 }
+
+# TCP egress rules for OpenVPN
+# Egress on port 443 is needed for AWS API commands (e.g. AssumeRole, which
+# is needed in order to fetch the server certificate from S3)
+resource "aws_security_group_rule" "openvpn_tcp_https_egress" {
+  provider = aws.ec2
+
+  security_group_id = aws_security_group.openvpn_servers.id
+  type              = "egress"
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 443
+  to_port           = 443
+}
