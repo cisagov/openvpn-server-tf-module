@@ -4,6 +4,8 @@ write_files:
     permissions: '0755'
     owner: root:root
     content: |
+      #!/usr/bin/env python3
+
       """Install certificates from AWS S3.
 
       This file is a template.  It should be processed by terraform.
@@ -46,7 +48,7 @@ write_files:
       for src, dst in INSTALLATION_MAP.items():
           obj = s3.get_object(
             Bucket=CERT_BUCKET_NAME,
-            Key=f"live/{SERVER_FQDN}/{src}")
+            Key="live/{}/{}".format(SERVER_FQDN, src))
           with open(dst, "wb") as f:
               f.write(obj["Body"].read())
 
