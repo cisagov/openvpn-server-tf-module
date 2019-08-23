@@ -4,7 +4,7 @@ provider "aws" {
 
 provider "aws" {
   alias  = "dns"
-  region = "us-east-1" # route53 is global, but still required by terraform
+  region = var.region # route53 is global, but still required by terraform
   assume_role {
     role_arn     = var.dns_role_arn
     session_name = "terraform-openvpn-dns"
@@ -13,7 +13,7 @@ provider "aws" {
 
 provider "aws" {
   alias  = "ec2"
-  region = "us-east-2"
+  region = var.region
   assume_role {
     role_arn     = var.ec2_role_arn
     session_name = "terraform-openvpn-ec2"
