@@ -15,8 +15,8 @@ Note that this example may create resources which cost money. Run
 | dns_role_arn | ARN of a role with route53 access |
 | cert_bucket_name | Name of the bucket that stores the certificates |
 | cert_role_arn | ARN of a role with certificate manager access |
-| ec2_role_arn | ARN of a role with EC2 access |
 | region | Region for instances (default: us-east-2) |
+| tf_role_arn | ARN of a role with permissions needed to terraform the OpenVPN server |
 
 ## Outputs ##
 

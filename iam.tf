@@ -2,24 +2,32 @@
 
 # The profile of the EC2 instance
 resource "aws_iam_instance_profile" "instance_profile" {
-  name = "instance_profile"
+  provider = aws.tf
+
+  name = "openvpn_instance_profile"
   role = aws_iam_role.instance_role.name
 }
 
 # The role for this EC2 instance
 resource "aws_iam_role" "instance_role" {
+  provider = aws.tf
+
   name               = "instance_role"
   assume_role_policy = "${data.aws_iam_policy_document.assume_role_policy_doc.json}"
 }
 
 # Attach policies to the instance role
 resource "aws_iam_role_policy" "access_cert_policy" {
+  provider = aws.tf
+
   name   = "access_cert_policy"
   role   = aws_iam_role.instance_role.id
   policy = "${data.aws_iam_policy_document.read_cert_policy_doc.json}"
 }
 
 resource "aws_iam_role_policy" "assume_delegated_role_policy" {
+  provider = aws.tf
+
   name   = "assume_delegated_role_policy"
   role   = aws_iam_role.instance_role.id
   policy = "${data.aws_iam_policy_document.assume_delegated_role_policy_doc.json}"

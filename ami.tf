@@ -15,7 +15,7 @@
 
 # The AMI from cisagov/openvpn-packer
 data "aws_ami" "openvpn" {
-  provider = aws.ec2
+  provider = aws.tf
 
   filter {
     name = "name"
