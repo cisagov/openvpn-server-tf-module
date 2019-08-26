@@ -1,7 +1,5 @@
 # The openvpn EC2 instance
 resource "aws_instance" "openvpn" {
-  provider = aws.tf
-
   ami                         = data.aws_ami.openvpn.id
   ebs_optimized               = true
   instance_type               = var.aws_instance_type
@@ -31,8 +29,6 @@ resource "aws_instance" "openvpn" {
 # inside of the lifecycle block
 # (https://github.com/hashicorp/terraform/issues/3116).
 resource "aws_ebs_volume" "openvpn_data" {
-  provider = aws.tf
-
   availability_zone = data.aws_subnet.the_subnet.availability_zone
   type              = "gp2"
   size              = 10
@@ -44,8 +40,6 @@ resource "aws_ebs_volume" "openvpn_data" {
 }
 
 resource "aws_volume_attachment" "openvpn_data_attachment" {
-  provider = aws.tf
-
   device_name = "/dev/xvdb"
   volume_id   = aws_ebs_volume.openvpn_data.id
   instance_id = aws_instance.openvpn.id
