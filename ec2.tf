@@ -17,12 +17,7 @@ resource "aws_instance" "openvpn" {
   iam_instance_profile = aws_iam_instance_profile.instance_profile.name
 }
 
-# This is the Terraform configuration for the EBS volume that will
-# contain the production IPA data. Therefore we need these resources
-# to be immortal in any "production" workspace, and so I am using the
-# prevent_destroy lifecycle element to disallow the destruction of it
-# via terraform in that case.
-#
+
 # I'd like to use "${terraform.workspace == "production" ? true :
 # false}", so the prevent_destroy only applies to the production
 # workspace, but it appears that interpolations are not supported
