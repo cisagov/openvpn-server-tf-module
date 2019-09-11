@@ -13,12 +13,6 @@ resource "aws_iam_role" "instance_role" {
 }
 
 # Attach policies to the instance role
-resource "aws_iam_role_policy" "access_cert_policy" {
-  name   = "access_cert_policy"
-  role   = aws_iam_role.instance_role.id
-  policy = "${data.aws_iam_policy_document.read_cert_policy_doc.json}"
-}
-
 resource "aws_iam_role_policy" "assume_delegated_role_policy" {
   name   = "assume_delegated_role_policy"
   role   = aws_iam_role.instance_role.id
@@ -37,14 +31,6 @@ data "aws_iam_policy_document" "assume_role_policy_doc" {
       identifiers = ["ec2.amazonaws.com"]
     }
     effect = "Allow"
-  }
-}
-
-data "aws_iam_policy_document" "read_cert_policy_doc" {
-  statement {
-    actions   = ["s3:GetObject"]
-    resources = ["${local.cert_bucket_path_arn}"]
-    effect    = "Allow"
   }
 }
 
