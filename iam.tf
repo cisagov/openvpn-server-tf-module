@@ -2,13 +2,13 @@
 
 # The profile of the EC2 instance
 resource "aws_iam_instance_profile" "instance_profile" {
-  name = "openvpn_instance_profile"
+  name = "openvpn_instance_profile_${terraform.workspace}"
   role = aws_iam_role.instance_role.name
 }
 
 # The role for this EC2 instance
 resource "aws_iam_role" "instance_role" {
-  name               = "instance_role"
+  name               = "openvpn_instance_role_${terraform.workspace}"
   assume_role_policy = "${data.aws_iam_policy_document.assume_role_policy_doc.json}"
 }
 
