@@ -19,9 +19,4 @@ locals {
     var.subdomain != "" ? format(".%s", var.subdomain) : "",
     var.domain
   )}"
-
-  cert_bucket_path_arn = "${format("arn:aws:s3:::%s/live/%s/*",
-    var.cert_bucket_name,
-    local.server_fqdn
-  )}"
 }

@@ -15,10 +15,9 @@ data "template_cloudinit_config" "cloud_init_tasks" {
   }
 
   part {
-    filename     = "install-certificates.yml"
-    content_type = "text/cloud-config"
+    content_type = "text/x-shellscript"
     content = templatefile(
-      "${path.module}/cloudinit/install-certificates.tpl.yml", {
+      "${path.module}/cloudinit/install-certificates.py", {
         cert_bucket_name   = var.cert_bucket_name
         cert_read_role_arn = var.cert_read_role_arn
         server_fqdn        = local.server_fqdn
