@@ -7,3 +7,7 @@ provider "aws" {
 provider "aws" {
   alias = "dns"
 }
+
+provider "aws" {
+  alias = "cert_read_role"
+}

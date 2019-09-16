@@ -1,3 +1,17 @@
+# Create a role that allows the instance to read its certs from S3.
+
+module "certreadrole" {
+  source = "github.com/cisagov/cert-read-role-tf-module"
+
+  providers = {
+    aws = "aws.cert_read_role"
+  }
+
+  account_ids      = var.cert_read_role_accounts_allowed
+  cert_bucket_name = var.cert_bucket_name
+  hostname         = local.server_fqdn
+}
+
 # Create the IAM instance profile for the EC2 server instance
 
 # The profile of the EC2 instance
@@ -37,7 +51,7 @@ data "aws_iam_policy_document" "assume_role_policy_doc" {
 data "aws_iam_policy_document" "assume_delegated_role_policy_doc" {
   statement {
     actions   = ["sts:AssumeRole"]
-    resources = ["${var.cert_read_role_arn}"]
+    resources = ["${module.certreadrole.arn}"]
     effect    = "Allow"
   }
 }

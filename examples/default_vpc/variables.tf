@@ -1,6 +1,7 @@
-variable "cert_read_role_arn" {
+variable "aws_region" {
   type        = string
-  description = "The ARN of the role that can read certs in the certificate bucket. (e.g. arn:aws:iam::123456789abc:role/ReadCerts)"
+  description = "The default aws region."
+  default     = "us-east-2"
 }
 
 variable "cert_bucket_name" {
@@ -8,20 +9,20 @@ variable "cert_bucket_name" {
   description = "The name of the bucket that stores the certificates. (e.g. my-certificates)"
 }
 
+variable "cert_read_role_accounts_allowed" {
+  type        = list(string)
+  description = "List of accounts allowed to access the role that can read certificates from an S3 bucket."
+  default     = []
+}
+
+variable "cert_read_role_arn" {
+  type        = string
+  description = "The ARN of the role that has read access to the S3 bucket ('cert_bucket_name' above) where certificates are stored"
+}
+
 variable "dns_role_arn" {
   type        = string
   description = "The ARN of the role that can modify route53 DNS. (e.g. arn:aws:iam::123456789abc:role/ModifyPublicDNS)"
-}
-
-variable "local_ec2_profile" {
-  type        = string
-  description = "The name of a local AWS profile (e.g. in your ~/.aws/credentials) that has permission to terminate and check the status of EC2 instances. (e.g. terraform-ec2-role)"
-}
-
-variable "region" {
-  type        = string
-  description = "The default aws region."
-  default     = "us-east-2"
 }
 
 variable "tf_role_arn" {
