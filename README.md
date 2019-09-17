@@ -58,6 +58,8 @@ module "example" {
 | client_network | A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. `"10.240.0.0 255.255.255.0"`) | string | | yes |
 | create_AAAA | Whether or not to create AAAA records for the OpenVPN server. | boolean | false | no |
 | domain | The domain for the OpenVPN server (e.g. `cyber.dhs.gov`). | string | | yes |
+| freeipa_admin_pw | The password for the Kerberos admin role | string | | yes |
+| freeipa_realm | The realm for the IPA client (e.g. EXAMPLE.COM) | string | | yes |
 | hostname | The hostname of the OpenVPN server (e.g. `vpn1`). | string | | yes |
 | private_networks | A list of network netmasks that exist behind the VPN server.  These will be pushed to the client.  (e.g. `["10.224.0.0 255.240.0.0", "192.168.100.0 255.255.255.0"]`) | list(string) | | yes |
 | subdomain | The subdomain for the OpenVPN server.  If empty, no subdomain will be used. (e.g. `cool`)" | string | | no |

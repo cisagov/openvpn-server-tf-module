@@ -50,6 +50,8 @@ module "example" {
   cert_bucket_name                = var.cert_bucket_name
   cert_read_role_accounts_allowed = var.cert_read_role_accounts_allowed
   hostname                        = "vpn"
+  freeipa_admin_pw                = "bogus"
+  freeipa_realm                   = "COOL.CYBER.DHS.GOV"
   subdomain                       = "cool"
   domain                          = "cyber.dhs.gov"
   client_network                  = "10.240.0.0 255.255.255.0"

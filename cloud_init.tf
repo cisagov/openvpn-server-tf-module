@@ -23,4 +23,14 @@ data "template_cloudinit_config" "cloud_init_tasks" {
         server_fqdn        = local.server_fqdn
     })
   }
+
+  part {
+    content_type = "text/x-shellscript"
+    content = templatefile(
+      "${path.module}/cloudinit/setup_freeipa.sh", {
+        admin_pw = var.freeipa_admin_pw
+        hostname = local.server_fqdn
+        realm    = var.freeipa_realm
+    })
+  }
 }
