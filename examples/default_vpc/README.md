@@ -12,10 +12,11 @@ Note that this example may create resources which cost money. Run
 
 | Name | Description |
 |------|-------------|
-| dns_role_arn | ARN of a role with route53 access |
+| aws_region | The default aws region. |
 | cert_bucket_name | Name of the bucket that stores the certificates |
-| cert_role_arn | ARN of a role with certificate manager access |
-| region | Region for instances (default: us-east-2) |
+| cert_read_role_accounts_allowed | List of accounts allowed to access the role that can read certificates from an S3 bucket. |
+| cert_read_role_arn | The ARN of the role that can create roles to have read access to the S3 bucket ('cert_bucket_name' above) where certificates are stored. |
+| dns_role_arn | ARN of a role with route53 access |
 | tf_role_arn | ARN of a role with permissions needed to terraform the OpenVPN server |
 
 ## Outputs ##
