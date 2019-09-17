@@ -17,7 +17,7 @@ variable "cert_read_role_accounts_allowed" {
 
 variable "cert_read_role_arn" {
   type        = string
-  description = "The ARN of the role that has read access to the S3 bucket ('cert_bucket_name' above) where certificates are stored"
+  description = "The ARN of the role that can create roles to have read access to the S3 bucket ('cert_bucket_name' above) where certificates are stored."
 }
 
 variable "dns_role_arn" {
