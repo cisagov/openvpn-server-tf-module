@@ -17,8 +17,7 @@ provider "aws" {
 }
 
 provider "aws" {
-  alias = "cert_read_role"
-  # profile = var.cert_read_role_profile
+  alias  = "cert_read_role"
   region = var.aws_region
   assume_role {
     role_arn     = var.cert_read_role_arn
