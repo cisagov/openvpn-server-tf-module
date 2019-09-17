@@ -2,14 +2,11 @@
 
 [![Build Status](https://travis-ci.com/cisagov/openvpn-server-tf-module.svg?branch=develop)](https://travis-ci.com/cisagov/openvpn-server-tf-module)
 
-This is a generic skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) [Terraform
-module](https://www.terraform.io/docs/modules/index.html) GitHub
-repository started.  This skeleton project contains [licensing
-information](LICENSE), as well as [pre-commit
-hooks](https://pre-commit.com) and a [Travis
-CI](https://travis-ci.com) configuration appropriate for the major
-languages that we use.
+This project implements a [Terraform
+module](https://www.terraform.io/docs/modules/index.html)
+that will create an [OpenVPN](https://openvpn.net) server EC2 instance
+using the [open-vpn](https://github.com/cisagov/openvpn-packer)
+AMI.
 
 See [here](https://www.terraform.io/docs/modules/index.html) for more
 details on Terraform modules and the standard module structure.
@@ -19,15 +16,22 @@ details on Terraform modules and the standard module structure.
 ```hcl
 module "example" {
   source = "github.com/cisagov/openvpn-server-tf-module"
-
-  aws_region            = "us-west-1"
-  aws_availability_zone = "b"
-  subnet_id             = "subnet-0123456789abcdef0"
-
-  tags = {
-    Key1 = "Value1"
-    Key2 = "Value2"
+  providers = {
+    aws                = "aws"
+    aws.dns            = "aws.dns"
+    aws.cert_read_role = "aws.cert_read_role"
   }
+
+  cert_bucket_name                = "spiffy-cert-bucket"
+  cert_read_role_accounts_allowed = ["123456789012","123456789013"]
+  hostname                        = "vpn"
+  subdomain                       = "fonz"
+  domain                          = "foo.org"
+  client_network                  = "10.10.2.0 255.255.255.0"
+  private_networks                = ["10.10.1.0 255.255.255.0"]
+  subnet_id                       = subnet-0123456789abcdef0
+  tags                            = { "Name" : "OpenVPN Test" }
+  trusted_cidr_blocks             = ["0.0.0.0/0"]
 }
 ```
 
@@ -35,23 +39,44 @@ module "example" {
 
 * [Deploying into the default VPC](https://github.com/cisagov/openvpn-server-tf-module/tree/develop/examples/default_vpc)
 
+## Providers ##
+
+| Provider Alias | Usage |
+|--|--|
+| aws | Non-specialized access |
+| aws.dns | Route53 zone modifications |
+| aws.cert_read_role | Creation of certificate access roles |
+
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-------:|:--------:|
-| aws_region | The AWS region to deploy into (e.g. us-east-1) | string | | yes |
-| aws_availability_zone | The AWS availability zone to deploy into (e.g. a, b, c, etc.) | string | | yes |
-| subnet_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0) | string | | yes |
-| tags | Tags to apply to all AWS resources created | map(string) | `{}` | no |
+| associate_public_ip_address | Whether or not to associate a public IP address with the OpenVPN server. | boolean | true | no |
+| aws_instance_type | The AWS instance type to deploy (e.g. `t3.medium`). | string | `t3.small` | no |
+| cert_bucket_name | The name of a bucket that stores certificates. (e.g. `my-certs`). | string | | yes |
+| cert_read_role_accounts_allowed | List of accounts allowed to access the role that can read certificates from an S3 bucket. | list(string) | `[]` | no |
+| client_network | A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. `"10.240.0.0 255.255.255.0"`) | string | | yes |
+| create_AAAA | Whether or not to create AAAA records for the OpenVPN server. | boolean | false | no |
+| domain | The domain for the OpenVPN server (e.g. `cyber.dhs.gov`). | string | | yes |
+| hostname | The hostname of the OpenVPN server (e.g. `vpn1`). | string | | yes |
+| private_networks | A list of network netmasks that exist behind the VPN server.  These will be pushed to the client.  (e.g. `["10.224.0.0 255.240.0.0", "192.168.100.0 255.255.255.0"]`) | list(string) | | yes |
+| subdomain | The subdomain for the OpenVPN server.  If empty, no subdomain will be used. (e.g. `cool`)" | string | | no |
+| subnet_id | The ID of the AWS subnet to deploy into. (e.g. `subnet-0123456789abcdef0`) | string | | yes |
+| tags | Tags to apply to all AWS resources created. | map(string) | `{}` | no |
+| trusted_cidr_blocks | A list of the CIDR blocks that are allowed to access the OpenVPN servers. (e.g. `["10.10.0.0/16", "10.11.0.0/16"])"` | list(string) |  | yes
+| ttl | The TTL value to use for Route53 DNS records (e.g. `86400`).  A smaller value may be useful when the DNS records are changing often, for example when testing. | integer | 60 | no |
 
 ## Outputs ##
 
 | Name | Description |
 |------|-------------|
-| id | The EC2 instance ID |
 | arn | The EC2 instance ARN |
 | availability_zone | The AZ where the EC2 instance is deployed |
+| id | The EC2 instance ID |
 | private_ip | The private IP of the EC2 instance |
+| public_ip | The public IP of the OpenVPN instance |
+| security_group_arn | The ARN of the OpenVPN server security group |
+| security_group_id | The ID of the OpenVPN server security group |
 | subnet_id | The ID of the subnet where the EC2 instance is deployed |
 
 ## Contributing ##
