@@ -62,6 +62,7 @@ module "example" {
 | freeipa_realm | The realm for the IPA client (e.g. EXAMPLE.COM) | string | | yes |
 | hostname | The hostname of the OpenVPN server (e.g. `vpn1`). | string | | yes |
 | private_networks | A list of network netmasks that exist behind the VPN server.  These will be pushed to the client.  (e.g. `["10.224.0.0 255.240.0.0", "192.168.100.0 255.255.255.0"]`) | list(string) | | yes |
+| ssm_read_role_accounts_allowed | List of accounts allowed to access the role that can read SSM keys. | list(string) | `[]` | no |
 | subdomain | The subdomain for the OpenVPN server.  If empty, no subdomain will be used. (e.g. `cool`)" | string | | no |
 | subnet_id | The ID of the AWS subnet to deploy into. (e.g. `subnet-0123456789abcdef0`) | string | | yes |
 | tags | Tags to apply to all AWS resources created. | map(string) | `{}` | no |
@@ -77,6 +78,7 @@ module "example" {
 | id | The EC2 instance ID |
 | private_ip | The private IP of the EC2 instance |
 | public_ip | The public IP of the OpenVPN instance |
+| ssm_tlscrypt_key | The SSM key that contains the tls-auth key. |
 | security_group_arn | The ARN of the OpenVPN server security group |
 | security_group_id | The ID of the OpenVPN server security group |
 | subnet_id | The ID of the subnet where the EC2 instance is deployed |
