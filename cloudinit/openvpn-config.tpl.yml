@@ -3,7 +3,7 @@
 ---
 
 write_files:
-  - path: /etc/openvpn/server/cal.conf
+  - path: /etc/openvpn/server/primary.conf
     permissions: '0600'
     owner: root:root
     content: |
@@ -229,13 +229,13 @@ write_files:
       # to help block DoS attacks and UDP port flooding.
       #
       # Generate with:
-      #   openvpn --genkey --secret ta.key
+      #   openvpn --genkey --secret tlscrypt.key
       #
       # The server and each client must have
       # a copy of this key.
       # The second parameter should be '0'
       # on the server and '1' on the clients.
-      tls-crypt ta.key # This file is secret
+      tls-crypt tlscrypt.key # This file is secret
 
       # Select a cryptographic cipher.
       # This config item must be copied to
