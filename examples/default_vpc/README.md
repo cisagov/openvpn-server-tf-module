@@ -17,6 +17,8 @@ Note that this example may create resources which cost money. Run
 | cert_read_role_accounts_allowed | List of accounts allowed to access the role that can read certificates from an S3 bucket. |
 | cert_read_role_arn | The ARN of the role that can create roles to have read access to the S3 bucket ('cert_bucket_name' above) where certificates are stored. |
 | dns_role_arn | ARN of a role with route53 access |
+| ssm_read_role_accounts_allowed | List of accounts allowed to access the role that can read SSM keys. |
+| ssm_read_role_arn | The ARN of the role that can create roles to have read access to the S3 bucket ('cert_bucket_name' above) where certificates are stored. |
 | tf_role_arn | ARN of a role with permissions needed to terraform the OpenVPN server |
 
 ## Outputs ##

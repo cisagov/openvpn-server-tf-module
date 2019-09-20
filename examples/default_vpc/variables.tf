@@ -25,6 +25,17 @@ variable "dns_role_arn" {
   description = "The ARN of the role that can modify route53 DNS. (e.g. arn:aws:iam::123456789abc:role/ModifyPublicDNS)"
 }
 
+variable "ssm_read_role_accounts_allowed" {
+  type        = list(string)
+  description = "List of accounts allowed to access the role that can read SSM keys."
+  default     = []
+}
+
+variable "ssm_read_role_arn" {
+  type        = string
+  description = "The ARN of the role that can create roles to have read access to the SSM parameters."
+}
+
 variable "tf_role_arn" {
   type        = string
   description = "The ARN of the role that can terraform resources. (e.g. arn:aws:iam::123456789abc:role/TerraformOpenVPNServer)"

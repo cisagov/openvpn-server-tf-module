@@ -41,6 +41,12 @@ variable "private_networks" {
   description = "A list of network netmasks that exist behind the VPN server.  These will be pushed to the client.  (e.g. [\"10.224.0.0 255.240.0.0\", \"192.168.100.0 255.255.255.0\"])"
 }
 
+variable "ssm_read_role_accounts_allowed" {
+  type        = list(string)
+  description = "List of accounts allowed to access the role that can read SSM keys."
+  default     = []
+}
+
 variable "subdomain" {
   description = "The subdomain for the OpenVPN server.  If empty, no subdomain will be used. (e.g. cool)"
 }
@@ -75,6 +81,24 @@ variable "create_AAAA" {
   type        = bool
   description = "Whether or not to create AAAA records for the OpenVPN server"
   default     = false
+}
+
+variable "ssm_dh4096_pem" {
+  type        = string
+  description = "The SSM key that contains the Diffie Hellman pem."
+  default     = "/openvpn/server/dh4096.pem"
+}
+
+variable "ssm_tlscrypt_key" {
+  type        = string
+  description = "The SSM key that contains the tls-auth key."
+  default     = "/openvpn/server/tlscrypt.key"
+}
+
+variable "ssm_region" {
+  type        = string
+  description = "The region of the SSM to access."
+  default     = "us-east-1"
 }
 
 variable "tags" {
