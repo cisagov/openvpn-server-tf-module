@@ -9,6 +9,11 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
+# Get the default Ethernet interface
+function get_interface {
+    ip route | grep default | sed "s/^.* dev \([^ ]*\).*$/\1/"
+}
+
 # Get the IP address corresponding to an interface
 function get_ip {
     ip --family inet address show dev "$1" | \
@@ -23,7 +28,8 @@ function get_ptr {
     dig +noall +ans -x "$1" | sed "s/.*PTR[[:space:]]*\(.*\)/\1/"
 }
 
-ip_address=$(get_ip eth0)
+interface=$(get_interface)
+ip_address=$(get_ip "$interface")
 
 # Wait until the IP address has a non-Amazon PTR record before
 # proceeding
