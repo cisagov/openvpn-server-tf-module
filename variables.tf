@@ -43,7 +43,12 @@ variable "private_networks" {
 
 variable "private_zone_id" {
   type        = string
-  description = "The DNS Zone ID in which to create reverse lookup records."
+  description = "The DNS Zone ID in which to create private lookup records."
+}
+
+variable "private_reverse_zone_id" {
+  type        = string
+  description = "The DNS Zone ID in which to create private reverse lookup records."
 }
 
 variable "ssm_read_role_accounts_allowed" {
