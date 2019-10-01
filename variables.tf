@@ -41,6 +41,11 @@ variable "private_networks" {
   description = "A list of network netmasks that exist behind the VPN server.  These will be pushed to the client.  (e.g. [\"10.224.0.0 255.240.0.0\", \"192.168.100.0 255.255.255.0\"])"
 }
 
+variable "private_zone_id" {
+  type        = string
+  description = "The DNS Zone ID in which to create reverse lookup records."
+}
+
 variable "ssm_read_role_accounts_allowed" {
   type        = list(string)
   description = "List of accounts allowed to access the role that can read SSM keys."

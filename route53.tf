@@ -26,19 +26,19 @@ resource "aws_route53_record" "server_AAAA" {
 #-------------------------------------------------------------------------------
 # Create a private Route53 reverse zone and records.
 #-------------------------------------------------------------------------------
-resource "aws_route53_zone" "private_reverse_zone" {
-  # uses the default tf provider
-  name = "in-addr.arpa."
-
-  vpc {
-    vpc_id = data.aws_vpc.the_vpc.id
-  }
-}
+# resource "aws_route53_zone" "private_reverse_zone" {
+#   # uses the default tf provider
+#   name = "in-addr.arpa."
+#
+#   vpc {
+#     vpc_id = data.aws_vpc.the_vpc.id
+#   }
+# }
 
 resource "aws_route53_record" "private_PTR" {
   # uses the default tf provider
 
-  zone_id = aws_route53_zone.private_reverse_zone.zone_id
+  zone_id = var.private_zone_id
   name = format(
     "%s.%s.%s.%s",
     element(split(".", aws_instance.openvpn.private_ip), 3),
