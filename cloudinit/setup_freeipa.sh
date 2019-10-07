@@ -51,4 +51,5 @@ ipa-client-install --realm="${realm}" \
                    --mkhomedir \
                    --hostname="${hostname}" \
                    --no-ntp \
-                   --unattended
+                   --unattended \
+                   --force-join
