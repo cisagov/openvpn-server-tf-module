@@ -51,6 +51,12 @@ variable "private_reverse_zone_id" {
   description = "The DNS Zone ID in which to create private reverse lookup records."
 }
 
+variable "security_groups" {
+  type        = list(string)
+  description = "Additional security group ids the server will join."
+  default     = []
+}
+
 variable "ssm_read_role_accounts_allowed" {
   type        = list(string)
   description = "List of accounts allowed to access the role that can read SSM keys."

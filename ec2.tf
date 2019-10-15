@@ -6,9 +6,9 @@ resource "aws_instance" "openvpn" {
   availability_zone           = data.aws_subnet.the_subnet.availability_zone
   subnet_id                   = var.subnet_id
   associate_public_ip_address = var.associate_public_ip_address
-  vpc_security_group_ids = [
+  vpc_security_group_ids = concat([
     aws_security_group.openvpn_servers.id,
-  ]
+  ], var.security_groups)
 
   user_data_base64 = data.template_cloudinit_config.cloud_init_tasks.rendered
 
