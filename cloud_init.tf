@@ -5,7 +5,7 @@ data "template_cloudinit_config" "cloud_init_tasks" {
   base64_encode = true
 
   part {
-    filename     = "openvpn-config.yml"
+    filename     = "openvpn-config"
     content_type = "text/cloud-config"
     content = templatefile(
       "${path.module}/cloudinit/openvpn-config.tpl.yml", {
@@ -36,9 +36,9 @@ data "template_cloudinit_config" "cloud_init_tasks" {
   }
 
   part {
-    content_type = "text/x-shellscript"
+    content_type = "text/cloud-config"
     content = templatefile(
-      "${path.module}/cloudinit/setup_freeipa.sh", {
+      "${path.module}/cloudinit/freeipa-creds.tpl.yml", {
         admin_pw = var.freeipa_admin_pw
         hostname = local.server_fqdn
         realm    = var.freeipa_realm
