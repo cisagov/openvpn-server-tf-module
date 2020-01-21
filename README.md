@@ -1,6 +1,6 @@
 # openvpn-server-tf-module #
 
-[![Build Status](https://travis-ci.com/cisagov/openvpn-server-tf-module.svg?branch=develop)](https://travis-ci.com/cisagov/openvpn-server-tf-module)
+[![GitHub Build Status](https://github.com/cisagov/openvpn-server-tf-module/workflows/build/badge.svg)](https://github.com/cisagov/openvpn-server-tf-module/actions)
 
 This project implements a [Terraform
 module](https://www.terraform.io/docs/modules/index.html)
