@@ -44,5 +44,5 @@ variable "ssm_read_role_arn" {
 
 variable "tf_role_arn" {
   type        = string
-  description = "The ARN of the role that can terraform resources. (e.g. arn:aws:iam::123456789abc:role/TerraformOpenVPNServer)"
+  description = "The ARN of the role that can terraform non-specialized resources."
 }
