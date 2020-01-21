@@ -20,16 +20,22 @@ module "example" {
     aws                = "aws"
     aws.dns            = "aws.dns"
     aws.cert_read_role = "aws.cert_read_role"
+    aws.ssm_read_role  = "aws.ssm_read_role"
   }
 
   cert_bucket_name                = "spiffy-cert-bucket"
   cert_read_role_accounts_allowed = ["123456789012","123456789013"]
+  ssm_read_role_accounts_allowed  = ["123456789014","123456789015"]
   hostname                        = "vpn"
+  freeipa_admin_pw                = "secure!"
+  freeipa_realm                   = "shark-jump.foo.org"
   subdomain                       = "fonz"
   domain                          = "foo.org"
   client_network                  = "10.10.2.0 255.255.255.0"
   private_networks                = ["10.10.1.0 255.255.255.0"]
-  subnet_id                       = subnet-0123456789abcdef0
+  private_zone_id                 = "MYZONEID"
+  private_reverse_zone_id         = "MYREVZONEID"
+  subnet_id                       = "subnet-0123456789abcdef0"
   tags                            = { "Name" : "OpenVPN Test" }
   trusted_cidr_blocks             = ["0.0.0.0/0"]
 }
