@@ -4,7 +4,7 @@ module "certreadrole" {
   source = "github.com/cisagov/cert-read-role-tf-module"
 
   providers = {
-    aws = "aws.cert_read_role"
+    aws = aws.cert_read_role
   }
 
   account_ids      = var.cert_read_role_accounts_allowed
@@ -18,7 +18,7 @@ module "ssmreadrole" {
   source = "github.com/cisagov/ssm-read-role-tf-module"
 
   providers = {
-    aws = "aws.ssm_read_role"
+    aws = aws.ssm_read_role
   }
 
   account_ids = var.ssm_read_role_accounts_allowed
@@ -37,14 +37,14 @@ resource "aws_iam_instance_profile" "instance_profile" {
 # The role for this EC2 instance
 resource "aws_iam_role" "instance_role" {
   name               = "openvpn_instance_role_${local.server_fqdn}"
-  assume_role_policy = "${data.aws_iam_policy_document.assume_role_policy_doc.json}"
+  assume_role_policy = data.aws_iam_policy_document.assume_role_policy_doc.json
 }
 
 # Attach policies to the instance role
 resource "aws_iam_role_policy" "assume_delegated_role_policy" {
   name   = "assume_delegated_role_policy"
   role   = aws_iam_role.instance_role.id
-  policy = "${data.aws_iam_policy_document.assume_delegated_role_policy_doc.json}"
+  policy = data.aws_iam_policy_document.assume_delegated_role_policy_doc.json
 }
 
 ################################
