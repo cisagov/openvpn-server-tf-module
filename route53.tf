@@ -10,12 +10,12 @@ resource "aws_route53_record" "server_A" {
   name     = local.server_fqdn
   type     = "A"
   ttl      = var.ttl
-  records  = ["${aws_instance.openvpn.public_ip}"]
+  records  = [aws_instance.openvpn.public_ip]
 }
 
 resource "aws_route53_record" "server_AAAA" {
   provider = aws.dns
-  count    = "${var.create_AAAA == true ? 1 : 0}"
+  count    = var.create_AAAA == true ? 1 : 0
   zone_id  = data.aws_route53_zone.public_dns_zone.zone_id
   name     = local.server_fqdn
   type     = "AAAA"
@@ -42,7 +42,7 @@ resource "aws_route53_record" "private_PTR" {
   type = "PTR"
   ttl  = var.ttl
   records = [
-    "${local.server_fqdn}"
+    local.server_fqdn
   ]
 }
 
@@ -51,11 +51,11 @@ resource "aws_route53_record" "private_server_A" {
   name    = local.server_fqdn
   type    = "A"
   ttl     = var.ttl
-  records = ["${aws_instance.openvpn.private_ip}"]
+  records = [aws_instance.openvpn.private_ip]
 }
 
 resource "aws_route53_record" "private_server_AAAA" {
-  count   = "${var.create_AAAA == true ? 1 : 0}"
+  count   = var.create_AAAA == true ? 1 : 0
   zone_id = var.private_zone_id
   name    = local.server_fqdn
   type    = "AAAA"
