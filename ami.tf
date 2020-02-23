@@ -1,11 +1,4 @@
 # ------------------------------------------------------------------------------
-# Deploy the AMI from cisagov/openvpn-packer in AWS.
-# ------------------------------------------------------------------------------
-
-# The AWS account ID being used
-# data "aws_caller_identity" "current" {}
-
-# ------------------------------------------------------------------------------
 # Automatically look up the latest AMI from
 # cisagov/openvpn-packer.
 #
@@ -32,6 +25,8 @@ data "aws_ami" "openvpn" {
     values = ["ebs"]
   }
 
-  owners      = ["self"]
+  owners = [
+    var.ami_owner_account_id
+  ]
   most_recent = true
 }
