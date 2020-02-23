@@ -82,6 +82,11 @@ variable "trusted_cidr_blocks" {
 # These parameters have reasonable defaults.
 # ------------------------------------------------------------------------------
 
+variable "ami_owner_account_id" {
+  description = "The ID of the AWS account that owns the OpenVPN AMI, or \"self\" if the AMI is owned by the same account as the provisioner."
+  default     = "self"
+}
+
 variable "associate_public_ip_address" {
   type        = bool
   description = "Whether or not to associate a public IP address with the OpenVPN server"
