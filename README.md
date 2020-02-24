@@ -58,6 +58,7 @@ module "example" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
+| ami_owner_account_id | The ID of the AWS account that owns the OpenVPN AMI, or "self" if the AMI is owned by the same account as the provisioner. | string | `self` | no |
 | associate\_public\_ip\_address | Whether or not to associate a public IP address with the OpenVPN server | `bool` | `true` | no |
 | aws\_instance\_type | The AWS instance type to deploy (e.g. t3.medium). | `string` | `"t3.small"` | no |
 | cert\_bucket\_name | The name of a bucket that stores certificates. (e.g. my-certs) | `string` | n/a | yes |
