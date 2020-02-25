@@ -15,7 +15,7 @@ module "certreadrole" {
 # Create a role that allows the instance to read its params from SSM.
 
 module "ssmreadrole" {
-  source = "github.com/cisagov/ssm-read-role-tf-module?ref=improvement%2Fupdate-for-the-cool"
+  source = "github.com/cisagov/ssm-read-role-tf-module"
 
   providers = {
     aws = aws.ssm_read_role
