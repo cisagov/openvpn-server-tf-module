@@ -19,7 +19,7 @@ data "template_cloudinit_config" "cloud_init_tasks" {
     content = templatefile(
       "${path.module}/cloudinit/install-certificates.py", {
         cert_bucket_name   = var.cert_bucket_name
-        cert_read_role_arn = module.certreadrole.arn
+        cert_read_role_arn = module.certreadrole.role.arn
         server_fqdn        = local.server_fqdn
     })
   }
