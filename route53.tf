@@ -7,7 +7,7 @@ data "aws_route53_zone" "public_dns_zone" {
 resource "aws_route53_record" "server_A" {
   provider = aws.dns
   zone_id  = data.aws_route53_zone.public_dns_zone.zone_id
-  name     = local.server_fqdn
+  name     = var.hostname
   type     = "A"
   ttl      = var.ttl
   records  = [aws_instance.openvpn.public_ip]
@@ -17,7 +17,7 @@ resource "aws_route53_record" "server_AAAA" {
   provider = aws.dns
   count    = var.create_AAAA == true ? 1 : 0
   zone_id  = data.aws_route53_zone.public_dns_zone.zone_id
-  name     = local.server_fqdn
+  name     = var.hostname
   type     = "AAAA"
   ttl      = var.ttl
   records  = aws_instance.openvpn.ipv6_addresses
@@ -42,13 +42,13 @@ resource "aws_route53_record" "private_PTR" {
   type = "PTR"
   ttl  = var.ttl
   records = [
-    local.server_fqdn
+    var.hostname
   ]
 }
 
 resource "aws_route53_record" "private_server_A" {
   zone_id = var.private_zone_id
-  name    = local.server_fqdn
+  name    = var.hostname
   type    = "A"
   ttl     = var.ttl
   records = [aws_instance.openvpn.private_ip]
@@ -57,7 +57,7 @@ resource "aws_route53_record" "private_server_A" {
 resource "aws_route53_record" "private_server_AAAA" {
   count   = var.create_AAAA == true ? 1 : 0
   zone_id = var.private_zone_id
-  name    = local.server_fqdn
+  name    = var.hostname
   type    = "AAAA"
   ttl     = var.ttl
   records = aws_instance.openvpn.ipv6_addresses

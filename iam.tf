@@ -9,7 +9,7 @@ module "certreadrole" {
 
   account_ids      = var.cert_read_role_accounts_allowed
   cert_bucket_name = var.cert_bucket_name
-  hostname         = local.server_fqdn
+  hostname         = var.hostname
 }
 
 # Create a role that allows the instance to read its params from SSM.
@@ -23,20 +23,20 @@ module "ssmreadrole" {
 
   account_ids = var.ssm_read_role_accounts_allowed
   ssm_names   = [var.ssm_tlscrypt_key, var.ssm_dh4096_pem]
-  hostname    = local.server_fqdn
+  hostname    = var.hostname
 }
 
 # Create the IAM instance profile for the EC2 server instance
 
 # The profile of the EC2 instance
 resource "aws_iam_instance_profile" "instance_profile" {
-  name = "openvpn_instance_profile_${local.server_fqdn}"
+  name = "openvpn_instance_profile_${var.hostname}"
   role = aws_iam_role.instance_role.name
 }
 
 # The role for this EC2 instance
 resource "aws_iam_role" "instance_role" {
-  name               = "openvpn_instance_role_${local.server_fqdn}"
+  name               = "openvpn_instance_role_${var.hostname}"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy_doc.json
 }
 
