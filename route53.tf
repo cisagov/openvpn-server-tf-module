@@ -32,7 +32,7 @@ resource "aws_route53_record" "server_AAAA" {
 resource "aws_route53_record" "private_PTR" {
   zone_id = var.private_reverse_zone_id
   name = format(
-    "%s.%s.%s.%s",
+    "%s.%s.%s.%s.in-addr.arpa",
     element(split(".", aws_instance.openvpn.private_ip), 3),
     element(split(".", aws_instance.openvpn.private_ip), 2),
     element(split(".", aws_instance.openvpn.private_ip), 1),
