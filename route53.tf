@@ -35,9 +35,9 @@ resource "aws_route53_record" "private_PTR" {
   # append the reverse zone name if you specify just enough of the
   # record name to "fill in" the rest of the PTR record.  For example,
   # if this record were for the IP 10.11.12.13, going into the reverse
-  # zone with name "12.11.10.in-addr-arpa", then you could provide the
-  # entire record name ("13.12.11.10.in-addr.arpa.") or just the last
-  # octet ("13").  If you do the latter, then look at the
+  # zone with name "12.11.10.in-addr-arpa.", then you could provide
+  # the entire record name ("13.12.11.10.in-addr.arpa.") or just the
+  # last octet ("13").  If you do the latter, then look at the
   # corresponding Route53 record in the AWS console, you can see that
   # the ".12.11.10.in-addr.arpa." part of the name has been
   # automatically added.  With the previous code the record was coming
