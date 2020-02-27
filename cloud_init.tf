@@ -19,8 +19,8 @@ data "template_cloudinit_config" "cloud_init_tasks" {
     content = templatefile(
       "${path.module}/cloudinit/install-certificates.py", {
         cert_bucket_name   = var.cert_bucket_name
-        cert_read_role_arn = module.certreadrole.arn
-        server_fqdn        = local.server_fqdn
+        cert_read_role_arn = module.certreadrole.role.arn
+        server_fqdn        = var.hostname
     })
   }
 
@@ -40,7 +40,7 @@ data "template_cloudinit_config" "cloud_init_tasks" {
     content = templatefile(
       "${path.module}/cloudinit/freeipa-creds.tpl.yml", {
         admin_pw = var.freeipa_admin_pw
-        hostname = local.server_fqdn
+        hostname = var.hostname
         realm    = var.freeipa_realm
     })
   }

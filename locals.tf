@@ -13,10 +13,4 @@ locals {
     "tcp",
     "udp"
   ]
-
-  server_fqdn = "${format("%s%s.%s",
-    var.hostname,
-    var.subdomain != "" ? format(".%s", var.subdomain) : "",
-    var.domain
-  )}"
 }

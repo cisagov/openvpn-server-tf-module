@@ -33,7 +33,7 @@ variable "freeipa_realm" {
 }
 
 variable "hostname" {
-  description = "The hostname of the OpenVPN server (e.g. vpn1)"
+  description = "The hostname of the OpenVPN server (e.g. vpn.example.com)"
 }
 
 variable "private_networks" {
@@ -61,10 +61,6 @@ variable "ssm_read_role_accounts_allowed" {
   type        = list(string)
   description = "List of accounts allowed to access the role that can read SSM keys."
   default     = []
-}
-
-variable "subdomain" {
-  description = "The subdomain for the OpenVPN server.  If empty, no subdomain will be used. (e.g. cool)"
 }
 
 variable "subnet_id" {
