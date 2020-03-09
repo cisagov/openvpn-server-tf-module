@@ -6,7 +6,7 @@ data "template_cloudinit_config" "cloud_init_tasks" {
 
   # Note: The filename parameters in each part below are only used to name the
   # mime-parts of the user-data.  It does not affect the final name for the templates.
-  # For the x-shellscipt parts, it will also be used as a filename in the scripts
+  # For the x-shellscript parts, it will also be used as a filename in the scripts
   # directory.
 
   part {
