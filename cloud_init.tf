@@ -4,17 +4,23 @@ data "template_cloudinit_config" "cloud_init_tasks" {
   gzip          = true
   base64_encode = true
 
+  # Note: The filename parameters below are only used to name the mime-parts of the
+  # user-data.  It does not affect the final name for the templates.  For the
+  # x-shellscipt parts, it will also be used as a filename in the scripts directory.
+
   part {
-    filename     = "openvpn-config"
+    filename     = "openvpn-config.yml"
     content_type = "text/cloud-config"
     content = templatefile(
       "${path.module}/cloudinit/openvpn-config.tpl.yml", {
         private_networks = var.private_networks
         client_network   = var.client_network
     })
+    merge_type = "list(append)+dict(recurse_array)+str()"
   }
 
   part {
+    filename     = "install-certificates.py"
     content_type = "text/x-shellscript"
     content = templatefile(
       "${path.module}/cloudinit/install-certificates.py", {
@@ -25,6 +31,7 @@ data "template_cloudinit_config" "cloud_init_tasks" {
   }
 
   part {
+    filename     = "install-parameters.py"
     content_type = "text/x-shellscript"
     content = templatefile(
       "${path.module}/cloudinit/install-parameters.py", {
@@ -36,6 +43,7 @@ data "template_cloudinit_config" "cloud_init_tasks" {
   }
 
   part {
+    filename     = "freeipa-creds.yml"
     content_type = "text/cloud-config"
     content = templatefile(
       "${path.module}/cloudinit/freeipa-creds.tpl.yml", {
@@ -43,5 +51,6 @@ data "template_cloudinit_config" "cloud_init_tasks" {
         hostname = var.hostname
         realm    = var.freeipa_realm
     })
+    merge_type = "list(append)+dict(recurse_array)+str()"
   }
 }
