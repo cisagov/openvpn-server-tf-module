@@ -58,29 +58,30 @@ module "example" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
-| ami_owner_account_id | The ID of the AWS account that owns the OpenVPN AMI, or "self" if the AMI is owned by the same account as the provisioner. | string | `self` | no |
-| associate\_public\_ip\_address | Whether or not to associate a public IP address with the OpenVPN server | `bool` | `true` | no |
-| aws\_instance\_type | The AWS instance type to deploy (e.g. t3.medium). | `string` | `"t3.small"` | no |
-| cert\_bucket\_name | The name of a bucket that stores certificates. (e.g. my-certs) | `string` | n/a | yes |
-| cert\_read\_role\_accounts\_allowed | List of accounts allowed to access the role that can read certificates from an S3 bucket. | `list(string)` | `[]` | no |
-| client\_network | A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. "10.240.0.0 255.255.255.0") | `string` | n/a | yes |
-| create\_AAAA | Whether or not to create AAAA records for the OpenVPN server | `bool` | `false` | no |
+| ami_owner_account_id | The ID of the AWS account that owns the OpenVPN AMI, or "self" if the AMI is owned by the same account as the provisioner. | `string` | `self` | no |
+| associate_public_ip_address | Whether or not to associate a public IP address with the OpenVPN server | `bool` | `true` | no |
+| aws_instance_type | The AWS instance type to deploy (e.g. t3.medium). | `string` | `t3.small` | no |
+| cert_bucket_name | The name of a bucket that stores certificates. (e.g. my-certs) | `string` | n/a | yes |
+| cert_read_role_accounts_allowed | List of accounts allowed to access the role that can read certificates from an S3 bucket. | `list(string)` | `[]` | no |
+| client_dns_search_domain | The DNS search domain to be pushed to VPN clients. | `any` | n/a | yes |
+| client_dns_server | The address of the DNS server to be pushed to the VPN clients. | `any` | n/a | yes |
+| client_network | A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. "10.240.0.0 255.255.255.0") | `string` | n/a | yes |
+| create_AAAA | Whether or not to create AAAA records for the OpenVPN server | `bool` | `false` | no |
 | domain | The domain for the OpenVPN server (e.g. cyber.dhs.gov) | `any` | n/a | yes |
-| freeipa\_admin\_pw | The password for the Kerberos admin role | `any` | n/a | yes |
-| freeipa\_realm | The realm for the IPA client (e.g. EXAMPLE.COM) | `any` | n/a | yes |
-| hostname | The hostname of the OpenVPN server (e.g. vpn1) | `any` | n/a | yes |
-| private\_networks | A list of network netmasks that exist behind the VPN server.  These will be pushed to the client.  (e.g. ["10.224.0.0 255.240.0.0", "192.168.100.0 255.255.255.0"]) | `list(string)` | n/a | yes |
-| private\_reverse\_zone\_id | The DNS Zone ID in which to create private reverse lookup records. | `string` | n/a | yes |
-| private\_zone\_id | The DNS Zone ID in which to create private lookup records. | `string` | n/a | yes |
-| security\_groups | Additional security group ids the server will join. | `list(string)` | `[]` | no |
-| ssm\_dh4096\_pem | The SSM key that contains the Diffie Hellman pem. | `string` | `"/openvpn/server/dh4096.pem"` | no |
-| ssm\_read\_role\_accounts\_allowed | List of accounts allowed to access the role that can read SSM keys. | `list(string)` | `[]` | no |
-| ssm\_region | The region of the SSM to access. | `string` | `"us-east-1"` | no |
-| ssm\_tlscrypt\_key | The SSM key that contains the tls-auth key. | `string` | `"/openvpn/server/tlscrypt.key"` | no |
-| subdomain | The subdomain for the OpenVPN server.  If empty, no subdomain will be used. (e.g. cool) | `any` | n/a | yes |
-| subnet\_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0) | `any` | n/a | yes |
+| freeipa_admin_pw | The password for the Kerberos admin role | `any` | n/a | yes |
+| freeipa_realm | The realm for the IPA client (e.g. EXAMPLE.COM) | `any` | n/a | yes |
+| hostname | The hostname of the OpenVPN server (e.g. vpn.example.com) | `any` | n/a | yes |
+| private_networks | A list of network netmasks that exist behind the VPN server.  These will be pushed to the client.  (e.g. ["10.224.0.0 255.240.0.0", "192.168.100.0 255.255.255.0"]) | `list(string)` | n/a | yes |
+| private_reverse_zone_id | The DNS Zone ID in which to create private reverse lookup records. | `string` | n/a | yes |
+| private_zone_id | The DNS Zone ID in which to create private lookup records. | `string` | n/a | yes |
+| security_groups | Additional security group ids the server will join. | `list(string)` | `[]` | no |
+| ssm_dh4096_pem | The SSM key that contains the Diffie Hellman pem. | `string` | `/openvpn/server/dh4096.pem` | no |
+| ssm_read_role_accounts_allowed | List of accounts allowed to access the role that can read SSM keys. | `list(string)` | `[]` | no |
+| ssm_region | The region of the SSM to access. | `string` | `us-east-1` | no |
+| ssm_tlscrypt_key | The SSM key that contains the tls-auth key. | `string` | `/openvpn/server/tlscrypt.key` | no |
+| subnet_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0) | `any` | n/a | yes |
 | tags | Tags to apply to all AWS resources created | `map(string)` | `{}` | no |
-| trusted\_cidr\_blocks | A list of the CIDR blocks that are allowed to access the OpenVPN servers (e.g. ["10.10.0.0/16", "10.11.0.0/16"]) | `list(string)` | n/a | yes |
+| trusted_cidr_blocks | A list of the CIDR blocks that are allowed to access the OpenVPN servers (e.g. ["10.10.0.0/16", "10.11.0.0/16"]) | `list(string)` | n/a | yes |
 | ttl | The TTL value to use for Route53 DNS records (e.g. 86400).  A smaller value may be useful when the DNS records are changing often, for example when testing. | `number` | `60` | no |
 
 ## Outputs ##
