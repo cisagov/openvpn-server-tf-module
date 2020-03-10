@@ -9,6 +9,10 @@ data "template_cloudinit_config" "cloud_init_tasks" {
   # For the x-shellscript parts, it will also be used as a filename in the scripts
   # directory.
 
+  # Note: All the cloud-config parts will write to the same file on the instance at
+  # boot. To prevent one part from clobbering another, you must specify a merge_type.
+  # See: https://cloudinit.readthedocs.io/en/latest/topics/merging.html#built-in-mergers
+
   part {
     filename     = "openvpn-config.yml"
     content_type = "text/cloud-config"
