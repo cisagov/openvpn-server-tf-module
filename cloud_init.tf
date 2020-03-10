@@ -4,17 +4,28 @@ data "template_cloudinit_config" "cloud_init_tasks" {
   gzip          = true
   base64_encode = true
 
+  # Note: The filename parameters in each part below are only used to name the
+  # mime-parts of the user-data.  It does not affect the final name for the templates.
+  # For the x-shellscript parts, it will also be used as a filename in the scripts
+  # directory.
+
+  # Note: All the cloud-config parts will write to the same file on the instance at
+  # boot. To prevent one part from clobbering another, you must specify a merge_type.
+  # See: https://cloudinit.readthedocs.io/en/latest/topics/merging.html#built-in-mergers
+
   part {
-    filename     = "openvpn-config"
+    filename     = "openvpn-config.yml"
     content_type = "text/cloud-config"
     content = templatefile(
       "${path.module}/cloudinit/openvpn-config.tpl.yml", {
         private_networks = var.private_networks
         client_network   = var.client_network
     })
+    merge_type = "list(append)+dict(recurse_array)+str()"
   }
 
   part {
+    filename     = "install-certificates.py"
     content_type = "text/x-shellscript"
     content = templatefile(
       "${path.module}/cloudinit/install-certificates.py", {
@@ -25,6 +36,7 @@ data "template_cloudinit_config" "cloud_init_tasks" {
   }
 
   part {
+    filename     = "install-parameters.py"
     content_type = "text/x-shellscript"
     content = templatefile(
       "${path.module}/cloudinit/install-parameters.py", {
@@ -36,6 +48,7 @@ data "template_cloudinit_config" "cloud_init_tasks" {
   }
 
   part {
+    filename     = "freeipa-creds.yml"
     content_type = "text/cloud-config"
     content = templatefile(
       "${path.module}/cloudinit/freeipa-creds.tpl.yml", {
@@ -43,5 +56,6 @@ data "template_cloudinit_config" "cloud_init_tasks" {
         hostname = var.hostname
         realm    = var.freeipa_realm
     })
+    merge_type = "list(append)+dict(recurse_array)+str()"
   }
 }
