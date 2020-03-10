@@ -19,10 +19,10 @@ data "template_cloudinit_config" "cloud_init_tasks" {
     content_type = "text/cloud-config"
     content = templatefile(
       "${path.module}/cloudinit/openvpn-config.tpl.yml", {
-        client_network    = var.client_network
-        dns_server        = var.client_dns_server
-        dns_search_domain = var.client_dns_search_domain
-        private_networks  = var.private_networks
+        client_network           = var.client_network
+        client_dns_server        = var.client_dns_server
+        client_dns_search_domain = var.client_dns_search_domain
+        private_networks         = var.private_networks
     })
     merge_type = "list(append)+dict(recurse_array)+str()"
   }
