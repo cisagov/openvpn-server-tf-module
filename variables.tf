@@ -15,6 +15,14 @@ variable "cert_read_role_accounts_allowed" {
   default     = []
 }
 
+variable "client_dns_search_domain" {
+  description = "The DNS search domain to be pushed to VPN clients."
+}
+
+variable "client_dns_server" {
+  description = "The address of the DNS server to be pushed to the VPN clients."
+}
+
 variable "client_network" {
   type        = string
   description = "A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. \"10.240.0.0 255.255.255.0\")"
