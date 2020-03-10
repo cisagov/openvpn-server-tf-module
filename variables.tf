@@ -16,10 +16,12 @@ variable "cert_read_role_accounts_allowed" {
 }
 
 variable "client_dns_search_domain" {
+  type        = string
   description = "The DNS search domain to be pushed to VPN clients."
 }
 
 variable "client_dns_server" {
+  type        = string
   description = "The address of the DNS server to be pushed to the VPN clients."
 }
 

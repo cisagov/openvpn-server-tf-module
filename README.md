@@ -63,8 +63,8 @@ module "example" {
 | aws_instance_type | The AWS instance type to deploy (e.g. t3.medium). | `string` | `t3.small` | no |
 | cert_bucket_name | The name of a bucket that stores certificates. (e.g. my-certs) | `string` | n/a | yes |
 | cert_read_role_accounts_allowed | List of accounts allowed to access the role that can read certificates from an S3 bucket. | `list(string)` | `[]` | no |
-| client_dns_search_domain | The DNS search domain to be pushed to VPN clients. | `any` | n/a | yes |
-| client_dns_server | The address of the DNS server to be pushed to the VPN clients. | `any` | n/a | yes |
+| client_dns_search_domain | The DNS search domain to be pushed to VPN clients. | `string` | n/a | yes |
+| client_dns_server | The address of the DNS server to be pushed to the VPN clients. | `string` | n/a | yes |
 | client_network | A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. "10.240.0.0 255.255.255.0") | `string` | n/a | yes |
 | create_AAAA | Whether or not to create AAAA records for the OpenVPN server | `bool` | `false` | no |
 | domain | The domain for the OpenVPN server (e.g. cyber.dhs.gov) | `any` | n/a | yes |
