@@ -5,33 +5,34 @@ resource "aws_security_group" "openvpn_servers" {
   tags        = var.tags
 }
 
-# TCP ingress rules for OpenVPN
-resource "aws_security_group_rule" "openvpn_tcp_ingress" {
-  count = length(local.openvpn_tcp_ports)
+# TCP ingress rules for ssh
+resource "aws_security_group_rule" "ssh_tcp_ingress" {
+  count = length(local.ssh_tcp_ports)
 
   security_group_id = aws_security_group.openvpn_servers.id
   type              = "ingress"
   protocol          = "tcp"
-  cidr_blocks       = var.trusted_cidr_blocks
-  from_port         = local.openvpn_tcp_ports[count.index]
-  to_port           = local.openvpn_tcp_ports[count.index]
+  cidr_blocks       = var.trusted_cidr_blocks_ssh
+  from_port         = local.ssh_tcp_ports[count.index]
+  to_port           = local.ssh_tcp_ports[count.index]
 }
 
-# UDP ingress rules for OpenVPN
-resource "aws_security_group_rule" "openvpn_udp_ingress" {
-  count = length(local.openvpn_udp_ports)
+# UDP ingress rules for VPN
+resource "aws_security_group_rule" "vpn_udp_ingress" {
+  count = length(local.vpn_udp_ports)
 
   security_group_id = aws_security_group.openvpn_servers.id
   type              = "ingress"
   protocol          = "udp"
-  cidr_blocks       = var.trusted_cidr_blocks
-  from_port         = local.openvpn_udp_ports[count.index]
-  to_port           = local.openvpn_udp_ports[count.index]
+  cidr_blocks       = var.trusted_cidr_blocks_vpn
+  from_port         = local.vpn_udp_ports[count.index]
+  to_port           = local.vpn_udp_ports[count.index]
 }
 
 # TCP egress rules for OpenVPN
-# Egress on port 443 is needed for AWS API commands (e.g. AssumeRole, which
-# is needed in order to fetch the server certificate from S3)
+#
+# Egress on port 443 is needed for AWS API commands (e.g. AssumeRole,
+# which is needed in order to fetch the server certificate from S3).
 resource "aws_security_group_rule" "openvpn_tcp_https_egress" {
   security_group_id = aws_security_group.openvpn_servers.id
   type              = "egress"

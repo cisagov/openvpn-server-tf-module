@@ -77,9 +77,14 @@ variable "subnet_id" {
   description = "The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0)"
 }
 
-variable "trusted_cidr_blocks" {
+variable "trusted_cidr_blocks_ssh" {
   type        = list(string)
-  description = "A list of the CIDR blocks that are allowed to access the OpenVPN servers (e.g. [\"10.10.0.0/16\", \"10.11.0.0/16\"])"
+  description = "A list of the CIDR blocks that are allowed to access the ssh port on OpenVPN servers (e.g. [\"10.10.0.0/16\", \"10.11.0.0/16\"])"
+}
+
+variable "trusted_cidr_blocks_vpn" {
+  type        = list(string)
+  description = "A list of the CIDR blocks that are allowed to access the VPN port on OpenVPN servers (e.g. [\"10.10.0.0/16\", \"10.11.0.0/16\"])"
 }
 
 # ------------------------------------------------------------------------------
