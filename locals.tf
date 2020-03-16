@@ -1,16 +1,11 @@
 locals {
-  # The TCP ports that the OpenVPN servers should listen on
-  openvpn_tcp_ports = [
+  # The TCP ports that the OpenVPN servers should listen on for ssh
+  ssh_tcp_ports = [
     22, # SSH
   ]
 
-  # The UDP ports that the OpenVPN servers should listen on
-  openvpn_udp_ports = [
+  # The UDP ports that the OpenVPN servers should listen on for VPN
+  vpn_udp_ports = [
     1194, # OpenVPN
-  ]
-
-  tcp_and_udp = [
-    "tcp",
-    "udp"
   ]
 }
