@@ -50,11 +50,6 @@ variable "hostname" {
   description = "The hostname of the OpenVPN server (e.g. vpn.example.com)"
 }
 
-variable "ldap_uri" {
-  type        = string
-  description = "The URI of the LDAP server (e.g. ldaps://ipa.example.com)"
-}
-
 variable "private_networks" {
   type        = list(string)
   description = "A list of network netmasks that exist behind the VPN server.  These will be pushed to the client.  (e.g. [\"10.224.0.0 255.240.0.0\", \"192.168.100.0 255.255.255.0\"])"

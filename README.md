@@ -72,7 +72,6 @@ module "example" {
 | freeipa_admin_pw | The password for the Kerberos admin role | `string` | n/a | yes |
 | freeipa_realm | The realm for the IPA client (e.g. EXAMPLE.COM) | `string` | n/a | yes |
 | hostname | The hostname of the OpenVPN server (e.g. vpn.example.com) | `string` | n/a | yes |
-| ldap_uri | The URI of the LDAP server (e.g. ldaps://ipa.example.com) | `string` | n/a | yes |
 | private_networks | A list of network netmasks that exist behind the VPN server.  These will be pushed to the client.  (e.g. ["10.224.0.0 255.240.0.0", "192.168.100.0 255.255.255.0"]) | `list(string)` | n/a | yes |
 | private_reverse_zone_id | The DNS Zone ID in which to create private reverse lookup records. | `string` | n/a | yes |
 | private_zone_id | The DNS Zone ID in which to create private lookup records. | `string` | n/a | yes |

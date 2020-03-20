@@ -9,6 +9,5 @@ write_files:
     content: |
       ---
       # This file was created by cloud-init at boot.
-      ldap_uri: ${ldap_uri}
       realm: ${realm}
       vpn_group: ${vpn_group}

@@ -44,7 +44,6 @@ data "template_cloudinit_config" "cloud_init_tasks" {
     content_type = "text/cloud-config"
     content = templatefile(
       "${path.module}/cloudinit/verify-cn.tpl.yml", {
-        ldap_uri  = var.ldap_uri
         realm     = var.freeipa_realm
         vpn_group = var.vpn_group
     })
