@@ -31,19 +31,28 @@ variable "client_network" {
 }
 
 variable "domain" {
+  type        = string
   description = "The domain for the OpenVPN server (e.g. cyber.dhs.gov)"
 }
 
 variable "freeipa_admin_pw" {
+  type        = string
   description = "The password for the Kerberos admin role"
 }
 
 variable "freeipa_realm" {
+  type        = string
   description = "The realm for the IPA client (e.g. EXAMPLE.COM)"
 }
 
 variable "hostname" {
+  type        = string
   description = "The hostname of the OpenVPN server (e.g. vpn.example.com)"
+}
+
+variable "ldap_uri" {
+  type        = string
+  description = "The URI of the LDAP server (e.g. ldaps://ipa.example.com)"
 }
 
 variable "private_networks" {
@@ -85,6 +94,11 @@ variable "trusted_cidr_blocks_ssh" {
 variable "trusted_cidr_blocks_vpn" {
   type        = list(string)
   description = "A list of the CIDR blocks that are allowed to access the VPN port on OpenVPN servers (e.g. [\"10.10.0.0/16\", \"10.11.0.0/16\"])"
+}
+
+variable "vpn_group" {
+  type        = string
+  description = "The LDAP group that grants users the permission to connect to the VPN server. (e.g. vpnusers)"
 }
 
 # ------------------------------------------------------------------------------

@@ -1,0 +1,14 @@
+# cloud-config
+# vim: syntax=yaml
+---
+
+write_files:
+  - path: /etc/openvpn/server/verify-cn.yml
+    permissions: '0400'
+    owner: root:root
+    content: |
+      ---
+      # This file was created by cloud-init at boot.
+      ldap_uri: ${ldap_uri}
+      realm: ${realm}
+      vpn_group: ${vpn_group}

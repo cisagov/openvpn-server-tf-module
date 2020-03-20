@@ -68,10 +68,11 @@ module "example" {
 | client_dns_server | The address of the DNS server to be pushed to the VPN clients. | `string` | n/a | yes |
 | client_network | A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. "10.240.0.0 255.255.255.0") | `string` | n/a | yes |
 | create_AAAA | Whether or not to create AAAA records for the OpenVPN server | `bool` | `false` | no |
-| domain | The domain for the OpenVPN server (e.g. cyber.dhs.gov) | `any` | n/a | yes |
-| freeipa_admin_pw | The password for the Kerberos admin role | `any` | n/a | yes |
-| freeipa_realm | The realm for the IPA client (e.g. EXAMPLE.COM) | `any` | n/a | yes |
-| hostname | The hostname of the OpenVPN server (e.g. vpn.example.com) | `any` | n/a | yes |
+| domain | The domain for the OpenVPN server (e.g. cyber.dhs.gov) | `string` | n/a | yes |
+| freeipa_admin_pw | The password for the Kerberos admin role | `string` | n/a | yes |
+| freeipa_realm | The realm for the IPA client (e.g. EXAMPLE.COM) | `string` | n/a | yes |
+| hostname | The hostname of the OpenVPN server (e.g. vpn.example.com) | `string` | n/a | yes |
+| ldap_uri | The URI of the LDAP server (e.g. ldaps://ipa.example.com) | `string` | n/a | yes |
 | private_networks | A list of network netmasks that exist behind the VPN server.  These will be pushed to the client.  (e.g. ["10.224.0.0 255.240.0.0", "192.168.100.0 255.255.255.0"]) | `list(string)` | n/a | yes |
 | private_reverse_zone_id | The DNS Zone ID in which to create private reverse lookup records. | `string` | n/a | yes |
 | private_zone_id | The DNS Zone ID in which to create private lookup records. | `string` | n/a | yes |
@@ -85,19 +86,20 @@ module "example" {
 | trusted_cidr_blocks_ssh | A list of the CIDR blocks that are allowed to access the ssh port on OpenVPN servers (e.g. ["10.10.0.0/16", "10.11.0.0/16"]) | `list(string)` | n/a | yes |
 | trusted_cidr_blocks_vpn | A list of the CIDR blocks that are allowed to access the VPN port on OpenVPN servers (e.g. ["10.10.0.0/16", "10.11.0.0/16"]) | `list(string)` | n/a | yes |
 | ttl | The TTL value to use for Route53 DNS records (e.g. 86400).  A smaller value may be useful when the DNS records are changing often, for example when testing. | `number` | `60` | no |
+| vpn_group | The LDAP group that grants users the permission to connect to the VPN server. (e.g. vpnusers) | `string` | n/a | yes |
 
 ## Outputs ##
 
 | Name | Description |
 |------|-------------|
 | arn | The EC2 instance ARN |
-| availability\_zone | The AZ where the EC2 instance is deployed |
+| availability_zone | The AZ where the EC2 instance is deployed |
 | id | The EC2 instance ID |
-| private\_ip | The private IP of the EC2 instance |
-| public\_ip | The public IP of the OpenVPN instance |
-| security\_group\_arn | The ARN of the OpenVPN server security group |
-| security\_group\_id | The ID of the OpenVPN server security group |
-| subnet\_id | The ID of the subnet where the EC2 instance is deployed |
+| private_ip | The private IP of the EC2 instance |
+| public_ip | The public IP of the OpenVPN instance |
+| security_group_arn | The ARN of the OpenVPN server security group |
+| security_group_id | The ID of the OpenVPN server security group |
+| subnet_id | The ID of the subnet where the EC2 instance is deployed |
 
 ## Contributing ##
 
