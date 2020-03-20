@@ -39,6 +39,17 @@ data "template_cloudinit_config" "cloud_init_tasks" {
     merge_type = "list(append)+dict(recurse_array)+str()"
   }
 
+  part {
+    filename     = "verify-cn.yml"
+    content_type = "text/cloud-config"
+    content = templatefile(
+      "${path.module}/cloudinit/verify-cn.tpl.yml", {
+        realm     = var.freeipa_realm
+        vpn_group = var.vpn_group
+    })
+    merge_type = "list(append)+dict(recurse_array)+str()"
+  }
+
   #-------------------------------------------------------------------------------
   # Shell script parts
   #-------------------------------------------------------------------------------
