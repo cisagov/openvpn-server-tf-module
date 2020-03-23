@@ -22,8 +22,8 @@ module "ssmreadrole" {
   }
 
   account_ids = var.ssm_read_role_accounts_allowed
+  entity_name = var.hostname
   ssm_names   = [var.ssm_tlscrypt_key, var.ssm_dh4096_pem]
-  hostname    = var.hostname
 }
 
 # Create the IAM instance profile for the EC2 server instance
