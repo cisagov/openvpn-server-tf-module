@@ -30,11 +30,11 @@ module "example" {
   freeipa_admin_pw                = "secure!"
   freeipa_realm                   = "shark-jump.foo.org"
   subdomain                       = "fonz"
-  domain                          = "foo.org"
   client_network                  = "10.10.2.0 255.255.255.0"
   private_networks                = ["10.10.1.0 255.255.255.0"]
   private_zone_id                 = "MYZONEID"
   private_reverse_zone_id         = "MYREVZONEID"
+  public_zone_id                  = "MYPUBLICZONEID"
   subnet_id                       = "subnet-0123456789abcdef0"
   tags                            = { "Name" : "OpenVPN Test" }
   trusted_cidr_blocks_ssh         = ["1.2.3.4/32"]
@@ -68,13 +68,13 @@ module "example" {
 | client_dns_server | The address of the DNS server to be pushed to the VPN clients. | `string` | n/a | yes |
 | client_network | A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. "10.240.0.0 255.255.255.0") | `string` | n/a | yes |
 | create_AAAA | Whether or not to create AAAA records for the OpenVPN server | `bool` | `false` | no |
-| domain | The domain for the OpenVPN server (e.g. cyber.dhs.gov) | `string` | n/a | yes |
 | freeipa_admin_pw | The password for the Kerberos admin role | `string` | n/a | yes |
 | freeipa_realm | The realm for the IPA client (e.g. EXAMPLE.COM) | `string` | n/a | yes |
 | hostname | The hostname of the OpenVPN server (e.g. vpn.example.com) | `string` | n/a | yes |
 | private_networks | A list of network netmasks that exist behind the VPN server.  These will be pushed to the client.  (e.g. ["10.224.0.0 255.240.0.0", "192.168.100.0 255.255.255.0"]) | `list(string)` | n/a | yes |
 | private_reverse_zone_id | The DNS Zone ID in which to create private reverse lookup records. | `string` | n/a | yes |
 | private_zone_id | The DNS Zone ID in which to create private lookup records. | `string` | n/a | yes |
+| public_zone_id | The DNS Zone ID in which to create public lookup records. | `string` | n/a | yes |
 | security_groups | Additional security group ids the server will join. | `list(string)` | `[]` | no |
 | ssm_dh4096_pem | The SSM key that contains the Diffie Hellman pem. | `string` | `/openvpn/server/dh4096.pem` | no |
 | ssm_read_role_accounts_allowed | List of accounts allowed to access the role that can read SSM keys. | `list(string)` | `[]` | no |
