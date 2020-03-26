@@ -69,10 +69,10 @@ resource "aws_route53_zone" "private_zone" {
 module "example" {
   source = "../../"
   providers = {
-    aws                = "aws"
-    aws.dns            = "aws.dns"
-    aws.cert_read_role = "aws.cert_read_role"
-    aws.ssm_read_role  = "aws.ssm_read_role"
+    aws                = aws
+    aws.dns            = aws.dns
+    aws.cert_read_role = aws.cert_read_role
+    aws.ssm_read_role  = aws.ssm_read_role
   }
 
   cert_bucket_name                = var.cert_bucket_name
