@@ -1,3 +1,8 @@
+variable "ami_owner_account_id" {
+  description = "The ID of the AWS account that owns the OpenVPN AMI, or \"self\" if the AMI is owned by the same account as the provisioner."
+  default     = "self"
+}
+
 variable "aws_region" {
   type        = string
   description = "The default aws region."
