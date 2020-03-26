@@ -30,11 +30,6 @@ variable "client_network" {
   description = "A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. \"10.240.0.0 255.255.255.0\")"
 }
 
-variable "domain" {
-  type        = string
-  description = "The domain for the OpenVPN server (e.g. cyber.dhs.gov)"
-}
-
 variable "freeipa_admin_pw" {
   type        = string
   description = "The password for the Kerberos admin role"
@@ -63,6 +58,11 @@ variable "private_zone_id" {
 variable "private_reverse_zone_id" {
   type        = string
   description = "The DNS Zone ID in which to create private reverse lookup records."
+}
+
+variable "public_zone_id" {
+  type        = string
+  description = "The DNS Zone ID in which to create public lookup records."
 }
 
 variable "security_groups" {
