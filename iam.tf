@@ -70,8 +70,11 @@ data "aws_iam_policy_document" "assume_role_policy_doc" {
 
 data "aws_iam_policy_document" "assume_delegated_role_policy_doc" {
   statement {
-    actions   = ["sts:AssumeRole"]
-    resources = ["${module.certreadrole.role.arn}", "${module.ssmreadrole.arn}"]
-    effect    = "Allow"
+    actions = ["sts:AssumeRole"]
+    resources = [
+      module.certreadrole.role.arn,
+      module.ssmreadrole.role.arn
+    ]
+    effect = "Allow"
   }
 }
