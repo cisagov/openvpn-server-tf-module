@@ -5,7 +5,7 @@ variable "ami_owner_account_id" {
 
 variable "aws_region" {
   type        = string
-  description = "The default aws region."
+  description = "The default AWS region."
   default     = "us-east-2"
 }
 
