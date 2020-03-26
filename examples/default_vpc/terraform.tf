@@ -4,7 +4,7 @@ terraform {
     dynamodb_table = "terraform-state-lock"
     encrypt        = true
     key            = "openvpn-server-tf-module-example/terraform.tfstate"
-    profile        = "terraform-role"
+    profile        = "cool-terraform-backend"
     region         = "us-east-1"
   }
 }
