@@ -1,12 +1,6 @@
-# Find the DNS zone for the domain
-data "aws_route53_zone" "public_dns_zone" {
-  provider = aws.dns
-  name     = var.domain
-}
-
 resource "aws_route53_record" "server_A" {
   provider = aws.dns
-  zone_id  = data.aws_route53_zone.public_dns_zone.zone_id
+  zone_id  = var.public_zone_id
   name     = var.hostname
   type     = "A"
   ttl      = var.ttl
@@ -16,7 +10,7 @@ resource "aws_route53_record" "server_A" {
 resource "aws_route53_record" "server_AAAA" {
   provider = aws.dns
   count    = var.create_AAAA == true ? 1 : 0
-  zone_id  = data.aws_route53_zone.public_dns_zone.zone_id
+  zone_id  = var.public_zone_id
   name     = var.hostname
   type     = "AAAA"
   ttl      = var.ttl

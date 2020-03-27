@@ -45,8 +45,12 @@ data "aws_subnet_ids" "default" {
   vpc_id = data.aws_vpc.default.id
 }
 
-resource "aws_route53_zone" "private_reverse_zone" {
+data "aws_route53_zone" "public_zone" {
+  provider = aws.dns
+  name     = "cyber.dhs.gov"
+}
 
+resource "aws_route53_zone" "private_reverse_zone" {
   name = "in-addr.arpa."
 
   vpc {
@@ -88,6 +92,7 @@ module "example" {
   private_networks                = ["10.224.0.0 255.240.0.0"]
   private_zone_id                 = aws_route53_zone.private_zone.zone_id
   private_reverse_zone_id         = aws_route53_zone.private_reverse_zone.zone_id
+  public_zone_id                  = data.aws_route53_zone.public_zone.zone_id
   security_groups                 = var.security_groups
   subnet_id                       = tolist(data.aws_subnet_ids.default.ids)[0]
   tags                            = { "Name" : "OpenVPN Test" }
