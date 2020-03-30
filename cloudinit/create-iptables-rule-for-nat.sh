@@ -20,7 +20,7 @@ interface=$(ip addr show to "${subnet_cidr}" | head -n1 | cut --delimiter=":" --
 # Convert client_network from netmask format to CIDR format
 #
 # shellcheck disable=SC2154
-client_network_cidr=$(python -c "from ipaddress import IPv4Network; print(IPv4Network(u${client_network_netmask}))")
+client_network_cidr=$(python3 -c "from ipaddress import IPv4Network; print(IPv4Network('${client_network_netmask}'))")
 
 # Add the iptables rule for NAT
 iptables -t nat -A POSTROUTING -s "$client_network_cidr" -o "$interface" -j MASQUERADE
