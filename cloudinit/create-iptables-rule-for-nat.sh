@@ -22,9 +22,13 @@ interface=$(ip addr show to "${subnet_cidr}" | head -n1 | cut --delimiter=":" --
 # shellcheck disable=SC2154
 client_network_cidr=$(python -c "from ipaddress import IPv4Network; print(IPv4Network(u${client_network_netmask}))")
 
-
 # Add the iptables rule for NAT
 iptables -t nat -A POSTROUTING -s "${client_network_cidr}" -o "$interface" -j MASQUERADE
 
-# Save the iptables rules to they become persistent
+# Save the iptables rules so they become persistent
+#
+# RedHat
+# iptables-save > /etc/sysconfig/iptables
+#
+# Debian
 iptables-save > /etc/iptables/rules.v4
