@@ -67,7 +67,7 @@ write_files:
       # parameter is included, exit if less than bytes of combined in/out
       # traffic are produced on the tun/tap device in n seconds. In any case,
       # OpenVPN’s internal ping packets (which are just keepalives) and TLS
-      # control packets are not considered “activity”, nor are they counted as
+      # control packets are not considered "activity", nor are they counted as
       # traffic, as they are used internally by OpenVPN and are not an
       # indication of actual user activity.
       push "inactive 3600"
