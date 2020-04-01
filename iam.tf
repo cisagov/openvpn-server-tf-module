@@ -22,8 +22,8 @@ module "ssmreadrole" {
   }
 
   account_ids = var.ssm_read_role_accounts_allowed
+  entity_name = var.hostname
   ssm_names   = [var.ssm_tlscrypt_key, var.ssm_dh4096_pem]
-  hostname    = var.hostname
 }
 
 # Create the IAM instance profile for the EC2 server instance
@@ -70,8 +70,11 @@ data "aws_iam_policy_document" "assume_role_policy_doc" {
 
 data "aws_iam_policy_document" "assume_delegated_role_policy_doc" {
   statement {
-    actions   = ["sts:AssumeRole"]
-    resources = ["${module.certreadrole.role.arn}", "${module.ssmreadrole.arn}"]
-    effect    = "Allow"
+    actions = ["sts:AssumeRole"]
+    resources = [
+      module.certreadrole.role.arn,
+      module.ssmreadrole.role.arn
+    ]
+    effect = "Allow"
   }
 }
