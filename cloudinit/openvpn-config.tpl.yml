@@ -70,7 +70,6 @@ write_files:
       # control packets are not considered “activity”, nor are they counted as
       # traffic, as they are used internally by OpenVPN and are not an
       # indication of actual user activity.
-
       push "inactive 3600"
 
       # For extra security beyond that provided by SSL/TLS, create an "HMAC
