@@ -121,6 +121,12 @@ variable "aws_instance_type" {
   default     = "t3.small"
 }
 
+variable "client_inactive_timeout" {
+  type        = number
+  description = "The number of seconds of tolerable user inactivity before a client will be disconnected from the VPN."
+  default     = 3600
+}
+
 variable "create_AAAA" {
   type        = bool
   description = "Whether or not to create AAAA records for the OpenVPN server"

@@ -22,6 +22,7 @@ data "template_cloudinit_config" "cloud_init_tasks" {
         client_network           = var.client_network
         client_dns_server        = var.client_dns_server
         client_dns_search_domain = var.client_dns_search_domain
+        client_inactive_timeout  = var.client_inactive_timeout
         private_networks         = var.private_networks
     })
     merge_type = "list(append)+dict(recurse_array)+str()"

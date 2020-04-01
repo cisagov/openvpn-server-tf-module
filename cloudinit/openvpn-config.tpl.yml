@@ -70,7 +70,7 @@ write_files:
       # control packets are not considered "activity", nor are they counted as
       # traffic, as they are used internally by OpenVPN and are not an
       # indication of actual user activity.
-      push "inactive 3600"
+      push "inactive ${client_inactive_timeout}"
 
       # For extra security beyond that provided by SSL/TLS, create an "HMAC
       # firewall" to help block DoS attacks and UDP port flooding.
