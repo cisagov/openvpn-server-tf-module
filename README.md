@@ -80,7 +80,7 @@ module "example" {
 | ssm_read_role_accounts_allowed | List of accounts allowed to access the role that can read SSM keys. | `list(string)` | `[]` | no |
 | ssm_region | The region of the SSM to access. | `string` | `us-east-1` | no |
 | ssm_tlscrypt_key | The SSM key that contains the tls-auth key. | `string` | `/openvpn/server/tlscrypt.key` | no |
-| subnet_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0) | `any` | n/a | yes |
+| subnet_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0) | `string` | n/a | yes |
 | tags | Tags to apply to all AWS resources created | `map(string)` | `{}` | no |
 | trusted_cidr_blocks_ssh | A list of the CIDR blocks that are allowed to access the ssh port on OpenVPN servers (e.g. ["10.10.0.0/16", "10.11.0.0/16"]) | `list(string)` | n/a | yes |
 | trusted_cidr_blocks_vpn | A list of the CIDR blocks that are allowed to access the VPN port on OpenVPN servers (e.g. ["10.10.0.0/16", "10.11.0.0/16"]) | `list(string)` | n/a | yes |
