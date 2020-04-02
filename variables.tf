@@ -28,6 +28,7 @@ variable "client_dns_server" {
 variable "client_motd_url" {
   type        = string
   description = "A URL to the motd page.  This will be pushed to VPN clients as an environment variable."
+  default     = ""
 }
 
 variable "client_network" {
