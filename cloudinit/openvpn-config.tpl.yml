@@ -119,8 +119,7 @@ write_files:
       # message category will be output to the log.
       ;mute 20
 
-      # Notify the client that when the server restarts so it can automatically
-      # reconnect.
+      # Notify the client of server restarts so it can automatically reconnect.
       explicit-exit-notify 1
 
       # Run command cmd to verify the X509 name of a pending TLS connection that
