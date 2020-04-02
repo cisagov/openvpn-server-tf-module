@@ -127,6 +127,12 @@ variable "client_inactive_timeout" {
   default     = 3600
 }
 
+variable "client_motd_url" {
+  type        = string
+  description = "A URL to the motd page.  This will be pushed to VPN clients as an environment variable."
+  default     = ""
+}
+
 variable "create_AAAA" {
   type        = bool
   description = "Whether or not to create AAAA records for the OpenVPN server"
