@@ -25,6 +25,11 @@ variable "client_dns_server" {
   description = "The address of the DNS server to be pushed to the VPN clients."
 }
 
+variable "client_motd_url" {
+  type        = string
+  description = "A URL to the motd page.  This will be pushed to VPN clients as an environment variable."
+}
+
 variable "client_network" {
   type        = string
   description = "A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. \"10.240.0.0 255.255.255.0\")"

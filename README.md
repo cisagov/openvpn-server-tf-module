@@ -67,6 +67,7 @@ module "example" {
 | client_dns_search_domain | The DNS search domain to be pushed to VPN clients. | `string` | n/a | yes |
 | client_dns_server | The address of the DNS server to be pushed to the VPN clients. | `string` | n/a | yes |
 | client_inactive_timeout | The number of seconds of tolerable user inactivity before a client will be disconnected from the VPN. | `number` | `3600` | no |
+| client_motd_url | A URL to the motd page.  This will be pushed to VPN clients as an environment variable. | `string` | n/a | yes |
 | client_network | A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. "10.240.0.0 255.255.255.0") | `string` | n/a | yes |
 | create_AAAA | Whether or not to create AAAA records for the OpenVPN server | `bool` | `false` | no |
 | freeipa_admin_pw | The password for the Kerberos admin role | `string` | n/a | yes |
