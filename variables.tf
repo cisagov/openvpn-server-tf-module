@@ -78,6 +78,7 @@ variable "ssm_read_role_accounts_allowed" {
 }
 
 variable "subnet_id" {
+  type        = string
   description = "The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0)"
 }
 
@@ -103,6 +104,7 @@ variable "vpn_group" {
 # ------------------------------------------------------------------------------
 
 variable "ami_owner_account_id" {
+  type        = string
   description = "The ID of the AWS account that owns the OpenVPN AMI, or \"self\" if the AMI is owned by the same account as the provisioner."
   default     = "self"
 }
@@ -114,8 +116,15 @@ variable "associate_public_ip_address" {
 }
 
 variable "aws_instance_type" {
+  type        = string
   description = "The AWS instance type to deploy (e.g. t3.medium)."
   default     = "t3.small"
+}
+
+variable "client_inactive_timeout" {
+  type        = number
+  description = "The number of seconds of tolerable user inactivity before a client will be disconnected from the VPN."
+  default     = 3600
 }
 
 variable "create_AAAA" {
@@ -149,6 +158,7 @@ variable "tags" {
 }
 
 variable "ttl" {
+  type        = number
   description = "The TTL value to use for Route53 DNS records (e.g. 86400).  A smaller value may be useful when the DNS records are changing often, for example when testing."
   default     = 60
 }

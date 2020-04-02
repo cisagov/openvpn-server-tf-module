@@ -66,6 +66,7 @@ module "example" {
 | cert_read_role_accounts_allowed | List of accounts allowed to access the role that can read certificates from an S3 bucket. | `list(string)` | `[]` | no |
 | client_dns_search_domain | The DNS search domain to be pushed to VPN clients. | `string` | n/a | yes |
 | client_dns_server | The address of the DNS server to be pushed to the VPN clients. | `string` | n/a | yes |
+| client_inactive_timeout | The number of seconds of tolerable user inactivity before a client will be disconnected from the VPN. | `number` | `3600` | no |
 | client_network | A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. "10.240.0.0 255.255.255.0") | `string` | n/a | yes |
 | create_AAAA | Whether or not to create AAAA records for the OpenVPN server | `bool` | `false` | no |
 | freeipa_admin_pw | The password for the Kerberos admin role | `string` | n/a | yes |
@@ -80,7 +81,7 @@ module "example" {
 | ssm_read_role_accounts_allowed | List of accounts allowed to access the role that can read SSM keys. | `list(string)` | `[]` | no |
 | ssm_region | The region of the SSM to access. | `string` | `us-east-1` | no |
 | ssm_tlscrypt_key | The SSM key that contains the tls-auth key. | `string` | `/openvpn/server/tlscrypt.key` | no |
-| subnet_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0) | `any` | n/a | yes |
+| subnet_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0) | `string` | n/a | yes |
 | tags | Tags to apply to all AWS resources created | `map(string)` | `{}` | no |
 | trusted_cidr_blocks_ssh | A list of the CIDR blocks that are allowed to access the ssh port on OpenVPN servers (e.g. ["10.10.0.0/16", "10.11.0.0/16"]) | `list(string)` | n/a | yes |
 | trusted_cidr_blocks_vpn | A list of the CIDR blocks that are allowed to access the VPN port on OpenVPN servers (e.g. ["10.10.0.0/16", "10.11.0.0/16"]) | `list(string)` | n/a | yes |
