@@ -66,7 +66,7 @@ write_files:
       # value is 0 seconds, which disables this feature.  If the optional bytes
       # parameter is included, exit if less than bytes of combined in/out
       # traffic are produced on the tun/tap device in n seconds. In any case,
-      # OpenVPN’s internal ping packets (which are just keepalives) and TLS
+      # OpenVPN's internal ping packets (which are just keepalives) and TLS
       # control packets are not considered "activity", nor are they counted as
       # traffic, as they are used internally by OpenVPN and are not an
       # indication of actual user activity.
@@ -141,6 +141,6 @@ write_files:
       # Push an environment variable to the clients with the location of the
       # motd page if it is set.
       # Create a client-side environment variable named: OPENVPN_motd
-      {% if client_motd_url %}
-        push "setenv-safe motd ${client_motd_url}"
-      {% endif %}
+      %{ if client_motd_url }
+      push "setenv-safe motd ${client_motd_url}"
+      %{ endif }
