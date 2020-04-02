@@ -141,6 +141,6 @@ write_files:
       # Push an environment variable to the clients with the location of the
       # motd page if it is set.
       # Create a client-side environment variable named: OPENVPN_motd
-      {% if client_motd_url %}
+      %{ if client_motd_url }
         push "setenv-safe motd ${client_motd_url}"
-      {% endif %}
+      %{ endif }
