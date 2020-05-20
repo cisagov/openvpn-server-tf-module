@@ -102,6 +102,12 @@ module "example" {
 | security_group_id | The ID of the OpenVPN server security group |
 | subnet_id | The ID of the subnet where the EC2 instance is deployed |
 
+## Notes ##
+
+Running `pre-commit` requires running `terraform init` in every directory that
+contains Terraform code. In this repository, these are the main directory and
+every directory under `examples/`.
+
 ## Contributing ##
 
 We welcome contributions!  Please see [here](CONTRIBUTING.md) for
