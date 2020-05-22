@@ -84,7 +84,6 @@ module "example" {
 | ssm_tlscrypt_key | The SSM key that contains the tls-auth key. | `string` | `/openvpn/server/tlscrypt.key` | no |
 | subnet_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0) | `string` | n/a | yes |
 | tags | Tags to apply to all AWS resources created | `map(string)` | `{}` | no |
-| trusted_cidr_blocks_ssh | A list of the CIDR blocks that are allowed to access the ssh port on OpenVPN servers (e.g. ["10.10.0.0/16", "10.11.0.0/16"]) | `list(string)` | n/a | yes |
 | trusted_cidr_blocks_vpn | A list of the CIDR blocks that are allowed to access the VPN port on OpenVPN servers (e.g. ["10.10.0.0/16", "10.11.0.0/16"]) | `list(string)` | n/a | yes |
 | ttl | The TTL value to use for Route53 DNS records (e.g. 86400).  A smaller value may be useful when the DNS records are changing often, for example when testing. | `number` | `60` | no |
 | vpn_group | The LDAP group that grants users the permission to connect to the VPN server. (e.g. vpnusers) | `string` | n/a | yes |
@@ -101,6 +100,12 @@ module "example" {
 | security_group_arn | The ARN of the OpenVPN server security group |
 | security_group_id | The ID of the OpenVPN server security group |
 | subnet_id | The ID of the subnet where the EC2 instance is deployed |
+
+## Notes ##
+
+Running `pre-commit` requires running `terraform init` in every directory that
+contains Terraform code. In this repository, these are the main directory and
+every directory under `examples/`.
 
 ## Contributing ##
 
