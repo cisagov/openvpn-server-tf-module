@@ -5,18 +5,6 @@ resource "aws_security_group" "openvpn_servers" {
   tags        = var.tags
 }
 
-# TCP ingress rules for ssh
-resource "aws_security_group_rule" "ssh_tcp_ingress" {
-  count = length(local.ssh_tcp_ports)
-
-  security_group_id = aws_security_group.openvpn_servers.id
-  type              = "ingress"
-  protocol          = "tcp"
-  cidr_blocks       = var.trusted_cidr_blocks_ssh
-  from_port         = local.ssh_tcp_ports[count.index]
-  to_port           = local.ssh_tcp_ports[count.index]
-}
-
 # UDP ingress rules for VPN
 resource "aws_security_group_rule" "vpn_udp_ingress" {
   count = length(local.vpn_udp_ports)
