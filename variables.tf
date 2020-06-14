@@ -30,9 +30,9 @@ variable "client_network" {
   description = "A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. \"10.240.0.0 255.255.255.0\")"
 }
 
-variable "freeipa_admin_pw" {
+variable "freeipa_domain" {
   type        = string
-  description = "The password for the Kerberos admin role"
+  description = "The domain for the IPA client (e.g. example.com)"
 }
 
 variable "freeipa_realm" {
