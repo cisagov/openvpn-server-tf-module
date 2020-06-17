@@ -30,13 +30,12 @@ data "template_cloudinit_config" "cloud_init_tasks" {
   }
 
   part {
-    filename     = "freeipa-creds.yml"
+    filename     = "freeipa-vars.yml"
     content_type = "text/cloud-config"
     content = templatefile(
-      "${path.module}/cloudinit/freeipa-creds.tpl.yml", {
-        admin_pw = var.freeipa_admin_pw
+      "${path.module}/cloudinit/freeipa-vars.tpl.yml", {
+        domain   = var.freeipa_domain
         hostname = var.hostname
-        realm    = var.freeipa_realm
     })
     merge_type = "list(append)+dict(recurse_array)+str()"
   }

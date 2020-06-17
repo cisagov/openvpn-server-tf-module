@@ -26,10 +26,9 @@ module "example" {
   cert_bucket_name                = "spiffy-cert-bucket"
   cert_read_role_accounts_allowed = ["123456789012","123456789013"]
   ssm_read_role_accounts_allowed  = ["123456789014","123456789015"]
-  hostname                        = "vpn"
-  freeipa_admin_pw                = "secure!"
-  freeipa_realm                   = "shark-jump.foo.org"
-  subdomain                       = "fonz"
+  hostname                        = "vpn.fonz.shark-jump.foo.org"
+  freeipa_domain                  = "shark-jump.foo.org"
+  freeipa_realm                   = "SHARK-JUMP.FOO.ORG"
   client_network                  = "10.10.2.0 255.255.255.0"
   private_networks                = ["10.10.1.0 255.255.255.0"]
   private_zone_id                 = "MYZONEID"
@@ -37,7 +36,6 @@ module "example" {
   public_zone_id                  = "MYPUBLICZONEID"
   subnet_id                       = "subnet-0123456789abcdef0"
   tags                            = { "Name" : "OpenVPN Test" }
-  trusted_cidr_blocks_ssh         = ["1.2.3.4/32"]
   trusted_cidr_blocks_vpn         = ["0.0.0.0/0"]
 }
 ```
@@ -46,19 +44,24 @@ module "example" {
 
 * [Deploying into the default VPC](https://github.com/cisagov/openvpn-server-tf-module/tree/develop/examples/default_vpc)
 
+## Requirements ##
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12 |
+
 ## Providers ##
 
-| Provider Alias | Usage |
-|--|--|
-| aws | Non-specialized access |
-| aws.dns | Route53 zone modifications |
-| aws.cert_read_role | Creation of certificate access roles |
-| aws.ssm_read_role | Creation of roles for SSM key access |
+| Name | Version |
+|------|---------|
+| aws | n/a |
+| aws.dns | n/a |
+| template | n/a |
 
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | ami_owner_account_id | The ID of the AWS account that owns the OpenVPN AMI, or "self" if the AMI is owned by the same account as the provisioner. | `string` | `self` | no |
 | associate_public_ip_address | Whether or not to associate a public IP address with the OpenVPN server | `bool` | `true` | no |
 | aws_instance_type | The AWS instance type to deploy (e.g. t3.medium). | `string` | `t3.small` | no |
@@ -70,7 +73,7 @@ module "example" {
 | client_motd_url | A URL to the motd page.  This will be pushed to VPN clients as an environment variable. | `string` | `` | no |
 | client_network | A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. "10.240.0.0 255.255.255.0") | `string` | n/a | yes |
 | create_AAAA | Whether or not to create AAAA records for the OpenVPN server | `bool` | `false` | no |
-| freeipa_admin_pw | The password for the Kerberos admin role | `string` | n/a | yes |
+| freeipa_domain | The domain for the IPA client (e.g. example.com) | `string` | n/a | yes |
 | freeipa_realm | The realm for the IPA client (e.g. EXAMPLE.COM) | `string` | n/a | yes |
 | hostname | The hostname of the OpenVPN server (e.g. vpn.example.com) | `string` | n/a | yes |
 | private_networks | A list of network netmasks that exist behind the VPN server.  These will be pushed to the client.  (e.g. ["10.224.0.0 255.240.0.0", "192.168.100.0 255.255.255.0"]) | `list(string)` | n/a | yes |
