@@ -22,13 +22,18 @@ interface=$(ip addr show to "${subnet_cidr}" | head -n1 | cut --delimiter=":" --
 # shellcheck disable=SC2154
 client_network_cidr=$(python3 -c "from ipaddress import IPv4Network; print(IPv4Network('${client_network_netmask}'))")
 
-# Add the iptables rule for NAT
-iptables -t nat -A POSTROUTING -s "$client_network_cidr" -o "$interface" -j MASQUERADE
+# Add the NAT rule to the ufw configuration.
+cat << EOF >> /etc/ufw/before.rules
+# nat Table rules
+*nat
+:POSTROUTING ACCEPT [0:0]
 
-# Save the iptables rules so they become persistent
-#
-# RedHat
-# iptables-save > /etc/sysconfig/iptables
-#
-# Debian
-iptables-save > /etc/iptables/rules.v4
+# Forward OpenvPN client traffic.
+-A POSTROUTING -s "$client_network_cidr" -o "$interface" -j MASQUERADE
+
+# Don't delete the 'COMMIT' line or these nat table rules won't be processed
+COMMIT
+EOF
+
+# Activate the new nat table rules.
+ufw disable && ufw enable
