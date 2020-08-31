@@ -11,11 +11,12 @@ resource "aws_eip" eips {
 
 # The openvpn EC2 instance
 resource "aws_instance" "openvpn" {
-  ami               = data.aws_ami.openvpn.id
-  ebs_optimized     = true
-  instance_type     = var.aws_instance_type
-  availability_zone = data.aws_subnet.the_subnet.availability_zone
-  subnet_id         = var.subnet_id
+  ami                         = data.aws_ami.openvpn.id
+  associate_public_ip_address = true
+  ebs_optimized               = true
+  instance_type               = var.aws_instance_type
+  availability_zone           = data.aws_subnet.the_subnet.availability_zone
+  subnet_id                   = var.subnet_id
   vpc_security_group_ids = concat([
     aws_security_group.openvpn_servers.id,
   ], var.security_groups)
