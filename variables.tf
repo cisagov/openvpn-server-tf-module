@@ -104,12 +104,6 @@ variable "ami_owner_account_id" {
   default     = "self"
 }
 
-variable "associate_public_ip_address" {
-  type        = bool
-  description = "Whether or not to associate a public IP address with the OpenVPN server"
-  default     = true
-}
-
 variable "aws_instance_type" {
   type        = string
   description = "The AWS instance type to deploy (e.g. t3.medium)."

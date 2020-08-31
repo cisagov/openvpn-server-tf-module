@@ -4,7 +4,6 @@
 # cool-sharedservices-networking, so the is no need for a depends_on
 # for the IGW here.
 resource "aws_eip" eips {
-  count    = var.associate_public_ip_address ? 1 : 0
   instance = aws_instance.openvpn.id
   tags     = var.tags
   vpc      = true
