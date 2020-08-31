@@ -48,22 +48,23 @@ module "example" {
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12 |
+| terraform | ~> 0.12.0 |
+| aws | ~> 2.0 |
+| template | ~> 2.0 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
-| aws.dns | n/a |
-| template | n/a |
+| aws | ~> 2.0 |
+| aws.dns | ~> 2.0 |
+| template | ~> 2.0 |
 
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | ami_owner_account_id | The ID of the AWS account that owns the OpenVPN AMI, or "self" if the AMI is owned by the same account as the provisioner. | `string` | `self` | no |
-| associate_public_ip_address | Whether or not to associate a public IP address with the OpenVPN server | `bool` | `true` | no |
 | aws_instance_type | The AWS instance type to deploy (e.g. t3.medium). | `string` | `t3.small` | no |
 | cert_bucket_name | The name of a bucket that stores certificates. (e.g. my-certs) | `string` | n/a | yes |
 | cert_read_role_accounts_allowed | List of accounts allowed to access the role that can read certificates from an S3 bucket. | `list(string)` | `[]` | no |
