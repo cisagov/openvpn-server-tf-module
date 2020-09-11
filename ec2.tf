@@ -3,7 +3,7 @@
 # Note that the internet gateway has already been created in
 # cool-sharedservices-networking, so the is no need for a depends_on
 # for the IGW here.
-resource "aws_eip" eips {
+resource "aws_eip" openvpn {
   instance = aws_instance.openvpn.id
   tags     = var.tags
   vpc      = true

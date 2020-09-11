@@ -4,7 +4,7 @@ resource "aws_route53_record" "server_A" {
   name     = var.hostname
   type     = "A"
   ttl      = var.ttl
-  records  = [aws_instance.openvpn.public_ip]
+  records  = [aws_eip.openvpn.public_ip]
 }
 
 resource "aws_route53_record" "server_AAAA" {
