@@ -1,7 +1,7 @@
 # Create a role that allows the instance to read its certs from S3.
 
 module "certreadrole" {
-  source = "github.com/cisagov/cert-read-role-tf-module"
+  source = "github.com/cisagov/cert-read-role-tf-module?ref=test_tf_aws_provider_v3"
 
   providers = {
     aws = aws.cert_read_role
