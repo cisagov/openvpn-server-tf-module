@@ -42,22 +42,22 @@ module "example" {
 
 ## Examples ##
 
-* [Deploying into the default VPC](https://github.com/cisagov/openvpn-server-tf-module/tree/develop/examples/default_vpc)
+* [Deploying into a new VPC](https://github.com/cisagov/openvpn-server-tf-module/tree/develop/examples/basic_usage)
 
 ## Requirements ##
 
 | Name | Version |
 |------|---------|
 | terraform | ~> 0.12.0 |
-| aws | ~> 2.0 |
+| aws | ~> 3.0 |
 | template | ~> 2.1 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 2.0 |
-| aws.dns | ~> 2.0 |
+| aws | ~> 3.0 |
+| aws.dns | ~> 3.0 |
 | template | ~> 2.1 |
 
 ## Inputs ##
