@@ -49,15 +49,15 @@ module "example" {
 | Name | Version |
 |------|---------|
 | terraform | ~> 0.12.0 |
-| aws | ~> 2.0 |
+| aws | ~> 3.0 |
 | template | ~> 2.1 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 2.0 |
-| aws.dns | ~> 2.0 |
+| aws | ~> 3.0 |
+| aws.dns | ~> 3.0 |
 | template | ~> 2.1 |
 
 ## Inputs ##
