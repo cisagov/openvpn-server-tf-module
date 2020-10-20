@@ -50,7 +50,7 @@ module "example" {
 |------|---------|
 | terraform | ~> 0.12.0 |
 | aws | ~> 3.0 |
-| template | ~> 2.1 |
+| cloudinit | ~> 2.0 |
 
 ## Providers ##
 
@@ -58,7 +58,7 @@ module "example" {
 |------|---------|
 | aws | ~> 3.0 |
 | aws.dns | ~> 3.0 |
-| template | ~> 2.1 |
+| cloudinit | ~> 2.0 |
 
 ## Inputs ##
 
