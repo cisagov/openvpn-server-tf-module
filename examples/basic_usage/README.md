@@ -8,6 +8,16 @@ followed by the `terraform apply` command.
 Note that this example may create resources which cost money. Run
 `terraform destroy` when you no longer need these resources.
 
+## Requirements ##
+
+No requirements.
+
+## Providers ##
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
@@ -19,6 +29,7 @@ Note that this example may create resources which cost money. Run
 | cert_read_role_arn | The ARN of the role that can create roles to have read access to the S3 bucket ('cert_bucket_name' above) where certificates are stored. | `string` | n/a | yes |
 | dns_role_arn | The ARN of the role that can modify route53 DNS. (e.g. arn:aws:iam::123456789abc:role/ModifyPublicDNS) | `string` | n/a | yes |
 | freeipa_domain | The domain for the IPA client (e.g. example.com) | `string` | n/a | yes |
+| public_dns_zone_id | The DNS zone ID in which to create public lookup records. | `string` | n/a | yes |
 | security_groups | Additional security group ids the server will join. | `list(string)` | `[]` | no |
 | ssm_read_role_accounts_allowed | List of accounts allowed to access the role that can read SSM keys. | `list(string)` | `[]` | no |
 | ssm_read_role_arn | The ARN of the role that can create roles to have read access to the SSM parameters. | `string` | n/a | yes |

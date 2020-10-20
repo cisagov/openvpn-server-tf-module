@@ -21,7 +21,7 @@ resource "aws_instance" "openvpn" {
     aws_security_group.openvpn_servers.id,
   ], var.security_groups)
 
-  user_data_base64 = data.template_cloudinit_config.cloud_init_tasks.rendered
+  user_data_base64 = data.cloudinit_config.cloud_init_tasks.rendered
 
   tags                 = var.tags
   iam_instance_profile = aws_iam_instance_profile.instance_profile.name

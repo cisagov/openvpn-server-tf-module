@@ -1,6 +1,6 @@
 # cloud-init commands for configuring OpenVPN
 
-data "template_cloudinit_config" "cloud_init_tasks" {
+data "cloudinit_config" "cloud_init_tasks" {
   gzip          = true
   base64_encode = true
 
