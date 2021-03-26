@@ -1,5 +1,4 @@
 # Create a role that allows the instance to read its certs from S3.
-
 module "certreadrole" {
   source = "github.com/cisagov/cert-read-role-tf-module"
 
@@ -13,7 +12,6 @@ module "certreadrole" {
 }
 
 # Create a role that allows the instance to read its params from SSM.
-
 module "ssmreadrole" {
   source = "github.com/cisagov/ssm-read-role-tf-module"
 
@@ -23,7 +21,13 @@ module "ssmreadrole" {
 
   account_ids = var.ssm_read_role_accounts_allowed
   entity_name = var.hostname
-  ssm_names   = [var.ssm_tlscrypt_key, var.ssm_dh4096_pem]
+  ssm_names = [
+    var.nessus_hostname_key,
+    var.nessus_key_key,
+    var.nessus_port_key,
+    var.ssm_tlscrypt_key,
+    var.ssm_dh4096_pem,
+  ]
 }
 
 # Create the IAM instance profile for the EC2 server instance
@@ -38,6 +42,7 @@ resource "aws_iam_instance_profile" "instance_profile" {
 resource "aws_iam_role" "instance_role" {
   name               = "openvpn_instance_role_${var.hostname}"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy_doc.json
+  tags               = var.tags
 }
 
 # Attach policies to the instance role
