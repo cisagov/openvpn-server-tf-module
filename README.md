@@ -30,6 +30,9 @@ module "example" {
   freeipa_domain                  = "shark-jump.foo.org"
   freeipa_realm                   = "SHARK-JUMP.FOO.ORG"
   client_network                  = "10.10.2.0 255.255.255.0"
+  nessus_hostname key             = "/thulsa/doom/hostname"
+  nessus_key_key                  = "/thulsa/doom/key"
+  nessus_port_key                 = "/thulsa/doom/port"
   private_networks                = ["10.10.1.0 255.255.255.0"]
   private_zone_id                 = "MYZONEID"
   private_reverse_zone_id         = "MYREVZONEID"
