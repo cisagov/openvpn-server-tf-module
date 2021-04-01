@@ -5,6 +5,8 @@
 This file is a template.  It must be processed by Terraform.
 """
 
+from __future__ import annotations
+
 # Standard Python Libraries
 # Bandit triggers B404 here, but we're only using subprocess.run() and
 # doing so safely.  For more details on B404 see here:
