@@ -1,3 +1,7 @@
+locals {
+  tags = { "Name" : "OpenVPN Example" }
+}
+
 provider "aws" {
   # Our primary provider uses our terraform role
   assume_role {
@@ -5,36 +9,45 @@ provider "aws" {
     session_name = "terraform-openvpn"
   }
   default_tags {
-    tags = var.tags
+    tags = local.tags
   }
   region = var.aws_region
 }
 
 provider "aws" {
-  alias  = "dns"
-  region = var.aws_region # route53 is global, but still required by terraform
+  alias = "dns"
   assume_role {
     role_arn     = var.dns_role_arn
     session_name = "terraform-openvpn-dns"
   }
+  default_tags {
+    tags = local.tags
+  }
+  region = var.aws_region # route53 is global, but still required by terraform
 }
 
 provider "aws" {
-  alias  = "cert_read_role"
-  region = var.aws_region
+  alias = "cert_read_role"
   assume_role {
     role_arn     = var.cert_read_role_arn
     session_name = "terraform-openvpn-cert-read"
   }
+  default_tags {
+    tags = local.tags
+  }
+  region = var.aws_region
 }
 
 provider "aws" {
-  alias  = "ssm_read_role"
-  region = var.aws_region
+  alias = "ssm_read_role"
   assume_role {
     role_arn     = var.ssm_read_role_arn
     session_name = "terraform-openvpn-ssm-read"
   }
+  default_tags {
+    tags = local.tags
+  }
+  region = var.aws_region
 }
 
 #-------------------------------------------------------------------------------
@@ -86,7 +99,6 @@ module "example" {
   security_groups                 = var.security_groups
   ssm_read_role_accounts_allowed  = var.ssm_read_role_accounts_allowed
   subnet_id                       = aws_subnet.public.id
-  tags                            = { "Name" : "OpenVPN Example" }
   trusted_cidr_blocks_vpn         = ["0.0.0.0/0"]
   vpn_group                       = "vpnusers"
 }

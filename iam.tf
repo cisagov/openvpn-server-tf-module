@@ -42,7 +42,6 @@ resource "aws_iam_instance_profile" "instance_profile" {
 resource "aws_iam_role" "instance_role" {
   name               = "openvpn_instance_role_${var.hostname}"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy_doc.json
-  tags               = var.tags
 }
 
 # Attach policies to the instance role

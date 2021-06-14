@@ -173,12 +173,6 @@ variable "ssm_region" {
   default     = "us-east-1"
 }
 
-variable "tags" {
-  type        = map(string)
-  description = "Tags to apply to all AWS resources created"
-  default     = {}
-}
-
 variable "ttl" {
   type        = number
   description = "The TTL value to use for Route53 DNS records (e.g. 86400).  A smaller value may be useful when the DNS records are changing often, for example when testing."
