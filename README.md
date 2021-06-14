@@ -38,7 +38,6 @@ module "example" {
   private_reverse_zone_id         = "MYREVZONEID"
   public_zone_id                  = "MYPUBLICZONEID"
   subnet_id                       = "subnet-0123456789abcdef0"
-  tags                            = { "Name" : "OpenVPN Test" }
   trusted_cidr_blocks_vpn         = ["0.0.0.0/0"]
 }
 ```
@@ -52,15 +51,15 @@ module "example" {
 | Name | Version |
 |------|---------|
 | terraform | ~> 0.12.0 |
-| aws | ~> 3.0 |
+| aws | ~> 3.38 |
 | cloudinit | ~> 2.0 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 3.0 |
-| aws.dns | ~> 3.0 |
+| aws | ~> 3.38 |
+| aws.dns | ~> 3.38 |
 | cloudinit | ~> 2.0 |
 
 ## Modules ##
@@ -130,7 +129,6 @@ module "example" {
 | ssm\_region | The region of the SSM to access. | `string` | `"us-east-1"` | no |
 | ssm\_tlscrypt\_key | The SSM key that contains the tls-auth key. | `string` | `"/openvpn/server/tlscrypt.key"` | no |
 | subnet\_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0) | `string` | n/a | yes |
-| tags | Tags to apply to all AWS resources created | `map(string)` | `{}` | no |
 | trusted\_cidr\_blocks\_vpn | A list of the CIDR blocks that are allowed to access the VPN port on OpenVPN servers (e.g. ["10.10.0.0/16", "10.11.0.0/16"]) | `list(string)` | n/a | yes |
 | ttl | The TTL value to use for Route53 DNS records (e.g. 86400).  A smaller value may be useful when the DNS records are changing often, for example when testing. | `number` | `60` | no |
 | vpn\_group | The LDAP group that grants users the permission to connect to the VPN server. (e.g. vpnusers) | `string` | n/a | yes |
