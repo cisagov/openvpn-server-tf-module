@@ -23,7 +23,7 @@ provider "aws" {
   default_tags {
     tags = local.tags
   }
-  region = var.aws_region # route53 is global, but still required by terraform
+  region = var.aws_region # Route 53 is global, but still required by Terraform
 }
 
 provider "aws" {
