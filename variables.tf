@@ -9,12 +9,6 @@ variable "cert_bucket_name" {
   description = "The name of a bucket that stores certificates (e.g. my-certs)."
 }
 
-variable "cert_read_role_accounts_allowed" {
-  type        = list(string)
-  description = "A list of accounts allowed to access the role that can read certificates from an S3 bucket."
-  default     = []
-}
-
 variable "client_dns_search_domain" {
   type        = string
   description = "The DNS search domain to be pushed to VPN clients."
@@ -80,18 +74,6 @@ variable "public_zone_id" {
   description = "The DNS Zone ID in which to create public lookup records."
 }
 
-variable "security_groups" {
-  type        = list(string)
-  description = "Additional security group ids the server will join."
-  default     = []
-}
-
-variable "ssm_read_role_accounts_allowed" {
-  type        = list(string)
-  description = "List of accounts allowed to access the role that can read SSM keys."
-  default     = []
-}
-
 variable "subnet_id" {
   type        = string
   description = "The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0)."
@@ -131,6 +113,12 @@ variable "client_inactive_timeout" {
   default     = 3600
 }
 
+variable "cert_read_role_accounts_allowed" {
+  type        = list(string)
+  description = "A list of accounts allowed to access the role that can read certificates from an S3 bucket."
+  default     = []
+}
+
 variable "client_motd_url" {
   type        = string
   description = "A URL to the motd page.  This will be pushed to VPN clients as an environment variable."
@@ -155,6 +143,12 @@ variable "nessus_groups" {
   default     = ["COOL_Deb_10"]
 }
 
+variable "security_groups" {
+  type        = list(string)
+  description = "Additional security group ids the server will join."
+  default     = []
+}
+
 variable "ssm_dh4096_pem" {
   type        = string
   description = "The SSM key that contains the Diffie Hellman pem."
@@ -165,6 +159,12 @@ variable "ssm_tlscrypt_key" {
   type        = string
   description = "The SSM key that contains the tls-auth key."
   default     = "/openvpn/server/tlscrypt.key"
+}
+
+variable "ssm_read_role_accounts_allowed" {
+  type        = list(string)
+  description = "List of accounts allowed to access the role that can read SSM keys."
+  default     = []
 }
 
 variable "ssm_region" {
