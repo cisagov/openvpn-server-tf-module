@@ -6,7 +6,7 @@
 
 variable "freeipa_domain" {
   type        = string
-  description = "The domain for the IPA client (e.g. example.com)"
+  description = "The domain for the IPA client (e.g. example.com)."
 }
 
 # ------------------------------------------------------------------------------
@@ -28,12 +28,12 @@ variable "aws_region" {
 
 variable "cert_bucket_name" {
   type        = string
-  description = "The name of the bucket that stores the certificates. (e.g. my-certificates)"
+  description = "The name of the bucket that stores the certificates (e.g. my-certificates)."
 }
 
 variable "cert_read_role_accounts_allowed" {
   type        = list(string)
-  description = "List of accounts allowed to access the role that can read certificates from an S3 bucket."
+  description = "A list of accounts allowed to access the role that can read certificates from an S3 bucket."
   default     = []
 }
 
@@ -44,7 +44,7 @@ variable "cert_read_role_arn" {
 
 variable "dns_role_arn" {
   type        = string
-  description = "The ARN of the role that can modify route53 DNS. (e.g. arn:aws:iam::123456789abc:role/ModifyPublicDNS)"
+  description = "The ARN of the role that can modify route53 DNS (e.g. arn:aws:iam::123456789abc:role/ModifyPublicDNS)."
 }
 
 variable "public_dns_zone_id" {
@@ -60,7 +60,7 @@ variable "security_groups" {
 
 variable "ssm_read_role_accounts_allowed" {
   type        = list(string)
-  description = "List of accounts allowed to access the role that can read SSM keys."
+  description = "A list of accounts allowed to access the role that can read SSM keys."
   default     = []
 }
 
