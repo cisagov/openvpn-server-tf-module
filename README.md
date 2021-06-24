@@ -125,7 +125,7 @@ module "example" {
 | public\_zone\_id | The DNS Zone ID in which to create public lookup records. | `string` | n/a | yes |
 | security\_groups | Additional security group ids the server will join. | `list(string)` | `[]` | no |
 | ssm\_dh4096\_pem | The SSM key that contains the Diffie Hellman pem. | `string` | `"/openvpn/server/dh4096.pem"` | no |
-| ssm\_read\_role\_accounts\_allowed | List of accounts allowed to access the role that can read SSM keys. | `list(string)` | `[]` | no |
+| ssm\_read\_role\_accounts\_allowed | A list of accounts allowed to access the role that can read SSM keys. | `list(string)` | `[]` | no |
 | ssm\_region | The region of the SSM to access. | `string` | `"us-east-1"` | no |
 | ssm\_tlscrypt\_key | The SSM key that contains the tls-auth key. | `string` | `"/openvpn/server/tlscrypt.key"` | no |
 | subnet\_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0). | `string` | n/a | yes |

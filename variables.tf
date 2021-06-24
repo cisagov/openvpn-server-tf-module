@@ -163,7 +163,7 @@ variable "ssm_tlscrypt_key" {
 
 variable "ssm_read_role_accounts_allowed" {
   type        = list(string)
-  description = "List of accounts allowed to access the role that can read SSM keys."
+  description = "A list of accounts allowed to access the role that can read SSM keys."
   default     = []
 }
 
