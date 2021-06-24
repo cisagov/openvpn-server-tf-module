@@ -5,7 +5,6 @@
 # for the IGW here.
 resource "aws_eip" openvpn {
   instance = aws_instance.openvpn.id
-  tags     = var.tags
   vpc      = true
 }
 
@@ -32,6 +31,5 @@ resource "aws_instance" "openvpn" {
     # Require IMDS tokens AKA require the use of IMDSv2
     http_tokens = "required"
   }
-  tags                 = var.tags
   iam_instance_profile = aws_iam_instance_profile.instance_profile.name
 }

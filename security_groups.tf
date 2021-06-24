@@ -2,7 +2,6 @@
 resource "aws_security_group" "openvpn_servers" {
   vpc_id      = data.aws_subnet.the_subnet.vpc_id
   description = "Security group for OpenVPN servers"
-  tags        = var.tags
 }
 
 # UDP ingress rules for VPN

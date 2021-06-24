@@ -38,7 +38,6 @@ module "example" {
   private_reverse_zone_id         = "MYREVZONEID"
   public_zone_id                  = "MYPUBLICZONEID"
   subnet_id                       = "subnet-0123456789abcdef0"
-  tags                            = { "Name" : "OpenVPN Test" }
   trusted_cidr_blocks_vpn         = ["0.0.0.0/0"]
 }
 ```
@@ -52,15 +51,15 @@ module "example" {
 | Name | Version |
 |------|---------|
 | terraform | ~> 0.12.0 |
-| aws | ~> 3.0 |
+| aws | ~> 3.38 |
 | cloudinit | ~> 2.0 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 3.0 |
-| aws.dns | ~> 3.0 |
+| aws | ~> 3.38 |
+| aws.dns | ~> 3.38 |
 | cloudinit | ~> 2.0 |
 
 ## Modules ##
@@ -104,49 +103,48 @@ module "example" {
 |------|-------------|------|---------|:--------:|
 | ami\_owner\_account\_id | The ID of the AWS account that owns the OpenVPN AMI, or "self" if the AMI is owned by the same account as the provisioner. | `string` | `"self"` | no |
 | aws\_instance\_type | The AWS instance type to deploy (e.g. t3.medium). | `string` | `"t3.small"` | no |
-| cert\_bucket\_name | The name of a bucket that stores certificates. (e.g. my-certs) | `string` | n/a | yes |
-| cert\_read\_role\_accounts\_allowed | List of accounts allowed to access the role that can read certificates from an S3 bucket. | `list(string)` | `[]` | no |
+| cert\_bucket\_name | The name of a bucket that stores certificates (e.g. my-certs). | `string` | n/a | yes |
+| cert\_read\_role\_accounts\_allowed | A list of accounts allowed to access the role that can read certificates from an S3 bucket. | `list(string)` | `[]` | no |
 | client\_dns\_search\_domain | The DNS search domain to be pushed to VPN clients. | `string` | n/a | yes |
 | client\_dns\_server | The address of the DNS server to be pushed to the VPN clients. | `string` | n/a | yes |
 | client\_inactive\_timeout | The number of seconds of tolerable user inactivity before a client will be disconnected from the VPN. | `number` | `3600` | no |
 | client\_motd\_url | A URL to the motd page.  This will be pushed to VPN clients as an environment variable. | `string` | `""` | no |
-| client\_network | A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. "10.240.0.0 255.255.255.0") | `string` | n/a | yes |
-| create\_AAAA | Whether or not to create AAAA records for the OpenVPN server | `bool` | `false` | no |
-| freeipa\_domain | The domain for the IPA client (e.g. example.com) | `string` | n/a | yes |
-| freeipa\_realm | The realm for the IPA client (e.g. EXAMPLE.COM) | `string` | n/a | yes |
-| hostname | The hostname of the OpenVPN server (e.g. vpn.example.com) | `string` | n/a | yes |
+| client\_network | A string containing the network and netmask to assign client addresses (e.g. "10.240.0.0 255.255.255.0").  The server will take the first address. | `string` | n/a | yes |
+| create\_AAAA | Whether or not to create AAAA records for the OpenVPN server. | `bool` | `false` | no |
+| freeipa\_domain | The domain for the IPA client (e.g. example.com). | `string` | n/a | yes |
+| freeipa\_realm | The realm for the IPA client (e.g. EXAMPLE.COM). | `string` | n/a | yes |
+| hostname | The hostname of the OpenVPN server (e.g. vpn.example.com). | `string` | n/a | yes |
 | nessus\_agent\_install\_path | The install path of Nessus Agent (e.g. /opt/nessus\_agent). | `string` | `"/opt/nessus_agent"` | no |
 | nessus\_groups | A list of strings, each of which is the name of a group in the CDM Tenable Nessus server that the Nessus Agent should join (e.g. ["group1", "group2"]). | `list(string)` | `["COOL_Deb_10"]` | no |
 | nessus\_hostname\_key | The SSM Parameter Store key whose corresponding value contains the hostname of the CDM Tenable Nessus server to which the Nessus Agent should link (e.g. /cdm/nessus/hostname). | `string` | n/a | yes |
 | nessus\_key\_key | The SSM Parameter Store key whose corresponding value contains the secret key that the Nessus Agent should use when linking with the CDM Tenable Nessus server (e.g. /cdm/nessus/key). | `string` | n/a | yes |
 | nessus\_port\_key | The SSM Parameter Store key whose corresponding value contains the port to which the Nessus Agent should connect when linking with the CDM Tenable Nessus server (e.g. /cdm/nessus/port). | `string` | n/a | yes |
-| private\_networks | A list of network netmasks that exist behind the VPN server.  These will be pushed to the client.  (e.g. ["10.224.0.0 255.240.0.0", "192.168.100.0 255.255.255.0"]) | `list(string)` | n/a | yes |
+| private\_networks | A list of network netmasks that exist behind the VPN server (e.g. ["10.224.0.0 255.240.0.0", "192.168.100.0 255.255.255.0"]).  These will be pushed to the client. | `list(string)` | n/a | yes |
 | private\_reverse\_zone\_id | The DNS Zone ID in which to create private reverse lookup records. | `string` | n/a | yes |
 | private\_zone\_id | The DNS Zone ID in which to create private lookup records. | `string` | n/a | yes |
 | public\_zone\_id | The DNS Zone ID in which to create public lookup records. | `string` | n/a | yes |
 | security\_groups | Additional security group ids the server will join. | `list(string)` | `[]` | no |
 | ssm\_dh4096\_pem | The SSM key that contains the Diffie Hellman pem. | `string` | `"/openvpn/server/dh4096.pem"` | no |
-| ssm\_read\_role\_accounts\_allowed | List of accounts allowed to access the role that can read SSM keys. | `list(string)` | `[]` | no |
+| ssm\_read\_role\_accounts\_allowed | A list of accounts allowed to access the role that can read SSM keys. | `list(string)` | `[]` | no |
 | ssm\_region | The region of the SSM to access. | `string` | `"us-east-1"` | no |
 | ssm\_tlscrypt\_key | The SSM key that contains the tls-auth key. | `string` | `"/openvpn/server/tlscrypt.key"` | no |
-| subnet\_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0) | `string` | n/a | yes |
-| tags | Tags to apply to all AWS resources created | `map(string)` | `{}` | no |
-| trusted\_cidr\_blocks\_vpn | A list of the CIDR blocks that are allowed to access the VPN port on OpenVPN servers (e.g. ["10.10.0.0/16", "10.11.0.0/16"]) | `list(string)` | n/a | yes |
+| subnet\_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0). | `string` | n/a | yes |
+| trusted\_cidr\_blocks\_vpn | A list of the CIDR blocks that are allowed to access the VPN port on OpenVPN servers (e.g. ["10.10.0.0/16", "10.11.0.0/16"]). | `list(string)` | n/a | yes |
 | ttl | The TTL value to use for Route53 DNS records (e.g. 86400).  A smaller value may be useful when the DNS records are changing often, for example when testing. | `number` | `60` | no |
-| vpn\_group | The LDAP group that grants users the permission to connect to the VPN server. (e.g. vpnusers) | `string` | n/a | yes |
+| vpn\_group | The LDAP group that grants users the permission to connect to the VPN server (e.g. vpnusers). | `string` | n/a | yes |
 
 ## Outputs ##
 
 | Name | Description |
 |------|-------------|
-| arn | The EC2 instance ARN |
-| availability\_zone | The AZ where the EC2 instance is deployed |
-| id | The EC2 instance ID |
-| private\_ip | The private IP of the EC2 instance |
-| public\_ip | The public IP of the OpenVPN instance |
-| security\_group\_arn | The ARN of the OpenVPN server security group |
-| security\_group\_id | The ID of the OpenVPN server security group |
-| subnet\_id | The ID of the subnet where the EC2 instance is deployed |
+| arn | The EC2 instance ARN. |
+| availability\_zone | The AZ where the EC2 instance is deployed. |
+| id | The EC2 instance ID. |
+| private\_ip | The private IP of the EC2 instance. |
+| public\_ip | The public IP of the OpenVPN instance. |
+| security\_group\_arn | The ARN of the OpenVPN server security group. |
+| security\_group\_id | The ID of the OpenVPN server security group. |
+| subnet\_id | The ID of the subnet where the EC2 instance is deployed. |
 
 ## Notes ##
 

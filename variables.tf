@@ -6,13 +6,7 @@
 
 variable "cert_bucket_name" {
   type        = string
-  description = "The name of a bucket that stores certificates. (e.g. my-certs)"
-}
-
-variable "cert_read_role_accounts_allowed" {
-  type        = list(string)
-  description = "List of accounts allowed to access the role that can read certificates from an S3 bucket."
-  default     = []
+  description = "The name of a bucket that stores certificates (e.g. my-certs)."
 }
 
 variable "client_dns_search_domain" {
@@ -27,22 +21,22 @@ variable "client_dns_server" {
 
 variable "client_network" {
   type        = string
-  description = "A string containing the network and netmask to assign client addresses.  The server will take the first address. (e.g. \"10.240.0.0 255.255.255.0\")"
+  description = "A string containing the network and netmask to assign client addresses (e.g. \"10.240.0.0 255.255.255.0\").  The server will take the first address."
 }
 
 variable "freeipa_domain" {
   type        = string
-  description = "The domain for the IPA client (e.g. example.com)"
+  description = "The domain for the IPA client (e.g. example.com)."
 }
 
 variable "freeipa_realm" {
   type        = string
-  description = "The realm for the IPA client (e.g. EXAMPLE.COM)"
+  description = "The realm for the IPA client (e.g. EXAMPLE.COM)."
 }
 
 variable "hostname" {
   type        = string
-  description = "The hostname of the OpenVPN server (e.g. vpn.example.com)"
+  description = "The hostname of the OpenVPN server (e.g. vpn.example.com)."
 }
 
 variable "nessus_hostname_key" {
@@ -62,7 +56,7 @@ variable "nessus_port_key" {
 
 variable "private_networks" {
   type        = list(string)
-  description = "A list of network netmasks that exist behind the VPN server.  These will be pushed to the client.  (e.g. [\"10.224.0.0 255.240.0.0\", \"192.168.100.0 255.255.255.0\"])"
+  description = "A list of network netmasks that exist behind the VPN server (e.g. [\"10.224.0.0 255.240.0.0\", \"192.168.100.0 255.255.255.0\"]).  These will be pushed to the client."
 }
 
 variable "private_zone_id" {
@@ -80,31 +74,19 @@ variable "public_zone_id" {
   description = "The DNS Zone ID in which to create public lookup records."
 }
 
-variable "security_groups" {
-  type        = list(string)
-  description = "Additional security group ids the server will join."
-  default     = []
-}
-
-variable "ssm_read_role_accounts_allowed" {
-  type        = list(string)
-  description = "List of accounts allowed to access the role that can read SSM keys."
-  default     = []
-}
-
 variable "subnet_id" {
   type        = string
-  description = "The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0)"
+  description = "The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0)."
 }
 
 variable "trusted_cidr_blocks_vpn" {
   type        = list(string)
-  description = "A list of the CIDR blocks that are allowed to access the VPN port on OpenVPN servers (e.g. [\"10.10.0.0/16\", \"10.11.0.0/16\"])"
+  description = "A list of the CIDR blocks that are allowed to access the VPN port on OpenVPN servers (e.g. [\"10.10.0.0/16\", \"10.11.0.0/16\"])."
 }
 
 variable "vpn_group" {
   type        = string
-  description = "The LDAP group that grants users the permission to connect to the VPN server. (e.g. vpnusers)"
+  description = "The LDAP group that grants users the permission to connect to the VPN server (e.g. vpnusers)."
 }
 
 # ------------------------------------------------------------------------------
@@ -131,6 +113,12 @@ variable "client_inactive_timeout" {
   default     = 3600
 }
 
+variable "cert_read_role_accounts_allowed" {
+  type        = list(string)
+  description = "A list of accounts allowed to access the role that can read certificates from an S3 bucket."
+  default     = []
+}
+
 variable "client_motd_url" {
   type        = string
   description = "A URL to the motd page.  This will be pushed to VPN clients as an environment variable."
@@ -139,7 +127,7 @@ variable "client_motd_url" {
 
 variable "create_AAAA" {
   type        = bool
-  description = "Whether or not to create AAAA records for the OpenVPN server"
+  description = "Whether or not to create AAAA records for the OpenVPN server."
   default     = false
 }
 
@@ -155,6 +143,12 @@ variable "nessus_groups" {
   default     = ["COOL_Deb_10"]
 }
 
+variable "security_groups" {
+  type        = list(string)
+  description = "Additional security group ids the server will join."
+  default     = []
+}
+
 variable "ssm_dh4096_pem" {
   type        = string
   description = "The SSM key that contains the Diffie Hellman pem."
@@ -167,16 +161,16 @@ variable "ssm_tlscrypt_key" {
   default     = "/openvpn/server/tlscrypt.key"
 }
 
+variable "ssm_read_role_accounts_allowed" {
+  type        = list(string)
+  description = "A list of accounts allowed to access the role that can read SSM keys."
+  default     = []
+}
+
 variable "ssm_region" {
   type        = string
   description = "The region of the SSM to access."
   default     = "us-east-1"
-}
-
-variable "tags" {
-  type        = map(string)
-  description = "Tags to apply to all AWS resources created"
-  default     = {}
 }
 
 variable "ttl" {
