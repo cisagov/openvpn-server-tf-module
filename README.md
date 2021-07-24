@@ -44,7 +44,7 @@ module "example" {
 
 ## Examples ##
 
-* [Deploying into a new VPC](https://github.com/cisagov/openvpn-server-tf-module/tree/develop/examples/basic_usage)
+- [Deploying into a new VPC](https://github.com/cisagov/openvpn-server-tf-module/tree/develop/examples/basic_usage)
 
 ## Requirements ##
 
