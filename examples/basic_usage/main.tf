@@ -92,6 +92,9 @@ module "example" {
   freeipa_domain                  = var.freeipa_domain
   freeipa_realm                   = upper(var.freeipa_domain)
   hostname                        = "vpn.${var.freeipa_domain}"
+  nessus_hostname_key             = "/cdm/nessus/hostname"
+  nessus_key_key                  = "/cdm/nessus/key"
+  nessus_port_key                 = "/cdm/nessus/port"
   private_networks                = ["10.240.0.16 255.255.255.240"]
   private_reverse_zone_id         = aws_route53_zone.private_reverse_zone.zone_id
   private_zone_id                 = aws_route53_zone.private_zone.zone_id
