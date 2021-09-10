@@ -6,14 +6,14 @@ resource "aws_security_group" "openvpn_servers" {
 
 # UDP ingress rules for VPN
 resource "aws_security_group_rule" "vpn_udp_ingress" {
-  count = length(local.vpn_udp_ports)
+  for_each = toset(local.vpn_udp_ports)
 
   security_group_id = aws_security_group.openvpn_servers.id
   type              = "ingress"
   protocol          = "udp"
   cidr_blocks       = var.trusted_cidr_blocks_vpn
-  from_port         = local.vpn_udp_ports[count.index]
-  to_port           = local.vpn_udp_ports[count.index]
+  from_port         = each.value
+  to_port           = each.value
 }
 
 # TCP egress rules for OpenVPN
