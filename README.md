@@ -50,7 +50,7 @@ module "example" {
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 0.14.0 |
+| terraform | ~> 1.0 |
 | aws | ~> 3.38 |
 | cloudinit | ~> 2.0 |
 
@@ -66,8 +66,8 @@ module "example" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| certreadrole | github.com/cisagov/cert-read-role-tf-module |  |
-| ssmreadrole | github.com/cisagov/ssm-read-role-tf-module |  |
+| certreadrole | github.com/cisagov/cert-read-role-tf-module | n/a |
+| ssmreadrole | github.com/cisagov/ssm-read-role-tf-module | n/a |
 
 ## Resources ##
 
@@ -115,7 +115,7 @@ module "example" {
 | freeipa\_realm | The realm for the IPA client (e.g. EXAMPLE.COM). | `string` | n/a | yes |
 | hostname | The hostname of the OpenVPN server (e.g. vpn.example.com). | `string` | n/a | yes |
 | nessus\_agent\_install\_path | The install path of Nessus Agent (e.g. /opt/nessus\_agent). | `string` | `"/opt/nessus_agent"` | no |
-| nessus\_groups | A list of strings, each of which is the name of a group in the CDM Tenable Nessus server that the Nessus Agent should join (e.g. ["group1", "group2"]). | `list(string)` | `["COOL_Deb_10"]` | no |
+| nessus\_groups | A list of strings, each of which is the name of a group in the CDM Tenable Nessus server that the Nessus Agent should join (e.g. ["group1", "group2"]). | `list(string)` | ```[ "COOL_Deb_10" ]``` | no |
 | nessus\_hostname\_key | The SSM Parameter Store key whose corresponding value contains the hostname of the CDM Tenable Nessus server to which the Nessus Agent should link (e.g. /cdm/nessus/hostname). | `string` | n/a | yes |
 | nessus\_key\_key | The SSM Parameter Store key whose corresponding value contains the secret key that the Nessus Agent should use when linking with the CDM Tenable Nessus server (e.g. /cdm/nessus/key). | `string` | n/a | yes |
 | nessus\_port\_key | The SSM Parameter Store key whose corresponding value contains the port to which the Nessus Agent should connect when linking with the CDM Tenable Nessus server (e.g. /cdm/nessus/port). | `string` | n/a | yes |
