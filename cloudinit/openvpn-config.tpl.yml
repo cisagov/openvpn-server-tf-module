@@ -159,3 +159,9 @@ write_files:
       %{ if client_motd_url != "" }
       push "setenv-safe motd ${client_motd_url}"
       %{ endif }
+
+      # Disable data renegotiation setting on the server side.  The client
+      # may set this value to whatever they wish, but we do this to avoid
+      # the connection closing if the user's PIV is not inserted when the
+      # connection renegotiation is attempted.
+      reneg-sec 0
