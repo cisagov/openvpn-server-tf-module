@@ -22,9 +22,26 @@ interface=$(ip addr show to "${subnet_cidr}" | head -n1 | cut --delimiter=":" --
 # shellcheck disable=SC2154
 client_network_cidr=$(python3 -c "from ipaddress import IPv4Network; print(IPv4Network('${client_network_netmask}'))")
 
-# Add the NAT rule to the ufw configuration.
+# Get first address in client network
+client_network_address=$(echo "$client_network_cidr" | cut --delimiter="/" --fields=1)
+
+# Get name of VPN tunnel interface
+tunnel_interface=$(ip route get "$client_network_address" | head -n1 | sed "s/^.*dev \([^ ]*\).*$/\1/")
+
+# Add rules to the ufw configuration to:
+# - Disallow packets between VPN clients
+# - Enable NAT for VPN clients
 cat << EOF >> /etc/ufw/before.rules
-# nat Table rules
+
+# Add a filter table rule
+*filter
+# Drop packets between VPN clients; first rule in ufw-before-forward chain
+--insert ufw-before-forward 1 --in-interface "$tunnel_interface" --out-interface "$tunnel_interface" --jump DROP
+
+# don't delete the 'COMMIT' line or this filter table rule won't be processed
+COMMIT
+
+# Add nat table rules
 *nat
 :POSTROUTING ACCEPT [0:0]
 
