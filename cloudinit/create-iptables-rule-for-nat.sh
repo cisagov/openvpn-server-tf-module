@@ -45,12 +45,12 @@ COMMIT
 *nat
 :POSTROUTING ACCEPT [0:0]
 
-# Forward OpenvPN client traffic.
--A POSTROUTING -s "$client_network_cidr" -o "$interface" -j MASQUERADE
+# Forward OpenVPN client traffic
+--append POSTROUTING --source "$client_network_cidr" --out-interface "$interface" --jump MASQUERADE
 
 # Don't delete the 'COMMIT' line or these nat table rules won't be processed
 COMMIT
 EOF
 
-# Activate the new nat table rules.
+# Activate the new rules added above
 ufw disable && ufw enable
