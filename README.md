@@ -23,22 +23,20 @@ module "example" {
     aws.ssm_read_role  = "aws.ssm_read_role"
   }
 
-  cert_bucket_name                = "spiffy-cert-bucket"
-  cert_read_role_accounts_allowed = ["123456789012","123456789013"]
-  ssm_read_role_accounts_allowed  = ["123456789014","123456789015"]
-  hostname                        = "vpn.fonz.shark-jump.foo.org"
-  freeipa_domain                  = "shark-jump.foo.org"
-  freeipa_realm                   = "SHARK-JUMP.FOO.ORG"
-  client_network                  = "10.10.2.0 255.255.255.0"
-  nessus_hostname key             = "/thulsa/doom/hostname"
-  nessus_key_key                  = "/thulsa/doom/key"
-  nessus_port_key                 = "/thulsa/doom/port"
-  private_networks                = ["10.10.1.0 255.255.255.0"]
-  private_zone_id                 = "MYZONEID"
-  private_reverse_zone_id         = "MYREVZONEID"
-  public_zone_id                  = "MYPUBLICZONEID"
-  subnet_id                       = "subnet-0123456789abcdef0"
-  trusted_cidr_blocks_vpn         = ["0.0.0.0/0"]
+  cert_bucket_name                          = "spiffy-cert-bucket"
+  cert_read_role_accounts_allowed           = ["123456789012","123456789013"]
+  crowdstrike_falcon_sensor_customer_id_key = "/thulsa/doom/customer_id"
+  ssm_read_role_accounts_allowed            = ["123456789014","123456789015"]
+  hostname                                  = "vpn.fonz.shark-jump.foo.org"
+  freeipa_domain                            = "shark-jump.foo.org"
+  freeipa_realm                             = "SHARK-JUMP.FOO.ORG"
+  client_network                            = "10.10.2.0 255.255.255.0"
+  private_networks                          = ["10.10.1.0 255.255.255.0"]
+  private_zone_id                           = "MYZONEID"
+  private_reverse_zone_id                   = "MYREVZONEID"
+  public_zone_id                            = "MYPUBLICZONEID"
+  subnet_id                                 = "subnet-0123456789abcdef0"
+  trusted_cidr_blocks_vpn                   = ["0.0.0.0/0"]
 }
 ```
 
@@ -111,14 +109,11 @@ module "example" {
 | client\_motd\_url | A URL to the motd page.  This will be pushed to VPN clients as an environment variable. | `string` | `""` | no |
 | client\_network | A string containing the network and netmask to assign client addresses (e.g. "10.240.0.0 255.255.255.0").  The server will take the first address. | `string` | n/a | yes |
 | create\_AAAA | Whether or not to create AAAA records for the OpenVPN server. | `bool` | `false` | no |
+| crowdstrike\_falcon\_sensor\_customer\_id\_key | The SSM Parameter Store key whose corresponding value contains the customer ID for CrowdStrike Falcon (e.g. /cdm/falcon/customer\_id). | `string` | n/a | yes |
+| crowdstrike\_falcon\_sensor\_install\_path | The install path of the CrowdStrike Falcon sensor (e.g. /opt/CrowdStrike). | `string` | `"/opt/CrowdStrike"` | no |
 | freeipa\_domain | The domain for the IPA client (e.g. example.com). | `string` | n/a | yes |
 | freeipa\_realm | The realm for the IPA client (e.g. EXAMPLE.COM). | `string` | n/a | yes |
 | hostname | The hostname of the OpenVPN server (e.g. vpn.example.com). | `string` | n/a | yes |
-| nessus\_agent\_install\_path | The install path of Nessus Agent (e.g. /opt/nessus\_agent). | `string` | `"/opt/nessus_agent"` | no |
-| nessus\_groups | A list of strings, each of which is the name of a group in the CDM Tenable Nessus server that the Nessus Agent should join (e.g. ["group1", "group2"]). | `list(string)` | ```[ "COOL_Deb_10" ]``` | no |
-| nessus\_hostname\_key | The SSM Parameter Store key whose corresponding value contains the hostname of the CDM Tenable Nessus server to which the Nessus Agent should link (e.g. /cdm/nessus/hostname). | `string` | n/a | yes |
-| nessus\_key\_key | The SSM Parameter Store key whose corresponding value contains the secret key that the Nessus Agent should use when linking with the CDM Tenable Nessus server (e.g. /cdm/nessus/key). | `string` | n/a | yes |
-| nessus\_port\_key | The SSM Parameter Store key whose corresponding value contains the port to which the Nessus Agent should connect when linking with the CDM Tenable Nessus server (e.g. /cdm/nessus/port). | `string` | n/a | yes |
 | private\_networks | A list of network netmasks that exist behind the VPN server (e.g. ["10.224.0.0 255.240.0.0", "192.168.100.0 255.255.255.0"]).  These will be pushed to the client. | `list(string)` | n/a | yes |
 | private\_reverse\_zone\_id | The DNS Zone ID in which to create private reverse lookup records. | `string` | n/a | yes |
 | private\_zone\_id | The DNS Zone ID in which to create private lookup records. | `string` | n/a | yes |
