@@ -115,20 +115,4 @@ data "cloudinit_config" "cloud_init_tasks" {
         client_network_netmask = replace(var.client_network, " ", "/")
     })
   }
-
-  part {
-    filename     = "link-nessus-agent.py"
-    content_type = "text/x-shellscript"
-    content = templatefile(
-      "${path.module}/cloudinit/link-nessus-agent.py", {
-        nessus_agent_install_path = var.nessus_agent_install_path
-        nessus_groups             = join(",", var.nessus_groups)
-        nessus_hostname_key       = var.nessus_hostname_key
-        nessus_key_key            = var.nessus_key_key
-        nessus_port_key           = var.nessus_port_key
-        ssm_read_role_arn         = module.ssmreadrole.role.arn
-        # This is the region where the IPA instance is being created
-        ssm_region = data.aws_arn.subnet.region
-    })
-  }
 }
