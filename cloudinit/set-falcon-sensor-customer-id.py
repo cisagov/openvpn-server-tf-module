@@ -90,9 +90,8 @@ def main() -> int:
         "falcon-sensor.service",
     ]
     # Bandit triggers B603 here, but we're using subprocess.run()
-    # safely here, since the variable content in restart_cmd comes
-    # directly from SSM Parameter Store.  For more details on B603 see
-    # here:
+    # safely here, since the content of restart_cmd is entirely
+    # hard-coded.  For more details on B603 see here:
     # https://bandit.readthedocs.io/en/latest/plugins/b603_subprocess_without_shell_equals_true.html
     restart_cp: subprocess.CompletedProcess = subprocess.run(restart_cmd)  # nosec
     return restart_cp.returncode
