@@ -66,6 +66,9 @@ def main() -> int:
     #
     customer_id_cmd: list[str] = [
         f"{FALCON_SENSOR_INSTALL_PATH}/falconctl",
+        # This switch denotes that we are setting (as opposed to
+        # getting the value of) a variable.  There is no long form for
+        # this switch.
         "-s",
         f"--cid={customer_id}",
     ]
