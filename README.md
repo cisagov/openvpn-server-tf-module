@@ -25,16 +25,16 @@ module "example" {
 
   cert_bucket_name                          = "spiffy-cert-bucket"
   cert_read_role_accounts_allowed           = ["123456789012","123456789013"]
+  client_network                            = "10.10.2.0 255.255.255.0"
   crowdstrike_falcon_sensor_customer_id_key = "/thulsa/doom/customer_id"
-  ssm_read_role_accounts_allowed            = ["123456789014","123456789015"]
   hostname                                  = "vpn.fonz.shark-jump.foo.org"
   freeipa_domain                            = "shark-jump.foo.org"
   freeipa_realm                             = "SHARK-JUMP.FOO.ORG"
-  client_network                            = "10.10.2.0 255.255.255.0"
   private_networks                          = ["10.10.1.0 255.255.255.0"]
   private_zone_id                           = "MYZONEID"
   private_reverse_zone_id                   = "MYREVZONEID"
   public_zone_id                            = "MYPUBLICZONEID"
+  ssm_read_role_accounts_allowed            = ["123456789014","123456789015"]
   subnet_id                                 = "subnet-0123456789abcdef0"
   trusted_cidr_blocks_vpn                   = ["0.0.0.0/0"]
 }
