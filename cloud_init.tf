@@ -121,8 +121,8 @@ data "cloudinit_config" "cloud_init_tasks" {
     content_type = "text/x-shellscript"
     content = templatefile(
       "${path.module}/cloudinit/configure-falcon-sensor.py", {
-        falcon_sensor_install_path = var.crowdstrike_falcon_sensor_install_path
         falcon_customer_id_key     = var.crowdstrike_falcon_sensor_customer_id_key
+        falcon_sensor_install_path = var.crowdstrike_falcon_sensor_install_path
         falcon_tags_key            = var.crowdstrike_falcon_sensor_tags_key
         ssm_read_role_arn          = module.ssmreadrole.role.arn
         # This is the region where the OpenVPN instance is being
