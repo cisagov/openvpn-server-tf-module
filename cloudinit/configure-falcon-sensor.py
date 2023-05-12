@@ -21,6 +21,7 @@ import boto3
 # Inputs from Terraform
 FALCON_SENSOR_INSTALL_PATH: str = "${falcon_sensor_install_path}"
 FALCON_CUSTOMER_ID_KEY: str = "${falcon_customer_id_key}"
+FALCON_TAGS_KEY: str = "${falcon_tags_key}"
 SSM_READ_ROLE_ARN: str = "${ssm_read_role_arn}"
 SSM_REGION: str = "${ssm_region}"
 
@@ -60,6 +61,7 @@ def main() -> int:
 
     # Get the values of the SSM Parameter Store parameters
     customer_id: str = get_parameter(ssm_client, FALCON_CUSTOMER_ID_KEY)
+    tags: str = get_parameter(ssm_client, FALCON_TAGS_KEY)
 
     #
     # Set the customer ID
@@ -73,16 +75,39 @@ def main() -> int:
         f"--cid={customer_id}",
     ]
     # Bandit triggers B603 here, but we're using subprocess.run()
-    # safely here, since the variable content in customer_id__cmd
-    # comes directly from SSM Parameter Store.  For more details on
-    # B603 see here:
+    # safely since the variable content in customer_id__cmd comes
+    # directly from SSM Parameter Store.  For more details on B603 see
+    # here:
     # https://bandit.readthedocs.io/en/latest/plugins/b603_subprocess_without_shell_equals_true.html
     cid_cp: subprocess.CompletedProcess = subprocess.run(customer_id_cmd)  # nosec
     if cid_cp.returncode != 0:
         return cid_cp.returncode
 
     #
+    # Set the tags
+    #
+    tags_cmd: list[str] = [
+        f"{FALCON_SENSOR_INSTALL_PATH}/falconctl",
+        # This switch denotes that we are setting (as opposed to
+        # getting the value of) a variable.  There is no long form for
+        # this switch.
+        "-s",
+        f"--tags={tags}",
+    ]
+    # Bandit triggers B603 here, but we're using subprocess.run()
+    # safely since the variable content in customer_id__cmd comes
+    # directly from SSM Parameter Store.  For more details on B603 see
+    # here:
+    # https://bandit.readthedocs.io/en/latest/plugins/b603_subprocess_without_shell_equals_true.html
+    tags_cp: subprocess.CompletedProcess = subprocess.run(tags_cmd)  # nosec
+    if tags_cp.returncode != 0:
+        return tags_cp.returncode
+
+    #
     # Restart the Falcon sensor
+    #
+    # This is necessary since the service doesn't start up
+    # successfully without a valid customer ID.
     #
     restart_cmd: list[str] = [
         "/usr/bin/systemctl",
@@ -90,8 +115,8 @@ def main() -> int:
         "falcon-sensor.service",
     ]
     # Bandit triggers B603 here, but we're using subprocess.run()
-    # safely here, since the content of restart_cmd is entirely
-    # hard-coded.  For more details on B603 see here:
+    # safely since the content of restart_cmd is entirely hard-coded.
+    # For more details on B603 see here:
     # https://bandit.readthedocs.io/en/latest/plugins/b603_subprocess_without_shell_equals_true.html
     restart_cp: subprocess.CompletedProcess = subprocess.run(restart_cmd)  # nosec
     return restart_cp.returncode

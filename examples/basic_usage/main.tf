@@ -90,6 +90,7 @@ module "example" {
   client_dns_server                         = "10.128.0.2"
   client_network                            = "10.240.0.0 255.255.255.240"
   crowdstrike_falcon_sensor_customer_id_key = "/cdm/falcon/customer_id"
+  crowdstrike_falcon_sensor_tags_key        = "/cdm/falcon/tags"
   freeipa_domain                            = var.freeipa_domain
   freeipa_realm                             = upper(var.freeipa_domain)
   hostname                                  = "vpn.${var.freeipa_domain}"

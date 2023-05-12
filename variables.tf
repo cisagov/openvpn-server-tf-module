@@ -29,6 +29,11 @@ variable "crowdstrike_falcon_sensor_customer_id_key" {
   description = "The SSM Parameter Store key whose corresponding value contains the customer ID for CrowdStrike Falcon (e.g. /cdm/falcon/customer_id)."
 }
 
+variable "crowdstrike_falcon_sensor_tags_key" {
+  type        = string
+  description = "The SSM Parameter Store key whose corresponding value contains a comma-delimited list of tags that are to be applied to CrowdStrike Falcon (e.g. /cdm/falcon/tags)."
+}
+
 variable "freeipa_domain" {
   type        = string
   description = "The domain for the IPA client (e.g. example.com)."

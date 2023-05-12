@@ -23,6 +23,7 @@ module "ssmreadrole" {
   entity_name = var.hostname
   ssm_names = [
     var.crowdstrike_falcon_sensor_customer_id_key,
+    var.crowdstrike_falcon_sensor_tags_key,
     var.ssm_tlscrypt_key,
     var.ssm_dh4096_pem,
   ]

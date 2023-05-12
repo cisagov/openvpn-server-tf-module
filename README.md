@@ -111,6 +111,7 @@ module "example" {
 | create\_AAAA | Whether or not to create AAAA records for the OpenVPN server. | `bool` | `false` | no |
 | crowdstrike\_falcon\_sensor\_customer\_id\_key | The SSM Parameter Store key whose corresponding value contains the customer ID for CrowdStrike Falcon (e.g. /cdm/falcon/customer\_id). | `string` | n/a | yes |
 | crowdstrike\_falcon\_sensor\_install\_path | The install path of the CrowdStrike Falcon sensor (e.g. /opt/CrowdStrike). | `string` | `"/opt/CrowdStrike"` | no |
+| crowdstrike\_falcon\_sensor\_tags\_key | The SSM Parameter Store key whose corresponding value contains a comma-delimited list of tags that are to be applied to CrowdStrike Falcon (e.g. /cdm/falcon/tags). | `string` | n/a | yes |
 | freeipa\_domain | The domain for the IPA client (e.g. example.com). | `string` | n/a | yes |
 | freeipa\_realm | The realm for the IPA client (e.g. EXAMPLE.COM). | `string` | n/a | yes |
 | hostname | The hostname of the OpenVPN server (e.g. vpn.example.com). | `string` | n/a | yes |
