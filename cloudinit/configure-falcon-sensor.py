@@ -75,7 +75,7 @@ def main() -> int:
         f"--cid={customer_id}",
     ]
     # Bandit triggers B603 here, but we're using subprocess.run()
-    # safely since the variable content in customer_id__cmd comes
+    # safely since the variable content in customer_id_cmd comes
     # directly from SSM Parameter Store.  For more details on B603 see
     # here:
     # https://bandit.readthedocs.io/en/latest/plugins/b603_subprocess_without_shell_equals_true.html
@@ -95,7 +95,7 @@ def main() -> int:
         f"--tags={tags}",
     ]
     # Bandit triggers B603 here, but we're using subprocess.run()
-    # safely since the variable content in customer_id__cmd comes
+    # safely since the variable content in tags_cmd comes
     # directly from SSM Parameter Store.  For more details on B603 see
     # here:
     # https://bandit.readthedocs.io/en/latest/plugins/b603_subprocess_without_shell_equals_true.html
