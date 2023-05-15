@@ -84,7 +84,9 @@ data "cloudinit_config" "cloud_init_tasks" {
   # scripts directory.
 
   part {
-    filename     = "install-certificates.py"
+    filename = "install-certificates.py"
+    # Note that text/x-python is not supported here:
+    # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
     content_type = "text/x-shellscript"
     content = templatefile(
       "${path.module}/cloudinit/install-certificates.py", {
@@ -95,7 +97,9 @@ data "cloudinit_config" "cloud_init_tasks" {
   }
 
   part {
-    filename     = "install-parameters.py"
+    filename = "install-parameters.py"
+    # Note that text/x-python is not supported here:
+    # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
     content_type = "text/x-shellscript"
     content = templatefile(
       "${path.module}/cloudinit/install-parameters.py", {
@@ -117,7 +121,9 @@ data "cloudinit_config" "cloud_init_tasks" {
   }
 
   part {
-    filename     = "configure-falcon-sensor.py"
+    filename = "configure-falcon-sensor.py"
+    # Note that text/x-python is not supported here:
+    # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
     content_type = "text/x-shellscript"
     content = templatefile(
       "${path.module}/cloudinit/configure-falcon-sensor.py", {
