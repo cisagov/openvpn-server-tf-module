@@ -27,6 +27,7 @@ module "example" {
   cert_read_role_accounts_allowed           = ["123456789012","123456789013"]
   client_network                            = "10.10.2.0 255.255.255.0"
   crowdstrike_falcon_sensor_customer_id_key = "/thulsa/doom/customer_id"
+  crowdstrike_falcon_sensor_tags_key        = "/thulsa/doom/tags"
   hostname                                  = "vpn.fonz.shark-jump.foo.org"
   freeipa_domain                            = "shark-jump.foo.org"
   freeipa_realm                             = "SHARK-JUMP.FOO.ORG"
