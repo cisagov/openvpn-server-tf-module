@@ -19,8 +19,8 @@ from typing import Any
 import boto3
 
 # Inputs from Terraform
-FALCON_SENSOR_INSTALL_PATH: str = "${falcon_sensor_install_path}"
 FALCON_CUSTOMER_ID_KEY: str = "${falcon_customer_id_key}"
+FALCON_SENSOR_INSTALL_PATH: str = "${falcon_sensor_install_path}"
 FALCON_TAGS_KEY: str = "${falcon_tags_key}"
 SSM_READ_ROLE_ARN: str = "${ssm_read_role_arn}"
 SSM_REGION: str = "${ssm_region}"
