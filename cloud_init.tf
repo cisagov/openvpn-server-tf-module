@@ -84,7 +84,9 @@ data "cloudinit_config" "cloud_init_tasks" {
   # scripts directory.
 
   part {
-    filename     = "install-certificates.py"
+    filename = "install-certificates.py"
+    # Note that text/x-python is not supported here:
+    # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
     content_type = "text/x-shellscript"
     content = templatefile(
       "${path.module}/cloudinit/install-certificates.py", {
@@ -95,7 +97,9 @@ data "cloudinit_config" "cloud_init_tasks" {
   }
 
   part {
-    filename     = "install-parameters.py"
+    filename = "install-parameters.py"
+    # Note that text/x-python is not supported here:
+    # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
     content_type = "text/x-shellscript"
     content = templatefile(
       "${path.module}/cloudinit/install-parameters.py", {
@@ -117,17 +121,18 @@ data "cloudinit_config" "cloud_init_tasks" {
   }
 
   part {
-    filename     = "link-nessus-agent.py"
+    filename = "configure-falcon-sensor.py"
+    # Note that text/x-python is not supported here:
+    # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
     content_type = "text/x-shellscript"
     content = templatefile(
-      "${path.module}/cloudinit/link-nessus-agent.py", {
-        nessus_agent_install_path = var.nessus_agent_install_path
-        nessus_groups             = join(",", var.nessus_groups)
-        nessus_hostname_key       = var.nessus_hostname_key
-        nessus_key_key            = var.nessus_key_key
-        nessus_port_key           = var.nessus_port_key
-        ssm_read_role_arn         = module.ssmreadrole.role.arn
-        # This is the region where the IPA instance is being created
+      "${path.module}/cloudinit/configure-falcon-sensor.py", {
+        falcon_customer_id_key     = var.crowdstrike_falcon_sensor_customer_id_key
+        falcon_sensor_install_path = var.crowdstrike_falcon_sensor_install_path
+        falcon_tags_key            = var.crowdstrike_falcon_sensor_tags_key
+        ssm_read_role_arn          = module.ssmreadrole.role.arn
+        # This is the region where the OpenVPN instance is being
+        # created
         ssm_region = data.aws_arn.subnet.region
     })
   }

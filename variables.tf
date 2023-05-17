@@ -24,6 +24,16 @@ variable "client_network" {
   description = "A string containing the network and netmask to assign client addresses (e.g. \"10.240.0.0 255.255.255.0\").  The server will take the first address."
 }
 
+variable "crowdstrike_falcon_sensor_customer_id_key" {
+  type        = string
+  description = "The SSM Parameter Store key whose corresponding value contains the customer ID for CrowdStrike Falcon (e.g. /cdm/falcon/customer_id)."
+}
+
+variable "crowdstrike_falcon_sensor_tags_key" {
+  type        = string
+  description = "The SSM Parameter Store key whose corresponding value contains a comma-delimited list of tags that are to be applied to CrowdStrike Falcon (e.g. /cdm/falcon/tags)."
+}
+
 variable "freeipa_domain" {
   type        = string
   description = "The domain for the IPA client (e.g. example.com)."
@@ -37,21 +47,6 @@ variable "freeipa_realm" {
 variable "hostname" {
   type        = string
   description = "The hostname of the OpenVPN server (e.g. vpn.example.com)."
-}
-
-variable "nessus_hostname_key" {
-  type        = string
-  description = "The SSM Parameter Store key whose corresponding value contains the hostname of the CDM Tenable Nessus server to which the Nessus Agent should link (e.g. /cdm/nessus/hostname)."
-}
-
-variable "nessus_key_key" {
-  type        = string
-  description = "The SSM Parameter Store key whose corresponding value contains the secret key that the Nessus Agent should use when linking with the CDM Tenable Nessus server (e.g. /cdm/nessus/key)."
-}
-
-variable "nessus_port_key" {
-  type        = string
-  description = "The SSM Parameter Store key whose corresponding value contains the port to which the Nessus Agent should connect when linking with the CDM Tenable Nessus server (e.g. /cdm/nessus/port)."
 }
 
 variable "private_networks" {
@@ -131,16 +126,10 @@ variable "create_AAAA" {
   default     = false
 }
 
-variable "nessus_agent_install_path" {
+variable "crowdstrike_falcon_sensor_install_path" {
   type        = string
-  description = "The install path of Nessus Agent (e.g. /opt/nessus_agent)."
-  default     = "/opt/nessus_agent"
-}
-
-variable "nessus_groups" {
-  type        = list(string)
-  description = "A list of strings, each of which is the name of a group in the CDM Tenable Nessus server that the Nessus Agent should join (e.g. [\"group1\", \"group2\"])."
-  default     = ["COOL_Deb_10"]
+  description = "The install path of the CrowdStrike Falcon sensor (e.g. /opt/CrowdStrike)."
+  default     = "/opt/CrowdStrike"
 }
 
 variable "security_groups" {
