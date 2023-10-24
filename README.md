@@ -31,6 +31,9 @@ module "example" {
   hostname                                  = "vpn.fonz.shark-jump.foo.org"
   freeipa_domain                            = "shark-jump.foo.org"
   freeipa_realm                             = "SHARK-JUMP.FOO.ORG"
+  nessus_hostname_key                       = "/thulsa/doom/nessus/hostname"
+  nessus_key_key                            = "/thulsa/doom/nessus/key"
+  nessus_port_key                           = "/thulsa/doom/nessus/port"
   private_networks                          = ["10.10.1.0 255.255.255.0"]
   private_zone_id                           = "MYZONEID"
   private_reverse_zone_id                   = "MYREVZONEID"
@@ -116,6 +119,11 @@ module "example" {
 | freeipa\_domain | The domain for the IPA client (e.g. example.com). | `string` | n/a | yes |
 | freeipa\_realm | The realm for the IPA client (e.g. EXAMPLE.COM). | `string` | n/a | yes |
 | hostname | The hostname of the OpenVPN server (e.g. vpn.example.com). | `string` | n/a | yes |
+| nessus\_agent\_install\_path | The install path of Nessus Agent (e.g. /opt/nessus\_agent). | `string` | `"/opt/nessus_agent"` | no |
+| nessus\_groups | A list of strings, each of which is the name of a group in the CDM Tenable Nessus server that the Nessus Agent should join (e.g. ["group1", "group2"]). | `list(string)` | ```[ "COOL_Fed_32" ]``` | no |
+| nessus\_hostname\_key | The SSM Parameter Store key whose corresponding value contains the hostname of the CDM Tenable Nessus server to which the Nessus Agent should link (e.g. /cdm/nessus/hostname). | `string` | n/a | yes |
+| nessus\_key\_key | The SSM Parameter Store key whose corresponding value contains the secret key that the Nessus Agent should use when linking with the CDM Tenable Nessus server (e.g. /cdm/nessus/key). | `string` | n/a | yes |
+| nessus\_port\_key | The SSM Parameter Store key whose corresponding value contains the port to which the Nessus Agent should connect when linking with the CDM Tenable Nessus server (e.g. /cdm/nessus/port). | `string` | n/a | yes |
 | private\_networks | A list of network netmasks that exist behind the VPN server (e.g. ["10.224.0.0 255.240.0.0", "192.168.100.0 255.255.255.0"]).  These will be pushed to the client. | `list(string)` | n/a | yes |
 | private\_reverse\_zone\_id | The DNS Zone ID in which to create private reverse lookup records. | `string` | n/a | yes |
 | private\_zone\_id | The DNS Zone ID in which to create private lookup records. | `string` | n/a | yes |
