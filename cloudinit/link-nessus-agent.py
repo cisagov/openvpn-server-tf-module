@@ -46,9 +46,9 @@ def main() -> int:
     stsresponse: dict[str, Any] = sts_client.assume_role(
         RoleArn=SSM_READ_ROLE_ARN, RoleSessionName="nessus_agent_linking"
     )
-    newsession_id = stsresponse["Credentials"]["AccessKeyId"]
-    newsession_key = stsresponse["Credentials"]["SecretAccessKey"]
-    newsession_token = stsresponse["Credentials"]["SessionToken"]
+    newsession_id: str = stsresponse["Credentials"]["AccessKeyId"]
+    newsession_key: str = stsresponse["Credentials"]["SecretAccessKey"]
+    newsession_token: str = stsresponse["Credentials"]["SessionToken"]
 
     # Create a new client to access SSM Parameter Store using the
     # temporary credentials
