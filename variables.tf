@@ -49,6 +49,21 @@ variable "hostname" {
   description = "The hostname of the OpenVPN server (e.g. vpn.example.com)."
 }
 
+variable "nessus_hostname_key" {
+  type        = string
+  description = "The SSM Parameter Store key whose corresponding value contains the hostname of the CDM Tenable Nessus server to which the Nessus Agent should link (e.g. /cdm/nessus/hostname)."
+}
+
+variable "nessus_key_key" {
+  type        = string
+  description = "The SSM Parameter Store key whose corresponding value contains the secret key that the Nessus Agent should use when linking with the CDM Tenable Nessus server (e.g. /cdm/nessus/key)."
+}
+
+variable "nessus_port_key" {
+  type        = string
+  description = "The SSM Parameter Store key whose corresponding value contains the port to which the Nessus Agent should connect when linking with the CDM Tenable Nessus server (e.g. /cdm/nessus/port)."
+}
+
 variable "private_networks" {
   type        = list(string)
   description = "A list of network netmasks that exist behind the VPN server (e.g. [\"10.224.0.0 255.240.0.0\", \"192.168.100.0 255.255.255.0\"]).  These will be pushed to the client."
@@ -130,6 +145,18 @@ variable "crowdstrike_falcon_sensor_install_path" {
   type        = string
   description = "The install path of the CrowdStrike Falcon sensor (e.g. /opt/CrowdStrike)."
   default     = "/opt/CrowdStrike"
+}
+
+variable "nessus_agent_install_path" {
+  type        = string
+  description = "The install path of the Nessus Agent (e.g. /opt/nessus_agent)."
+  default     = "/opt/nessus_agent"
+}
+
+variable "nessus_groups" {
+  type        = list(string)
+  description = "A list of strings, each of which is the name of a group in the CDM Tenable Nessus server that the Nessus Agent should join (e.g. [\"group1\", \"group2\"])."
+  default     = ["COOL_Fed_32"]
 }
 
 variable "security_groups" {
