@@ -149,7 +149,7 @@ variable "crowdstrike_falcon_sensor_install_path" {
 
 variable "nessus_agent_install_path" {
   type        = string
-  description = "The install path of Nessus Agent (e.g. /opt/nessus_agent)."
+  description = "The install path of the Nessus Agent (e.g. /opt/nessus_agent)."
   default     = "/opt/nessus_agent"
 }
 
