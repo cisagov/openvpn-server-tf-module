@@ -48,20 +48,21 @@ module "example" {
 
 - [Basic usage](https://github.com/cisagov/openvpn-server-tf-module/tree/develop/examples/basic_usage)
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements ##
 
 | Name | Version |
 |------|---------|
 | terraform | ~> 1.0 |
-| aws | ~> 3.38 |
+| aws | ~> 4.9 |
 | cloudinit | ~> 2.0 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 3.38 |
-| aws.dns | ~> 3.38 |
+| aws | ~> 4.9 |
+| aws.dns | ~> 4.9 |
 | cloudinit | ~> 2.0 |
 
 ## Modules ##
@@ -150,6 +151,7 @@ module "example" {
 | security\_group\_arn | The ARN of the OpenVPN server security group. |
 | security\_group\_id | The ID of the OpenVPN server security group. |
 | subnet\_id | The ID of the subnet where the EC2 instance is deployed. |
+<!-- END_TF_DOCS -->
 
 ## Notes ##
 
