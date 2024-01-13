@@ -14,6 +14,9 @@ This file is a template.  It should be processed by Terraform.
 
 """
 
+# TODO: Remove this script when and if that becomes possible.  See #96
+# for more details.
+
 # Third-Party Libraries
 import yaml
 
