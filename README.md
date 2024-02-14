@@ -129,6 +129,7 @@ module "example" {
 | private\_reverse\_zone\_id | The DNS Zone ID in which to create private reverse lookup records. | `string` | n/a | yes |
 | private\_zone\_id | The DNS Zone ID in which to create private lookup records. | `string` | n/a | yes |
 | public\_zone\_id | The DNS Zone ID in which to create public lookup records. | `string` | n/a | yes |
+| root\_disk\_size | The size of the OpenVPN instance's root disk in GiB. | `number` | `8` | no |
 | security\_groups | Additional security group ids the server will join. | `list(string)` | `[]` | no |
 | ssm\_dh4096\_pem | The SSM key that contains the Diffie Hellman pem. | `string` | `"/openvpn/server/dh4096.pem"` | no |
 | ssm\_read\_role\_accounts\_allowed | A list of accounts allowed to access the role that can read SSM keys. | `list(string)` | `[]` | no |

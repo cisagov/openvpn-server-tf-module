@@ -165,6 +165,12 @@ variable "security_groups" {
   default     = []
 }
 
+variable "root_disk_size" {
+  type        = number
+  description = "The size of the OpenVPN instance's root disk in GiB."
+  default     = 8
+}
+
 variable "ssm_dh4096_pem" {
   type        = string
   description = "The SSM key that contains the Diffie Hellman pem."

@@ -31,5 +31,9 @@ resource "aws_instance" "openvpn" {
     # Require IMDS tokens AKA require the use of IMDSv2
     http_tokens = "required"
   }
+  root_block_device {
+    volume_size = var.root_disk_size
+    volume_type = "gp3"
+  }
   iam_instance_profile = aws_iam_instance_profile.instance_profile.name
 }
