@@ -85,8 +85,8 @@ variable "public_zone_id" {
 }
 
 variable "subnet_id" {
-  type        = string
   description = "The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0)."
+  type        = string
 }
 
 variable "trusted_cidr_blocks_vpn" {

@@ -1,21 +1,21 @@
 output "arn" {
-  value       = aws_instance.openvpn.arn
   description = "The EC2 instance ARN."
+  value       = aws_instance.openvpn.arn
 }
 
 output "availability_zone" {
-  value       = aws_instance.openvpn.availability_zone
   description = "The AZ where the EC2 instance is deployed."
+  value       = aws_instance.openvpn.availability_zone
 }
 
 output "id" {
-  value       = aws_instance.openvpn.id
   description = "The EC2 instance ID."
+  value       = aws_instance.openvpn.id
 }
 
 output "private_ip" {
-  value       = aws_instance.openvpn.private_ip
   description = "The private IP of the EC2 instance."
+  value       = aws_instance.openvpn.private_ip
 }
 
 output "public_ip" {
@@ -34,6 +34,6 @@ output "security_group_id" {
 }
 
 output "subnet_id" {
-  value       = aws_instance.openvpn.subnet_id
   description = "The ID of the subnet where the EC2 instance is deployed."
+  value       = aws_instance.openvpn.subnet_id
 }
