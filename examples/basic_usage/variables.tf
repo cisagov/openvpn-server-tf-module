@@ -4,8 +4,38 @@
 # You must provide a value for each of these parameters.
 # ------------------------------------------------------------------------------
 
+variable "cert_bucket_name" {
+  description = "The name of the bucket that stores the certificates (e.g. my-certificates)."
+  type        = string
+}
+
+variable "cert_read_role_arn" {
+  description = "The ARN of the role that can create roles to have read access to the S3 bucket ('cert_bucket_name' above) where certificates are stored."
+  type        = string
+}
+
+variable "dns_role_arn" {
+  description = "The ARN of the role that can modify route53 DNS (e.g. arn:aws:iam::123456789abc:role/ModifyPublicDNS)."
+  type        = string
+}
+
 variable "freeipa_domain" {
   description = "The domain for the IPA client (e.g. example.com)."
+  type        = string
+}
+
+variable "public_dns_zone_id" {
+  description = "The DNS zone ID in which to create public lookup records."
+  type        = string
+}
+
+variable "ssm_read_role_arn" {
+  description = "The ARN of the role that can create roles to have read access to the SSM parameters."
+  type        = string
+}
+
+variable "tf_role_arn" {
+  description = "The ARN of the role that can terraform non-specialized resources."
   type        = string
 }
 
@@ -26,30 +56,10 @@ variable "aws_region" {
   type        = string
 }
 
-variable "cert_bucket_name" {
-  description = "The name of the bucket that stores the certificates (e.g. my-certificates)."
-  type        = string
-}
-
 variable "cert_read_role_accounts_allowed" {
   default     = []
   description = "A list of accounts allowed to access the role that can read certificates from an S3 bucket."
   type        = list(string)
-}
-
-variable "cert_read_role_arn" {
-  description = "The ARN of the role that can create roles to have read access to the S3 bucket ('cert_bucket_name' above) where certificates are stored."
-  type        = string
-}
-
-variable "dns_role_arn" {
-  description = "The ARN of the role that can modify route53 DNS (e.g. arn:aws:iam::123456789abc:role/ModifyPublicDNS)."
-  type        = string
-}
-
-variable "public_dns_zone_id" {
-  description = "The DNS zone ID in which to create public lookup records."
-  type        = string
 }
 
 variable "security_groups" {
@@ -62,14 +72,4 @@ variable "ssm_read_role_accounts_allowed" {
   default     = []
   description = "A list of accounts allowed to access the role that can read SSM keys."
   type        = list(string)
-}
-
-variable "ssm_read_role_arn" {
-  description = "The ARN of the role that can create roles to have read access to the SSM parameters."
-  type        = string
-}
-
-variable "tf_role_arn" {
-  description = "The ARN of the role that can terraform non-specialized resources."
-  type        = string
 }
