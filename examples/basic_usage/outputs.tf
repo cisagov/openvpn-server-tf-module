@@ -19,8 +19,8 @@ output "private_ip" {
 }
 
 output "public_ip" {
-  value       = module.example.public_ip
   description = "The public IP of the EC2 instance."
+  value       = module.example.public_ip
 }
 
 output "subnet_id" {

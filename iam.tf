@@ -42,27 +42,27 @@ resource "aws_iam_instance_profile" "instance_profile" {
 
 # The role for this EC2 instance
 resource "aws_iam_role" "instance_role" {
-  name               = "openvpn_instance_role_${var.hostname}"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy_doc.json
+  name               = "openvpn_instance_role_${var.hostname}"
 }
 
 # Attach policies to the instance role
 resource "aws_iam_role_policy" "assume_delegated_role_policy" {
   name   = "assume_delegated_role_policy"
-  role   = aws_iam_role.instance_role.id
   policy = data.aws_iam_policy_document.assume_delegated_role_policy_doc.json
+  role   = aws_iam_role.instance_role.id
 }
 
 # Attach the CloudWatch Agent policy to this role as well
 resource "aws_iam_role_policy_attachment" "cloudwatch_agent_policy_attachment" {
-  role       = aws_iam_role.instance_role.id
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+  role       = aws_iam_role.instance_role.id
 }
 
 # Attach the SSM Agent policy to this role as well
 resource "aws_iam_role_policy_attachment" "ssm_agent_policy_attachment" {
-  role       = aws_iam_role.instance_role.id
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  role       = aws_iam_role.instance_role.id
 }
 
 ################################
@@ -72,21 +72,21 @@ resource "aws_iam_role_policy_attachment" "ssm_agent_policy_attachment" {
 data "aws_iam_policy_document" "assume_role_policy_doc" {
   statement {
     actions = ["sts:AssumeRole"]
+    effect  = "Allow"
     principals {
-      type        = "Service"
       identifiers = ["ec2.amazonaws.com"]
+      type        = "Service"
     }
-    effect = "Allow"
   }
 }
 
 data "aws_iam_policy_document" "assume_delegated_role_policy_doc" {
   statement {
     actions = ["sts:AssumeRole"]
+    effect  = "Allow"
     resources = [
       module.certreadrole.role.arn,
       module.ssmreadrole.role.arn
     ]
-    effect = "Allow"
   }
 }

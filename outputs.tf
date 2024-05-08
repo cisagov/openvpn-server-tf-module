@@ -19,18 +19,18 @@ output "private_ip" {
 }
 
 output "public_ip" {
-  value       = aws_instance.openvpn.public_ip
   description = "The public IP of the OpenVPN instance."
+  value       = aws_instance.openvpn.public_ip
 }
 
 output "security_group_arn" {
-  value       = aws_security_group.openvpn_servers.arn
   description = "The ARN of the OpenVPN server security group."
+  value       = aws_security_group.openvpn_servers.arn
 }
 
 output "security_group_id" {
-  value       = aws_security_group.openvpn_servers.id
   description = "The ID of the OpenVPN server security group."
+  value       = aws_security_group.openvpn_servers.id
 }
 
 output "subnet_id" {
