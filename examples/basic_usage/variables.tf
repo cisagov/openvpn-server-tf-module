@@ -48,6 +48,7 @@ variable "tf_role_arn" {
 variable "ami_owner_account_id" {
   default     = "self"
   description = "The ID of the AWS account that owns the OpenVPN AMI, or \"self\" if the AMI is owned by the same account as the provisioner."
+  type        = string
 }
 
 variable "aws_region" {
