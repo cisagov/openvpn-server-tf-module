@@ -12,14 +12,16 @@ resource "aws_eip" "openvpn" {
 resource "aws_instance" "openvpn" {
   ami                         = data.aws_ami.openvpn.id
   associate_public_ip_address = true
-  ebs_optimized               = true
-  instance_type               = var.aws_instance_type
   availability_zone           = data.aws_subnet.the_subnet.availability_zone
+  ebs_optimized               = true
+  iam_instance_profile        = aws_iam_instance_profile.instance_profile.name
+  instance_type               = var.aws_instance_type
   subnet_id                   = var.subnet_id
+  user_data_base64            = data.cloudinit_config.cloud_init_tasks.rendered
   vpc_security_group_ids = concat([
     aws_security_group.openvpn_servers.id,
   ], var.security_groups)
-  user_data_base64 = data.cloudinit_config.cloud_init_tasks.rendered
+
   # AWS Instance Meta-Data Service (IMDS) options
   metadata_options {
     # Enable IMDS (this is the default value)
@@ -35,5 +37,4 @@ resource "aws_instance" "openvpn" {
     volume_size = var.root_disk_size
     volume_type = "gp3"
   }
-  iam_instance_profile = aws_iam_instance_profile.instance_profile.name
 }

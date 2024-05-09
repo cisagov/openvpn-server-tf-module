@@ -6,8 +6,8 @@ data "aws_arn" "subnet" {
 
 # cloud-init commands for configuring OpenVPN
 data "cloudinit_config" "cloud_init_tasks" {
-  gzip          = true
   base64_encode = true
+  gzip          = true
 
   #-------------------------------------------------------------------------------
   # Cloud Config parts
@@ -80,40 +80,40 @@ data "cloudinit_config" "cloud_init_tasks" {
   }
 
   part {
-    filename     = "openvpn-config.yml"
-    content_type = "text/cloud-config"
     content = templatefile(
       "${path.module}/cloudinit/openvpn-config.tpl.yml", {
-        client_network           = var.client_network
         client_dns_server        = var.client_dns_server
         client_dns_search_domain = var.client_dns_search_domain
         client_inactive_timeout  = var.client_inactive_timeout
         client_motd_url          = var.client_motd_url
+        client_network           = var.client_network
         private_networks         = var.private_networks
     })
-    merge_type = "list(append)+dict(recurse_array)+str()"
+    content_type = "text/cloud-config"
+    filename     = "openvpn-config.yml"
+    merge_type   = "list(append)+dict(recurse_array)+str()"
   }
 
   part {
-    filename     = "freeipa-vars.yml"
-    content_type = "text/cloud-config"
     content = templatefile(
       "${path.module}/cloudinit/freeipa-vars.tpl.yml", {
         domain   = var.freeipa_domain
         hostname = var.hostname
     })
-    merge_type = "list(append)+dict(recurse_array)+str()"
+    content_type = "text/cloud-config"
+    filename     = "freeipa-vars.yml"
+    merge_type   = "list(append)+dict(recurse_array)+str()"
   }
 
   part {
-    filename     = "verify-cn.yml"
-    content_type = "text/cloud-config"
     content = templatefile(
       "${path.module}/cloudinit/verify-cn.tpl.yml", {
         realm     = var.freeipa_realm
         vpn_group = var.vpn_group
     })
-    merge_type = "list(append)+dict(recurse_array)+str()"
+    content_type = "text/cloud-config"
+    filename     = "verify-cn.yml"
+    merge_type   = "list(append)+dict(recurse_array)+str()"
   }
 
   #-------------------------------------------------------------------------------
@@ -125,23 +125,19 @@ data "cloudinit_config" "cloud_init_tasks" {
   # scripts directory.
 
   part {
-    filename = "install-certificates.py"
-    # Note that text/x-python is not supported here:
-    # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
-    content_type = "text/x-shellscript"
     content = templatefile(
       "${path.module}/cloudinit/install-certificates.py", {
         cert_bucket_name   = var.cert_bucket_name
         cert_read_role_arn = module.certreadrole.role.arn
         server_fqdn        = var.hostname
     })
-  }
-
-  part {
-    filename = "install-parameters.py"
     # Note that text/x-python is not supported here:
     # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
     content_type = "text/x-shellscript"
+    filename     = "install-certificates.py"
+  }
+
+  part {
     content = templatefile(
       "${path.module}/cloudinit/install-parameters.py", {
         ssm_dh4096_pem    = var.ssm_dh4096_pem
@@ -149,23 +145,23 @@ data "cloudinit_config" "cloud_init_tasks" {
         ssm_region        = var.ssm_region
         ssm_tlscrypt_key  = var.ssm_tlscrypt_key
     })
+    # Note that text/x-python is not supported here:
+    # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
+    content_type = "text/x-shellscript"
+    filename     = "install-parameters.py"
   }
 
   part {
-    filename     = "create-iptables-rule-for-nat.sh"
-    content_type = "text/x-shellscript"
     content = templatefile(
       "${path.module}/cloudinit/create-iptables-rule-for-nat.sh", {
         subnet_cidr            = data.aws_subnet.the_subnet.cidr_block
         client_network_netmask = replace(var.client_network, " ", "/")
     })
+    content_type = "text/x-shellscript"
+    filename     = "create-iptables-rule-for-nat.sh"
   }
 
   part {
-    filename = "link-nessus-agent.py"
-    # Note that text/x-python is not supported here:
-    # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
-    content_type = "text/x-shellscript"
     content = templatefile(
       "${path.module}/cloudinit/link-nessus-agent.py", {
         nessus_agent_install_path = var.nessus_agent_install_path
@@ -177,13 +173,13 @@ data "cloudinit_config" "cloud_init_tasks" {
         # This is the region where the IPA instance is being created
         ssm_region = data.aws_arn.subnet.region
     })
-  }
-
-  part {
-    filename = "configure-falcon-sensor.py"
     # Note that text/x-python is not supported here:
     # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
     content_type = "text/x-shellscript"
+    filename     = "link-nessus-agent.py"
+  }
+
+  part {
     content = templatefile(
       "${path.module}/cloudinit/configure-falcon-sensor.py", {
         falcon_customer_id_key     = var.crowdstrike_falcon_sensor_customer_id_key
@@ -194,5 +190,9 @@ data "cloudinit_config" "cloud_init_tasks" {
         # created
         ssm_region = data.aws_arn.subnet.region
     })
+    # Note that text/x-python is not supported here:
+    # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
+    content_type = "text/x-shellscript"
+    filename     = "configure-falcon-sensor.py"
   }
 }

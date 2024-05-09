@@ -25,8 +25,8 @@ data "aws_ami" "openvpn" {
     values = ["ebs"]
   }
 
+  most_recent = true
   owners = [
     var.ami_owner_account_id
   ]
-  most_recent = true
 }

@@ -1,19 +1,19 @@
 # Security group for OpenVPN servers
 resource "aws_security_group" "openvpn_servers" {
-  vpc_id      = data.aws_subnet.the_subnet.vpc_id
   description = "Security group for OpenVPN servers"
+  vpc_id      = data.aws_subnet.the_subnet.vpc_id
 }
 
 # UDP ingress rules for VPN
 resource "aws_security_group_rule" "vpn_udp_ingress" {
   for_each = toset(local.vpn_udp_ports)
 
-  security_group_id = aws_security_group.openvpn_servers.id
-  type              = "ingress"
-  protocol          = "udp"
   cidr_blocks       = var.trusted_cidr_blocks_vpn
   from_port         = each.value
+  protocol          = "udp"
+  security_group_id = aws_security_group.openvpn_servers.id
   to_port           = each.value
+  type              = "ingress"
 }
 
 # TCP egress rules for OpenVPN
@@ -25,10 +25,10 @@ resource "aws_security_group_rule" "vpn_udp_ingress" {
 resource "aws_security_group_rule" "openvpn_tcp_https_egress" {
   for_each = toset(["80", "443"])
 
-  security_group_id = aws_security_group.openvpn_servers.id
-  type              = "egress"
-  protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   from_port         = each.value
+  protocol          = "tcp"
+  security_group_id = aws_security_group.openvpn_servers.id
   to_port           = each.value
+  type              = "egress"
 }
