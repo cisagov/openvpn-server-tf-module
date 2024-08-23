@@ -8,16 +8,21 @@
 
 # The AMI from cisagov/openvpn-packer
 data "aws_ami" "openvpn" {
+  most_recent = true
+  owners = [
+    var.ami_owner_account_id
+  ]
+
   filter {
-    name = "name"
-    values = [
-      "openvpn-hvm-*-x86_64-ebs",
-    ]
+    name   = "architecture"
+    values = ["arm64"]
   }
 
   filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
+    name = "name"
+    values = [
+      "openvpn-hvm-*-arm64-ebs",
+    ]
   }
 
   filter {
@@ -25,8 +30,8 @@ data "aws_ami" "openvpn" {
     values = ["ebs"]
   }
 
-  most_recent = true
-  owners = [
-    var.ami_owner_account_id
-  ]
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
 }
