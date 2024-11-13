@@ -14,7 +14,7 @@ terraform {
     # for more information about the S3 bucket refactor.
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.9"
+      version = ">= 4.9"
     }
     cloudinit = {
       source  = "hashicorp/cloudinit"
@@ -22,6 +22,7 @@ terraform {
     }
   }
 
-  # We want to hold off on 1.1 or higher until we have tested it.
-  required_version = "~> 1.0"
+  # Version 1.1 of Terraform is the first version to support the
+  # nullable key in variable definitions.
+  required_version = ">= 1.1"
 }
