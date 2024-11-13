@@ -105,7 +105,7 @@ module "example" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | ami\_owner\_account\_id | The ID of the AWS account that owns the OpenVPN AMI, or "self" if the AMI is owned by the same account as the provisioner. | `string` | `"self"` | no |
-| aws\_instance\_type | The AWS instance type to deploy (e.g. t4g.medium). | `string` | `"t4g.small"` | no |
+| aws\_instance\_type | The AWS instance type to deploy (e.g. t4g.small). | `string` | `"t4g.small"` | no |
 | cert\_bucket\_name | The name of a bucket that stores certificates (e.g. my-certs). | `string` | n/a | yes |
 | cert\_read\_role\_accounts\_allowed | A list of accounts allowed to access the role that can read certificates from an S3 bucket. | `list(string)` | `[]` | no |
 | client\_dns\_search\_domain | The DNS search domain to be pushed to VPN clients. | `string` | n/a | yes |

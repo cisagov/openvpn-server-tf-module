@@ -133,7 +133,7 @@ variable "ami_owner_account_id" {
 
 variable "aws_instance_type" {
   default     = "t4g.small"
-  description = "The AWS instance type to deploy (e.g. t4g.medium)."
+  description = "The AWS instance type to deploy (e.g. t4g.small)."
   nullable    = false
   type        = string
 }
