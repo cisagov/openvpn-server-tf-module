@@ -4,7 +4,7 @@
 
 write_files:
   - path: /etc/openvpn/server/primary.conf
-    permissions: '0600'
+    permissions: "0600"
     owner: root:root
     content: |
       #################################################
