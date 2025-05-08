@@ -36,6 +36,7 @@ variable "ssm_read_role_arn" {
 
 variable "tf_role_arn" {
   description = "The ARN of the role that can terraform non-specialized resources."
+  nullable    = false
   type        = string
 }
 
@@ -48,12 +49,14 @@ variable "tf_role_arn" {
 variable "ami_owner_account_id" {
   default     = "self"
   description = "The ID of the AWS account that owns the OpenVPN AMI, or \"self\" if the AMI is owned by the same account as the provisioner."
+  nullable    = false
   type        = string
 }
 
 variable "aws_region" {
-  default     = "us-east-2"
-  description = "The default AWS region."
+  default     = "us-east-1"
+  description = "The AWS region to deploy into (e.g. us-east-1)."
+  nullable    = false
   type        = string
 }
 
