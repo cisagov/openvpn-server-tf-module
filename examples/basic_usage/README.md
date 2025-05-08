@@ -44,7 +44,7 @@ Note that this example may create resources which cost money. Run
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | ami\_owner\_account\_id | The ID of the AWS account that owns the OpenVPN AMI, or "self" if the AMI is owned by the same account as the provisioner. | `string` | `"self"` | no |
-| aws\_region | The default AWS region. | `string` | `"us-east-2"` | no |
+| aws\_region | The AWS region to deploy into (e.g. us-east-2). | `string` | `"us-east-2"` | no |
 | cert\_bucket\_name | The name of the bucket that stores the certificates (e.g. my-certificates). | `string` | n/a | yes |
 | cert\_read\_role\_accounts\_allowed | A list of accounts allowed to access the role that can read certificates from an S3 bucket. | `list(string)` | `[]` | no |
 | cert\_read\_role\_arn | The ARN of the role that can create roles to have read access to the S3 bucket ('cert\_bucket\_name' above) where certificates are stored. | `string` | n/a | yes |

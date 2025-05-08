@@ -60,8 +60,8 @@ variable "ami_owner_account_id" {
 }
 
 variable "aws_region" {
-  default     = "us-east-1"
-  description = "The AWS region to deploy into (e.g. us-east-1)."
+  default     = "us-east-2"
+  description = "The AWS region to deploy into (e.g. us-east-2)."
   nullable    = false
   type        = string
 }
