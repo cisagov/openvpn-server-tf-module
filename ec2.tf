@@ -5,7 +5,6 @@
 # for the IGW here.
 resource "aws_eip" "openvpn" {
   instance = aws_instance.openvpn.id
-  vpc      = true
 }
 
 # The openvpn EC2 instance
