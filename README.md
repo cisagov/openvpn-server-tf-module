@@ -15,7 +15,7 @@ details on Terraform modules and the standard module structure.
 
 ```hcl
 module "example" {
-  source = "github.com/cisagov/openvpn-server-tf-module"
+  source = "github.com/cisagov/openvpn-server-tf-module?ref=v1.0.1"
   providers = {
     aws                = "aws"
     aws.dns            = "aws.dns"
