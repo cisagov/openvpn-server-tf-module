@@ -8,8 +8,9 @@ that will create an [OpenVPN](https://openvpn.net) server EC2 instance
 using the [open-vpn](https://github.com/cisagov/openvpn-packer)
 AMI.
 
-See [here](https://www.terraform.io/docs/modules/index.html) for more
-details on Terraform modules and the standard module structure.
+See the [Terraform
+documentation](https://www.terraform.io/docs/modules/index.html) for
+more details on Terraform modules and the standard module structure.
 
 ## Usage ##
 
