@@ -41,8 +41,6 @@ s3 = boto3.client(
 
 # Copy each file from the bucket to the local file system
 for src, dst in INSTALLATION_MAP.items():
-    obj = s3.get_object(
-        Bucket=CERT_BUCKET_NAME, Key="live/{}/{}".format(SERVER_FQDN, src)
-    )
+    obj = s3.get_object(Bucket=CERT_BUCKET_NAME, Key=f"live/{SERVER_FQDN}/{src}")
     with open(dst, "wb") as f:
         f.write(obj["Body"].read())
