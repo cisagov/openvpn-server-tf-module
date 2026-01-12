@@ -1,6 +1,8 @@
 # openvpn-server-tf-module #
 
 [![GitHub Build Status](https://github.com/cisagov/openvpn-server-tf-module/workflows/build/badge.svg)](https://github.com/cisagov/openvpn-server-tf-module/actions)
+[![License](https://img.shields.io/github/license/cisagov/openvpn-server-tf-module)](https://spdx.org/licenses/)
+[![CodeQL](https://github.com/cisagov/openvpn-server-tf-module/workflows/CodeQL/badge.svg)](https://github.com/cisagov/openvpn-server-tf-module/actions/workflows/codeql-analysis.yml)
 
 This project implements a [Terraform
 module](https://www.terraform.io/docs/modules/index.html)
