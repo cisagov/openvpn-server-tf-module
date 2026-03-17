@@ -71,7 +71,7 @@ module "example" {
 ## Modules ##
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | certreadrole | github.com/cisagov/cert-read-role-tf-module | n/a |
 | ssmreadrole | github.com/cisagov/ssm-read-role-tf-module | n/a |
 
