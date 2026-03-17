@@ -12,26 +12,26 @@ Note that this example may create resources which cost money. Run
 ## Requirements ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | terraform | ~> 1.1 |
 | aws | ~> 6.7 |
 
 ## Providers ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | aws | ~> 6.7 |
 
 ## Modules ##
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | example | ../../ | n/a |
 
 ## Resources ##
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_internet_gateway.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway) | resource |
 | [aws_route53_zone.private_reverse_zone](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_zone) | resource |
 | [aws_route53_zone.private_zone](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_zone) | resource |
@@ -42,7 +42,7 @@ Note that this example may create resources which cost money. Run
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | ami\_owner\_account\_id | The ID of the AWS account that owns the OpenVPN AMI, or "self" if the AMI is owned by the same account as the provisioner. | `string` | `"self"` | no |
 | aws\_region | The AWS region to deploy into (e.g. us-east-2). | `string` | `"us-east-2"` | no |
 | cert\_bucket\_name | The name of the bucket that stores the certificates (e.g. my-certificates). | `string` | n/a | yes |
@@ -59,7 +59,7 @@ Note that this example may create resources which cost money. Run
 ## Outputs ##
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | arn | The EC2 instance ARN. |
 | availability\_zone | The AZ where the EC2 instance is deployed. |
 | id | The EC2 instance ID. |

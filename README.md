@@ -55,7 +55,7 @@ module "example" {
 ## Requirements ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | terraform | >= 1.1 |
 | aws | >= 4.9 |
 | cloudinit | >= 2.0 |
@@ -63,7 +63,7 @@ module "example" {
 ## Providers ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | aws | >= 4.9 |
 | aws.dns | >= 4.9 |
 | cloudinit | >= 2.0 |
@@ -78,7 +78,7 @@ module "example" {
 ## Resources ##
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_eip.openvpn](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip) | resource |
 | [aws_iam_instance_profile.instance_profile](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile) | resource |
 | [aws_iam_role.instance_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
@@ -106,7 +106,7 @@ module "example" {
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | ami\_owner\_account\_id | The ID of the AWS account that owns the OpenVPN AMI, or "self" if the AMI is owned by the same account as the provisioner. | `string` | `"self"` | no |
 | aws\_instance\_type | The AWS instance type to deploy (e.g. t4g.small). | `string` | `"t4g.small"` | no |
 | cert\_bucket\_name | The name of a bucket that stores certificates (e.g. my-certs). | `string` | n/a | yes |
@@ -146,7 +146,7 @@ module "example" {
 ## Outputs ##
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | arn | The EC2 instance ARN. |
 | availability\_zone | The AZ where the EC2 instance is deployed. |
 | id | The EC2 instance ID. |
