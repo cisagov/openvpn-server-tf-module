@@ -195,4 +195,23 @@ data "cloudinit_config" "cloud_init_tasks" {
     content_type = "text/x-shellscript"
     filename     = "configure-falcon-sensor.py"
   }
+
+  part {
+    # Note that text/x-python is not supported here:
+    # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
+    content_type = "text/x-shellscript"
+    content = templatefile(
+      "${path.module}/cloudinit/configure-qualys-cloud-agent.py", {
+        qualys_activation_id_key = var.qualys_cloud_agent_activation_id_key
+        qualys_customer_id_key   = var.qualys_cloud_agent_customer_id_key
+        qualys_fedramp           = tostring(var.qualys_cloud_agent_fedramp)
+        qualys_install_path      = var.qualys_cloud_agent_install_path
+        qualys_server_uri_key    = var.qualys_cloud_agent_server_uri_key
+        ssm_read_role_arn        = module.ssmreadrole.role.arn
+        # This is the region where the OpenVPN instance is being
+        # created
+        ssm_region = data.aws_arn.subnet.region
+    })
+    filename = "configure-qualys-cloud-agent.py"
+  }
 }

@@ -132,6 +132,11 @@ module "example" {
 | private\_reverse\_zone\_id | The DNS Zone ID in which to create private reverse lookup records. | `string` | n/a | yes |
 | private\_zone\_id | The DNS Zone ID in which to create private lookup records. | `string` | n/a | yes |
 | public\_zone\_id | The DNS Zone ID in which to create public lookup records. | `string` | n/a | yes |
+| qualys\_cloud\_agent\_activation\_id\_key | The SSM Parameter Store key whose corresponding value contains the activation ID for Qualys Cloud Agent (e.g. /cdm/qualys/activation\_id). | `string` | n/a | yes |
+| qualys\_cloud\_agent\_customer\_id\_key | The SSM Parameter Store key whose corresponding value contains the customer ID for Qualys Cloud Agent (e.g. /cdm/qualys/customer\_id). | `string` | n/a | yes |
+| qualys\_cloud\_agent\_fedramp | Whether or not the Qualys Cloud Agent should be concerned about FEDRAMP. | `bool` | `true` | no |
+| qualys\_cloud\_agent\_install\_path | The install path of the Qualys Cloud Agent (e.g. /usr/local/qualys/cloud-agent). | `string` | `"/usr/local/qualys/cloud-agent"` | no |
+| qualys\_cloud\_agent\_server\_uri\_key | The SSM Parameter Store key whose corresponding value contains the server URI for Qualys Cloud Agent (e.g. /cdm/qualys/server\_uri). | `string` | n/a | yes |
 | root\_disk\_size | The size of the OpenVPN instance's root disk in GiB. | `number` | `8` | no |
 | security\_groups | Additional security group ids the server will join. | `list(string)` | `[]` | no |
 | ssm\_dh4096\_pem | The SSM key that contains the Diffie Hellman pem. | `string` | `"/openvpn/server/dh4096.pem"` | no |
