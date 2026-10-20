@@ -41,6 +41,9 @@ module "example" {
   private_zone_id                           = "MYZONEID"
   private_reverse_zone_id                   = "MYREVZONEID"
   public_zone_id                            = "MYPUBLICZONEID"
+  qualys_cloud_agent_activation_id_key      = "/cdm/qualys/activation_id"
+  qualys_cloud_agent_customer_id_key        = "/cdm/qualys/customer_id"
+  qualys_cloud_agent_server_uri_key         = "/cdm/qualys/server_uri"
   ssm_read_role_accounts_allowed            = ["123456789014","123456789015"]
   subnet_id                                 = "subnet-0123456789abcdef0"
   trusted_cidr_blocks_vpn                   = ["0.0.0.0/0"]
