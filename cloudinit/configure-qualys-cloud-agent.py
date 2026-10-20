@@ -45,7 +45,7 @@ def main() -> int:
     # Assume the role that can read the SSM Parameter Store parameters
     stsresponse: dict[str, Any] = sts_client.assume_role(
         RoleArn=SSM_READ_ROLE_ARN,
-        RoleSessionName="set_crowdstrike_falcon_sensor_customer_id",
+        RoleSessionName="qualys_cloud_agent_setup",
     )
     newsession_id: str = stsresponse["Credentials"]["AccessKeyId"]
     newsession_key: str = stsresponse["Credentials"]["SecretAccessKey"]
