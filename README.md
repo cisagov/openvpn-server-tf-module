@@ -18,7 +18,7 @@ more details on Terraform modules and the standard module structure.
 
 ```hcl
 module "example" {
-  source = "github.com/cisagov/openvpn-server-tf-module?ref=v1.0.1"
+  source = "github.com/cisagov/openvpn-server-tf-module?ref=v2.0.0"
   providers = {
     aws                = "aws"
     aws.dns            = "aws.dns"
@@ -41,6 +41,9 @@ module "example" {
   private_zone_id                           = "MYZONEID"
   private_reverse_zone_id                   = "MYREVZONEID"
   public_zone_id                            = "MYPUBLICZONEID"
+  qualys_cloud_agent_activation_id_key      = "/cdm/qualys/activation_id"
+  qualys_cloud_agent_customer_id_key        = "/cdm/qualys/customer_id"
+  qualys_cloud_agent_server_uri_key         = "/cdm/qualys/server_uri"
   ssm_read_role_accounts_allowed            = ["123456789014","123456789015"]
   subnet_id                                 = "subnet-0123456789abcdef0"
   trusted_cidr_blocks_vpn                   = ["0.0.0.0/0"]
@@ -132,6 +135,11 @@ module "example" {
 | private\_reverse\_zone\_id | The DNS Zone ID in which to create private reverse lookup records. | `string` | n/a | yes |
 | private\_zone\_id | The DNS Zone ID in which to create private lookup records. | `string` | n/a | yes |
 | public\_zone\_id | The DNS Zone ID in which to create public lookup records. | `string` | n/a | yes |
+| qualys\_cloud\_agent\_activation\_id\_key | The SSM Parameter Store key whose corresponding value contains the activation ID for Qualys Cloud Agent (e.g. /cdm/qualys/activation\_id). | `string` | n/a | yes |
+| qualys\_cloud\_agent\_customer\_id\_key | The SSM Parameter Store key whose corresponding value contains the customer ID for Qualys Cloud Agent (e.g. /cdm/qualys/customer\_id). | `string` | n/a | yes |
+| qualys\_cloud\_agent\_fedramp | Whether or not the Qualys Cloud Agent should be concerned about FEDRAMP. | `bool` | `true` | no |
+| qualys\_cloud\_agent\_install\_path | The install path of the Qualys Cloud Agent (e.g. /usr/local/qualys/cloud-agent). | `string` | `"/usr/local/qualys/cloud-agent"` | no |
+| qualys\_cloud\_agent\_server\_uri\_key | The SSM Parameter Store key whose corresponding value contains the server URI for Qualys Cloud Agent (e.g. /cdm/qualys/server\_uri). | `string` | n/a | yes |
 | root\_disk\_size | The size of the OpenVPN instance's root disk in GiB. | `number` | `8` | no |
 | security\_groups | Additional security group ids the server will join. | `list(string)` | `[]` | no |
 | ssm\_dh4096\_pem | The SSM key that contains the Diffie Hellman pem. | `string` | `"/openvpn/server/dh4096.pem"` | no |

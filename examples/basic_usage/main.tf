@@ -101,6 +101,10 @@ module "example" {
   private_reverse_zone_id                   = aws_route53_zone.private_reverse_zone.zone_id
   private_zone_id                           = aws_route53_zone.private_zone.zone_id
   public_zone_id                            = var.public_dns_zone_id
+  qualys_cloud_agent_activation_id_key      = "/cdm/qualys/activation_id"
+  qualys_cloud_agent_customer_id_key        = "/cdm/qualys/customer_id"
+  qualys_cloud_agent_fedramp                = true
+  qualys_cloud_agent_server_uri_key         = "/cdm/qualys/server_uri"
   security_groups                           = var.security_groups
   ssm_read_role_accounts_allowed            = var.ssm_read_role_accounts_allowed
   subnet_id                                 = aws_subnet.public.id

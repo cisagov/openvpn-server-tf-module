@@ -142,8 +142,9 @@ data "cloudinit_config" "cloud_init_tasks" {
       "${path.module}/cloudinit/install-parameters.py", {
         ssm_dh4096_pem    = var.ssm_dh4096_pem
         ssm_read_role_arn = module.ssmreadrole.role.arn
-        ssm_region        = var.ssm_region
-        ssm_tlscrypt_key  = var.ssm_tlscrypt_key
+        # This is the region where the SSM parameters are stored
+        ssm_region       = var.ssm_region
+        ssm_tlscrypt_key = var.ssm_tlscrypt_key
     })
     # Note that text/x-python is not supported here:
     # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
@@ -170,8 +171,8 @@ data "cloudinit_config" "cloud_init_tasks" {
         nessus_key_key            = var.nessus_key_key
         nessus_port_key           = var.nessus_port_key
         ssm_read_role_arn         = module.ssmreadrole.role.arn
-        # This is the region where the IPA instance is being created
-        ssm_region = data.aws_arn.subnet.region
+        # This is the region where the SSM parameters are stored
+        ssm_region = var.ssm_region
     })
     # Note that text/x-python is not supported here:
     # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
@@ -186,13 +187,30 @@ data "cloudinit_config" "cloud_init_tasks" {
         falcon_sensor_install_path = var.crowdstrike_falcon_sensor_install_path
         falcon_tags_key            = var.crowdstrike_falcon_sensor_tags_key
         ssm_read_role_arn          = module.ssmreadrole.role.arn
-        # This is the region where the OpenVPN instance is being
-        # created
-        ssm_region = data.aws_arn.subnet.region
+        # This is the region where the SSM parameters are stored
+        ssm_region = var.ssm_region
     })
     # Note that text/x-python is not supported here:
     # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
     content_type = "text/x-shellscript"
     filename     = "configure-falcon-sensor.py"
+  }
+
+  part {
+    # Note that text/x-python is not supported here:
+    # https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
+    content_type = "text/x-shellscript"
+    content = templatefile(
+      "${path.module}/cloudinit/configure-qualys-cloud-agent.py", {
+        qualys_activation_id_key = var.qualys_cloud_agent_activation_id_key
+        qualys_customer_id_key   = var.qualys_cloud_agent_customer_id_key
+        qualys_fedramp           = tostring(var.qualys_cloud_agent_fedramp)
+        qualys_install_path      = var.qualys_cloud_agent_install_path
+        qualys_server_uri_key    = var.qualys_cloud_agent_server_uri_key
+        ssm_read_role_arn        = module.ssmreadrole.role.arn
+        # This is the region where the SSM parameters are stored
+        ssm_region = var.ssm_region
+    })
+    filename = "configure-qualys-cloud-agent.py"
   }
 }

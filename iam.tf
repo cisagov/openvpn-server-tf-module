@@ -27,6 +27,9 @@ module "ssmreadrole" {
     var.nessus_hostname_key,
     var.nessus_key_key,
     var.nessus_port_key,
+    var.qualys_cloud_agent_activation_id_key,
+    var.qualys_cloud_agent_customer_id_key,
+    var.qualys_cloud_agent_server_uri_key,
     var.ssm_tlscrypt_key,
     var.ssm_dh4096_pem,
   ]

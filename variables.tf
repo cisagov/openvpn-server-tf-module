@@ -100,6 +100,24 @@ variable "public_zone_id" {
   type        = string
 }
 
+variable "qualys_cloud_agent_activation_id_key" {
+  description = "The SSM Parameter Store key whose corresponding value contains the activation ID for Qualys Cloud Agent (e.g. /cdm/qualys/activation_id)."
+  nullable    = false
+  type        = string
+}
+
+variable "qualys_cloud_agent_customer_id_key" {
+  description = "The SSM Parameter Store key whose corresponding value contains the customer ID for Qualys Cloud Agent (e.g. /cdm/qualys/customer_id)."
+  nullable    = false
+  type        = string
+}
+
+variable "qualys_cloud_agent_server_uri_key" {
+  description = "The SSM Parameter Store key whose corresponding value contains the server URI for Qualys Cloud Agent (e.g. /cdm/qualys/server_uri)."
+  nullable    = false
+  type        = string
+}
+
 variable "subnet_id" {
   description = "The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0)."
   nullable    = false
@@ -185,6 +203,20 @@ variable "nessus_groups" {
   description = "A list of strings, each of which is the name of a group in the CDM Tenable Nessus server that the Nessus Agent should join (e.g. [\"group1\", \"group2\"])."
   nullable    = false
   type        = list(string)
+}
+
+variable "qualys_cloud_agent_fedramp" {
+  default     = true
+  description = "Whether or not the Qualys Cloud Agent should be concerned about FEDRAMP."
+  nullable    = false
+  type        = bool
+}
+
+variable "qualys_cloud_agent_install_path" {
+  default     = "/usr/local/qualys/cloud-agent"
+  description = "The install path of the Qualys Cloud Agent (e.g. /usr/local/qualys/cloud-agent)."
+  nullable    = false
+  type        = string
 }
 
 variable "security_groups" {
